@@ -2,9 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1707ebc3-0a07-43b0-ac11-11f5e073e617" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Store.WEB/Store.WEB.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.WEB.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.WEB.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/DataInitializer/DbInitializer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/EF/StoreContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/Entities/Base/EntityBase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/Entities/Base/ItemBase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/Entities/Base/SpecificationsBase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/Entities/Laptop/Laptop.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/Entities/Laptop/LaptopPartial.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/Entities/Order/Order.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/Entities/Phone/Phone.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/Entities/Phone/PhonePartial.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/Entities/Phone/PhoneSpecifications.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/Identity/User.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/Store.DAL.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/bin/Debug/net6.0/Store.DAL.deps.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/bin/Debug/net6.0/Store.DAL.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/bin/Debug/net6.0/Store.DAL.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/bin/Debug/net6.0/Store.DAL.runtimeconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/bin/Debug/net6.0/ref/Store.DAL.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.AssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.AssemblyInfoInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.GlobalUsings.g.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.assets.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.csproj.AssemblyReference.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.genruntimeconfig.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/ref/Store.DAL.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Store.DAL.csproj.nuget.dgspec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Store.DAL.csproj.nuget.g.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/Store.DAL.csproj.nuget.g.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/project.assets.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/project.nuget.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/project.packagespec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store.DAL/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Store/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Store/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.WEB/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.WEB/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/staticwebassets.pack.sentinel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Store.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,15 +57,19 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="23pkJsfhp51ezzgE1oL6pgDDqLG" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Store">
@@ -69,7 +112,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642438347018</updated>
-      <workItem from="1642438352246" duration="671000" />
+      <workItem from="1642438352246" duration="2720000" />
     </task>
     <servers />
   </component>
@@ -89,5 +132,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
