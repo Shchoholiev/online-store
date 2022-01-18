@@ -7,4 +7,8 @@
         <RootNamespace>Store</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Store.DAL\Store.DAL.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -1,3 +1,12 @@
+using Store.DAL.DataInitializer;
+using Store.DAL.EF;
+
+// using (var context = new StoreContext())
+// {
+//     DbInitializer.Delete(context);
+//     DbInitializer.Initialize(context);
+// }
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
