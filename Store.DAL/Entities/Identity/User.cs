@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Store.DAL.Entities.Order;
+using Store.DAL.Entities.Orders;
 
-namespace Store.DAL.Identity;
+
+namespace Store.DAL.Entities.Identity;
 
 public class User : IdentityUser
 {

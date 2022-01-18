@@ -1,7 +1,7 @@
 ﻿using Store.DAL.Entities.Base;
-using Store.DAL.Identity;
+using Store.DAL.Entities.Identity;
 
-namespace Store.DAL.Entities.Order;
+namespace Store.DAL.Entities.Orders;
 
 public class Order : EntityBase
 {

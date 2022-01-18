@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Store.DAL.Entities.Laptop;
-using Store.DAL.Entities.Order;
+using Store.DAL.Entities.Orders;
 using Store.DAL.Entities.Phone;
 
 namespace Store.DAL.EF;
