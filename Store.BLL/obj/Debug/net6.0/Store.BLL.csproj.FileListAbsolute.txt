@@ -13,3 +13,6 @@ C:\Users\rareb\Desktop\.NET-Education\online-store\Store.BLL\obj\Debug\net6.0\St
 C:\Users\rareb\Desktop\.NET-Education\online-store\Store.BLL\bin\Debug\net6.0\Store.DAL.dll
 C:\Users\rareb\Desktop\.NET-Education\online-store\Store.BLL\bin\Debug\net6.0\Store.DAL.pdb
 C:\Users\rareb\Desktop\.NET-Education\online-store\Store.BLL\obj\Debug\net6.0\Store.BLL.csproj.CopyComplete
+C:\Users\rareb\Desktop\.NET-Education\online-store\Store.BLL\obj\Debug\net6.0\Store.BLL.csproj.SuggestedBindingRedirects.cache
+C:\Users\rareb\Desktop\.NET-Education\online-store\Store.BLL\obj\Debug\net6.0\Store.BLL.dll.config
+C:\Users\rareb\Desktop\.NET-Education\online-store\Store.BLL\bin\Debug\net6.0\Store.BLL.dll.config

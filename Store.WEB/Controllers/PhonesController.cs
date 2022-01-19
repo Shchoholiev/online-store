@@ -1,18 +1,9 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
-using Store.BLL.Services;
-using Store.DAL.EF;
 using Store.DAL.Entities.Phone;
-using Store.DAL.Repository;
 using Store.ViewModels;
 
 namespace Store.Controllers

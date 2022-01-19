@@ -270,3 +270,4 @@ C:\Users\rareb\Desktop\.NET-Education\online-store\Store.WEB\bin\Debug\net6.0\ru
 C:\Users\rareb\Desktop\.NET-Education\online-store\Store.WEB\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\rareb\Desktop\.NET-Education\online-store\Store.WEB\bin\Debug\net6.0\Store.BLL.dll
 C:\Users\rareb\Desktop\.NET-Education\online-store\Store.WEB\bin\Debug\net6.0\Store.BLL.pdb
+C:\Users\rareb\Desktop\.NET-Education\online-store\Store.WEB\bin\Debug\net6.0\Store.BLL.dll.config
