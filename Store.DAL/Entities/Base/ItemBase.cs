@@ -7,6 +7,4 @@ public class ItemBase : EntityBase
     public uint Amount { get; set; }
 
     public byte[]? Image { get; set; }
-
-    public SpecificationsBase? Specifications { get; set; }
 }

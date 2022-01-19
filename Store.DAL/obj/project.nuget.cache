@@ -1,14 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "ABJhqVe/ajRBWIpJl7qM3q1dbJhwpfH+GMUht0A0Iafj9TAQDRG/Rb2xDtExZ4Aurqeqv13Ydy2NLHHpz2kN6Q==",
+  "dgSpecHash": "Tfl5Nc/M6gJvZn4glsVol18HA8NRLUs56FbycmUvExgJilIP54xLcYIZOrcebdUtaeX2wHOYHgU0FeAI+i2mHg==",
   "success": true,
   "projectFilePath": "C:\\Users\\rareb\\Desktop\\.NET-Education\\online-store\\Store.DAL\\Store.DAL.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\rareb\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\rareb\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\rareb\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.1\\microsoft.aspnetcore.cryptography.internal.6.0.1.nupkg.sha512",
     "C:\\Users\\rareb\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.1\\microsoft.aspnetcore.cryptography.keyderivation.6.0.1.nupkg.sha512",
     "C:\\Users\\rareb\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.1\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.1.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\rareb\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\rareb\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\rareb\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\rareb\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.1\\microsoft.entityframeworkcore.6.0.1.nupkg.sha512",

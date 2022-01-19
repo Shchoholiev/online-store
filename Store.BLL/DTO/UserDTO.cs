@@ -1,6 +1,6 @@
 ﻿namespace Store.BLL.DTO;
 
-public class UserDTO
+public class UserDTO : EntityBaseDTO
 {
     public string Name { get; set; }
     

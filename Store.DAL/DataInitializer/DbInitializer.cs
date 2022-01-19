@@ -78,12 +78,12 @@ public class DbInitializer
 
             var Phones = new List<Phone>
             {
-                new Phone{ Price = 1000, Amount = 30, Make = "Apple", 
-                           Model = "IPhone 11", Memory = 256, Image = imageI11 },
-                new Phone{ Price = 1500, Amount = 25, Make = "Samsung", 
-                           Model = "Galaxy 25", Memory = 512, Image = imageSas },
-                new Phone{ Price = 200, Amount = 99, Make = "Xiaomi", 
-                           Memory = 32, Image = imageXi },
+                // new Phone{ Price = 1000, Amount = 30, Make = "Apple", 
+                //            Model = "IPhone 11", Memory = 256, Image = imageI11 },
+                // new Phone{ Price = 1500, Amount = 25, Make = "Samsung", 
+                //            Model = "Galaxy 25", Memory = 512, Image = imageSas },
+                // new Phone{ Price = 200, Amount = 99, Make = "Xiaomi", 
+                //            Memory = 32, Image = imageXi },
 
                 new Phone{ Price = 980, Amount = 32, Make = "Apple", Specifications = specs13, ColorHex = "fbe2dd",
                            Model = "IPhone 13", Memory = 128, Color = "Pink", Image = image13Pink },

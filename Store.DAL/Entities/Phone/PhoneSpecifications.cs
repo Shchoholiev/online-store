@@ -3,7 +3,7 @@ using Store.DAL.Entities.Base;
 
 namespace Store.DAL.Entities.Phone;
 
-public class PhoneSpecifications : SpecificationsBase
+public class PhoneSpecifications : EntityBase
 {
     public double Diagonal { get; set; }
 

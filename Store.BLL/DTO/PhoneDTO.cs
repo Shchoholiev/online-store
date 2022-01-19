@@ -1,6 +1,6 @@
 ﻿namespace Store.BLL.DTO;
 
-public class PhoneDTO : Base
+public class PhoneDTO : ItemBaseDTO
 {
     public string Make { get; set; }
     
@@ -11,4 +11,6 @@ public class PhoneDTO : Base
     public string Color { get; set; }
     
     public string ColorHex { get; set; }
+    
+    public PhoneSpecificationsDTO Specifications { get; set; }
 }

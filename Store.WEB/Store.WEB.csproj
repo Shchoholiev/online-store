@@ -8,7 +8,22 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Store.BLL\Store.BLL.csproj" />
       <ProjectReference Include="..\Store.DAL\Store.DAL.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Areas" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="11.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
     </ItemGroup>
 
 </Project>
