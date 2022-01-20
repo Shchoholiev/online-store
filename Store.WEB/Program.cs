@@ -19,7 +19,6 @@ using (var context = new StoreContext())
     DbInitializer.Initialize(context);
 }
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
