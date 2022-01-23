@@ -9,14 +9,14 @@
 @{
     string imageSrc = "data:image/jpg;base64," + Convert.ToBase64String(phone?.Image);
 
-    var memories = from p in Model
-                   orderby p.Memory 
-                   where p.Color == phone.Color
-                    select p;
-    var colors = (from p in Model
-                    orderby p.Color
-                  where p.Memory == phone.Memory
-                  select p).DistinctBy(p => p.Color);
+    var memories = Model.OrderBy(p => p.Memory)
+                   .Where(p => p.Color == phone.Color)
+                   .Select(p => p);
+
+    var colors = Model.OrderBy(p => p.Color)
+                 .Where(p => p.Memory == phone.Memory)
+                 .Select(p => p)
+                 .DistinctBy(p => p.Color);
 }
 
 <style>

@@ -36,7 +36,5 @@ namespace Store.BLL.Mapper
         {
             return _mapper.Map<IEnumerable<PhoneDTO>>(source);
         }
-
-
     }
 }

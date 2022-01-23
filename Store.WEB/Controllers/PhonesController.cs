@@ -46,11 +46,11 @@ namespace Store.Controllers
             {
                 return NotFound();
             }
-            
-            var phones = (from p in _phoneService.GetAllWithInclude(ph => ph.Specifications)
-                where p.Make == phone.Make && p.Model == phone.Model && p.Id != phone.Id
-                select p).ToList();
-            
+
+            var phones = _phoneService.GetAllWithInclude(ph => ph.Specifications)
+                .Where(p => p.Make == phone.Make && p.Model == phone.Model && p.Id != phone.Id)
+                .Select(p => p);
+
             var model = _mapper.Map<PhoneViewModel>(phone);
             _mapper.Map(phone.Specifications, model);
             

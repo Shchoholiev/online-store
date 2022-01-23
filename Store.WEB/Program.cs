@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Store.BLL.DI;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
 using Store.BLL.Services;
@@ -28,15 +29,9 @@ builder.Services.AddControllersWithViews();
 string connectionString = @"server=(LocalDb)\MSSQLLocalDB;database=Store;integrated security=True;
                     MultipleActiveResultSets=True;App=EntityFramework;";
 
-builder.Services.AddDbContext<StoreContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddScoped<IGenericRepository<Phone>, GenericRepository<Phone>>();
-builder.Services.AddScoped<IPhoneService, PhoneService>();
-builder.Services.AddScoped<IUserService, UserService>();
-
-builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<StoreContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddDatabase();
+builder.Services.AddServices();
+builder.Services.AddIdentity();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
