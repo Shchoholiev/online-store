@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Store.DAL.Entities.Base
+namespace Store.DAL.Entities.Base;
+
+public class EntityBase
 {
-    public abstract class EntityBase
-    {
-        [Key]
-        public int Id { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
 }

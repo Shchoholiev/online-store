@@ -60,7 +60,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
     public IEnumerable<TEntity> GetAll()
     {
-        return _table;
+        return _table.AsNoTracking();
     }
 
     public IEnumerable<TEntity> GetAllWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
