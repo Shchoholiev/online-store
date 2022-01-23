@@ -14,11 +14,7 @@ public class UserService : IUserService
     
     private readonly SignInManager<User> _signInManager;
 
-    private readonly IMapper _mapper = new MapperConfiguration(cfg =>
-    {
-        cfg.CreateMap<UserDTO, User>().ForMember(dest => dest.UserName, 
-            opt => opt.MapFrom(src => src.Name));
-    }).CreateMapper();
+    private readonly Mapper.Mapper _mapper = new();
 
     public UserService(UserManager<User> userManager, SignInManager<User> signInManager)
     {
@@ -41,7 +37,7 @@ public class UserService : IUserService
         if (operationDetails.ErrorsCount() > 0)
             return operationDetails;
 
-        var user = _mapper.Map<User>(userDto);
+        var user = _mapper.Map(userDto);
         
         var result = await _userManager.CreateAsync(user, password);
         if (!result.Succeeded )

@@ -1,10 +1,11 @@
-﻿namespace Store.DAL.Entities.Base;
-
-public class ItemBase : EntityBase
+﻿namespace Store.DAL.Entities.Base
 {
-    public int Price { get; set; }
+    public abstract class ItemBase : EntityBase
+    {
+        public int Price { get; set; }
 
-    public int Amount { get; set; }
+        public int Amount { get; set; }
 
-    public byte[]? Image { get; set; }
+        public byte[]? Image { get; set; }
+    }
 }

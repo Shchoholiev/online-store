@@ -2,21 +2,21 @@
 using Store.DAL.Entities.Laptop;
 using Store.DAL.Entities.Phone;
 
-namespace Store.DAL.DataInitializer;
-
-public class DbInitializer
+namespace Store.DAL.DataInitializer
 {
-    public static void Initialize(StoreContext context)
+    public class DbInitializer
+    {
+        public static void Initialize(StoreContext context)
         {
             context.Database.EnsureCreated();
 
             var Laptops = new List<Laptop>
             {
-                new Laptop{ Price = 1000, Amount = 11, Make = "Asus", Model = "TUF Gaming", 
+                new Laptop{ Price = 1000, Amount = 11, Make = "Asus", Model = "TUF Gaming",
                             Processor = "Ryzen 7 4700H", RAM = 16, Memory = 512 },
-                new Laptop{ Price = 1300, Amount = 5, Make = "Lenovo", Model = "TUF Gaming", 
+                new Laptop{ Price = 1300, Amount = 5, Make = "Lenovo", Model = "TUF Gaming",
                             Processor = "Intel Core i7 11700", RAM = 16, Memory = 1024 },
-                new Laptop{ Price = 800, Amount = 0, Make = "Asus", Model = "Strix", 
+                new Laptop{ Price = 800, Amount = 0, Make = "Asus", Model = "Strix",
                             Processor = "Ryzen 5 4500U", RAM = 8, Memory = 256 },
             };
 
@@ -66,7 +66,6 @@ public class DbInitializer
             context.SaveChanges();
 
             byte[] imageI11 = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\iphone11.jpg");
-            //byte[] imageI13 = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\iphone13.jpg");
             byte[] imageSas = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\samsung.jpg");
             byte[] imageXi = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\xiaomi.jpg");
             byte[] imageI13ProMax = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13promax.jpg");
@@ -119,7 +118,7 @@ public class DbInitializer
                            Model = "IPhone 13", Memory = 256, Color = "Starlight", Image = image13Starlight },
                 new Phone{ Price = 1200, Amount = 10, Make = "Apple", Specifications = specs13, ColorHex = "fbf7f4",
                            Model = "IPhone 13", Memory = 512, Color = "Starlight", Image = image13Starlight },
-                
+
             };
 
             foreach (var p in Phones)
@@ -133,4 +132,5 @@ public class DbInitializer
         {
             context.Database.EnsureDeleted();
         }
+    }
 }

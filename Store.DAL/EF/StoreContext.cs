@@ -25,9 +25,14 @@ public class StoreContext : IdentityDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Phone>()
-            .HasOne<PhoneSpecifications>(p => p.Specifications);
+            .ToTable("Phones");
+
+        modelBuilder.Entity<Laptop>()
+            .ToTable("Laptops");
+
         modelBuilder.Entity<Phone>()
-            .Property(p => p.ColorHex).HasMaxLength(6);
+            .HasOne<PhoneSpecifications>(p => p.Specifications);
+
 
         base.OnModelCreating(modelBuilder);
     }
