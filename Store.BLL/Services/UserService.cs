@@ -4,28 +4,29 @@ using Microsoft.EntityFrameworkCore;
 using Store.BLL.DTO;
 using Store.BLL.Infrastructure;
 using Store.BLL.Interfaces;
+using Store.DAL.Entities.Identity;
 
 namespace Store.BLL.Services;
 
-public class UserService<TUser, TUserDTO> : IUserService<TUser, TUserDTO> where TUser : IdentityUser where TUserDTO : UserDTO
+public class UserService : IUserService
 {
-    private readonly UserManager<TUser> _userManager;
+    private readonly UserManager<User> _userManager;
     
-    private readonly SignInManager<TUser> _signInManager;
+    private readonly SignInManager<User> _signInManager;
 
     private readonly IMapper _mapper = new MapperConfiguration(cfg =>
     {
-        cfg.CreateMap<TUserDTO, TUser>().ForMember(dest => dest.UserName, 
+        cfg.CreateMap<UserDTO, User>().ForMember(dest => dest.UserName, 
             opt => opt.MapFrom(src => src.Name));
     }).CreateMapper();
 
-    public UserService(UserManager<TUser> userManager, SignInManager<TUser> signInManager)
+    public UserService(UserManager<User> userManager, SignInManager<User> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
     }
     
-    public async Task<OperationDetails> Register(TUserDTO userDto, string password)
+    public async Task<OperationDetails> Register(UserDTO userDto, string password)
     {
         var operationDetails = new OperationDetails();
         
@@ -40,7 +41,7 @@ public class UserService<TUser, TUserDTO> : IUserService<TUser, TUserDTO> where 
         if (operationDetails.ErrorsCount() > 0)
             return operationDetails;
 
-        var user = _mapper.Map<TUser>(userDto);
+        var user = _mapper.Map<User>(userDto);
         
         var result = await _userManager.CreateAsync(user, password);
         if (!result.Succeeded )
@@ -57,7 +58,7 @@ public class UserService<TUser, TUserDTO> : IUserService<TUser, TUserDTO> where 
         return operationDetails;
     }
 
-    public async Task<OperationDetails> Login(TUserDTO userDto, string password, bool rememberMe)
+    public async Task<OperationDetails> Login(UserDTO userDto, string password, bool rememberMe)
     {
         var dbUser = await _userManager.Users.FirstAsync(u => u.NormalizedEmail == userDto.Email.ToUpper()
                                                                         || u.PhoneNumber == userDto.PhoneNumber);
@@ -71,6 +72,6 @@ public class UserService<TUser, TUserDTO> : IUserService<TUser, TUserDTO> where 
     public async Task<OperationDetails> Logout()
     {
         await _signInManager.SignOutAsync();
-        return new OperationDetails() {Succeeded = true};
+        return new OperationDetails() { Succeeded = true };
     }
 }

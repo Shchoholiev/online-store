@@ -11,9 +11,9 @@ namespace Store.Areas.Identity.Controllers;
 [Authorize] 
 public class AccountController : Controller
 {
-    private readonly IUserService<User, UserDTO> _userService;
+    private readonly IUserService _userService;
 
-    public AccountController(IUserService<User, UserDTO> userService)
+    public AccountController(IUserService userService)
     {
         _userService = userService;
     }
