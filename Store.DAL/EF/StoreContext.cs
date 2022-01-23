@@ -22,21 +22,21 @@ public class StoreContext : IdentityDbContext
         optionsBuilder.UseSqlServer(connectionString);
     }
 
-    // protected override void OnModelCreating(ModelBuilder modelBuilder)
-    // {
-    //     modelBuilder.Entity<Phone>()
-    //         .HasOne<PhoneSpecifications>(p => p.Specifications)
-    //         .WithOne(i => i.Phone)
-    //         .HasForeignKey<PhoneSpecifications>(s => s.PhoneId);
-    //     base.OnModelCreating(modelBuilder);
-    //
-    // }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Phone>()
+            .HasOne<PhoneSpecifications>(p => p.Specifications);
+        modelBuilder.Entity<Phone>()
+            .Property(p => p.ColorHex).HasMaxLength(6);
+
+        base.OnModelCreating(modelBuilder);
+    }
 
     public DbSet<Laptop> Laptops { get; set; }
-        
+    
     public DbSet<Phone> Phones { get; set; }
-        
+    
     public DbSet<PhoneSpecifications> PhoneSpecifications { get; set; }
-        
+    
     public DbSet<Order> Orders { get; set; }
 }
