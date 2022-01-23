@@ -2,7 +2,7 @@
 @model List<Store.ViewModels.PhoneViewModel>
 
 @{
-    PhoneViewModel phone = @Model.First();
+    PhoneViewModel phone = @Model.FirstOrDefault();
     ViewData["Title"] = phone?.GetFullName();
 }
 

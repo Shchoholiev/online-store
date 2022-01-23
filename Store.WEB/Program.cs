@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
 using Store.BLL.Services;
+
 using Store.DAL.DataInitializer;
 using Store.DAL.EF;
 using Store.DAL.Entities.Identity;
@@ -30,7 +31,7 @@ string connectionString = @"server=(LocalDb)\MSSQLLocalDB;database=Store;integra
 builder.Services.AddDbContext<StoreContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IGenericRepository<Phone>, GenericRepository<Phone>>();
-builder.Services.AddScoped<IItemsService<Phone, PhoneDTO, PhoneSpecifications, PhoneSpecificationsDTO >, 
+builder.Services.AddScoped<IItemsService<Phone, PhoneDTO, PhoneSpecifications, PhoneSpecificationsDTO>,
     ItemsService<Phone, PhoneDTO, PhoneSpecifications, PhoneSpecificationsDTO>>();
 builder.Services.AddScoped<IUserService<User, UserDTO>, UserService<User, UserDTO>>();
 

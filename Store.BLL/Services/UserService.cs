@@ -15,7 +15,8 @@ public class UserService<TUser, TUserDTO> : IUserService<TUser, TUserDTO> where 
 
     private readonly IMapper _mapper = new MapperConfiguration(cfg =>
     {
-        cfg.CreateMap<TUserDTO, TUser>().ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Name));
+        cfg.CreateMap<TUserDTO, TUser>().ForMember(dest => dest.UserName, 
+            opt => opt.MapFrom(src => src.Name));
     }).CreateMapper();
 
     public UserService(UserManager<TUser> userManager, SignInManager<TUser> signInManager)

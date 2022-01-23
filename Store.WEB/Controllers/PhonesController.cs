@@ -1,4 +1,6 @@
 ﻿#nullable disable
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Store.BLL.DTO;
@@ -44,7 +46,7 @@ namespace Store.Controllers
             {
                 return NotFound();
             }
-
+            
             var phones = (from p in _itemsService.GetAllWithInclude(ph => ph.Specifications)
                 where p.Make == phone.Make && p.Model == phone.Model && p.Id != phone.Id
                 select p).ToList();

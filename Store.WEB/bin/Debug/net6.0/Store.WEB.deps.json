@@ -12,8 +12,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.1",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.1",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.1",
-          "Store.BLL": "1.0.0",
-          "Store.DAL": "1.0.0"
+          "Store.BLL": "1.0.0"
         },
         "runtime": {
           "Store.WEB.dll": {}

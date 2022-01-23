@@ -2,67 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1707ebc3-0a07-43b0-ac11-11f5e073e617" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Store.BLL/Infrastructure/OperationDetails.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.BLL/Interfaces/IUserService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.BLL/Services/UserService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/Store.BLL.dll.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.csproj.SuggestedBindingRedirects.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.dll.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.WEB/Areas/Identity/Controllers/AccountController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.WEB/Areas/Identity/ViewModels/LoginViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.WEB/Areas/Identity/ViewModels/RegisterViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.WEB/Areas/Identity/Views/Account/Login.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.WEB/Areas/Identity/Views/Account/Register.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.WEB/Areas/Identity/Views/_ViewImports.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.WEB/Areas/Identity/Views/_ViewStart.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.BLL.dll.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Store/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Store/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/Store/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Store/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/Store/project-colors.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Store/project-colors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/Store/v17/.futdcache.v1" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Store/v17/.futdcache.v1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/Store/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Store/v17/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.BLL/DTO/UserDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/DTO/UserDTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.BLL/Store.BLL.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/Store.BLL.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/Store.BLL.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/Store.BLL.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.BLL/DTO/BaseDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/DTO/ItemBaseDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.BLL/Services/ItemsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/Services/ItemsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.BLL/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/Services/UserService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/Store.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/Store.BLL.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/Store.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/Store.BLL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/ref/Store.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/ref/Store.BLL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/Store.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/Store.DAL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/Store.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/bin/Debug/net6.0/Store.DAL.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/Store.BLL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/ref/Store.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/obj/Debug/net6.0/ref/Store.BLL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.BLL/obj/Store.BLL.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/obj/Store.BLL.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.BLL/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.BLL/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.BLL/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.BLL/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Store.BLL/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.DAL/Entities/Orders/Order.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store.DAL/Entities/Orders/Order.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.DAL/bin/Debug/net6.0/Store.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.DAL/bin/Debug/net6.0/Store.DAL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.DAL/bin/Debug/net6.0/Store.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Store.DAL/bin/Debug/net6.0/Store.DAL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.DAL/bin/Debug/net6.0/ref/Store.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.DAL/bin/Debug/net6.0/ref/Store.DAL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/Store.DAL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/ref/Store.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.DAL/obj/Debug/net6.0/ref/Store.DAL.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.DAL/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Store.DAL/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.WEB/Areas/Identity/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/Areas/Identity/Controllers/AccountController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.WEB/Controllers/PhonesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/Controllers/PhonesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/Store.WEB.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/Store.WEB.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/Views/Shared/_Layout.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.BLL.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.BLL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.WEB.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.WEB.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.DAL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.DAL.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.WEB.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.WEB.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/Store.WEB.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/ref/Store.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/bin/Debug/net6.0/ref/Store.WEB.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/Store.WEB.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/project.razor.json" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/project.razor.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/ref/Store.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/ref/Store.WEB.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/staticwebassets.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/Debug/net6.0/staticwebassets.build.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/obj/Store.WEB.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/Store.WEB.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.WEB/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.WEB/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store.WEB/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/Store.WEB/obj/staticwebassets.pack.sentinel" afterDir="false" />
     </list>
@@ -83,7 +59,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/dbbbc1a09e7f41b9a32c96f4d78d098a3c498/10/12907c01/ConcurrentDictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/37a954845b52703c5cce1aacf8fa1292378878e82bf68c4c4b5effc447316e9/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Store.WEB/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Store.BLL/DTO/BaseDTO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Store.BLL/DTO/ItemBaseDTO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ecc3313c364786d6a992fb2a666732cf6d597647d75e2bfd256c7dd46cdf3/LockingConcurrentDictionary.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/909190e07c149cb041e6ec53f563e8d1750b69045a8e087df2f3409ae49dc/TypePair.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/92bca1cc9a9782b3886f5f7d96ff93b1f5ee5618bcc37f4762252a267ece86a0/ForeignKeyAttributeConvention.cs" root0="SKIP_HIGHLIGHTING" />
@@ -98,6 +74,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/53279a55fee55a5d624474129e4d6b6f22bc185/LoggerMessage.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b4bea9bed74d914e7435fff05d8a42fdc36c63d3645e88532abcfb1ad760fbee/EntityFrameworkQueryableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fd7e84c652acb74d1bb469c0db41fde874bfe844286f14882816f367e4e8e1/Type.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f39f8b3179d5493cb62c91d7a3b5bd5d3de00/29/0dc559dc/IMapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2e5a78beee0f4abd8ed7ef3636048cf1a20268/2b/5267e603/Void.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2888a7b3f5214a942e2464cca089727fd29979f5222297f3efc750e389b2/MemberExpression.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -167,6 +144,8 @@
       <workItem from="1642579277956" duration="6629000" />
       <workItem from="1642591034651" duration="14064000" />
       <workItem from="1642615500400" duration="1095000" />
+      <workItem from="1642840740481" duration="1050000" />
+      <workItem from="1642870187275" duration="3210000" />
     </task>
     <servers />
   </component>
