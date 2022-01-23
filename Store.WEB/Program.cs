@@ -31,8 +31,7 @@ string connectionString = @"server=(LocalDb)\MSSQLLocalDB;database=Store;integra
 builder.Services.AddDbContext<StoreContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IGenericRepository<Phone>, GenericRepository<Phone>>();
-builder.Services.AddScoped<IItemsService<Phone, PhoneDTO, PhoneSpecifications, PhoneSpecificationsDTO>,
-    ItemsService<Phone, PhoneDTO, PhoneSpecifications, PhoneSpecificationsDTO>>();
+builder.Services.AddScoped<IPhoneService, PhoneService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddIdentity<User, IdentityRole>()

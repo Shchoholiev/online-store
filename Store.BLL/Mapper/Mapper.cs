@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Store.BLL.DTO;
 using Store.DAL.Entities.Identity;
+using Store.DAL.Entities.Phone;
 
 namespace Store.BLL.Mapper
 {
@@ -15,12 +16,27 @@ namespace Store.BLL.Mapper
         {
             cfg.CreateMap<UserDTO, User>().ForMember(dest => dest.UserName,
                 opt => opt.MapFrom(src => src.Name));
+
+            cfg.CreateMap<PhoneSpecifications, PhoneSpecificationsDTO>();
+            cfg.CreateMap<Phone, PhoneDTO>();
+
         }).CreateMapper();
 
         public User Map(UserDTO source)
         {
             return _mapper.Map<User>(source);
         }
+
+        public PhoneDTO Map(Phone source)
+        {
+            return _mapper.Map<PhoneDTO>(source);
+        }
+
+        public IEnumerable<PhoneDTO> Map(IEnumerable<Phone> source)
+        {
+            return _mapper.Map<IEnumerable<PhoneDTO>>(source);
+        }
+
 
     }
 }

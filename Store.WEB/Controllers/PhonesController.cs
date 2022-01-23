@@ -12,7 +12,7 @@ namespace Store.Controllers
 {
     public class PhonesController : Controller
     {
-        private readonly IItemsService<Phone, PhoneDTO, PhoneSpecifications, PhoneSpecificationsDTO> _itemsService;
+        private readonly IPhoneService _phoneService;
         private readonly IMapper _mapper = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<PhoneDTO, PhoneViewModel>();
@@ -20,15 +20,15 @@ namespace Store.Controllers
                 opt => opt.Ignore());
         }).CreateMapper();
 
-        public PhonesController(IItemsService<Phone, PhoneDTO, PhoneSpecifications, PhoneSpecificationsDTO> itemsService)
+        public PhonesController(IPhoneService phoneService)
         {
-            _itemsService = itemsService;
+            _phoneService = phoneService;
         }
 
         // GET: Phones
         public  ActionResult Index()
         {
-            var phoneDtos = _itemsService.GetAll();
+            var phoneDtos = _phoneService.GetAll();
             return View(_mapper.Map<List<PhoneViewModel>>(phoneDtos));
         }
         
@@ -40,14 +40,14 @@ namespace Store.Controllers
                 return NotFound();
             }
 
-            var phone = _itemsService.GetItemWithInclude(id, p => p.Specifications);
+            var phone = _phoneService.GetItemWithInclude(id, p => p.Specifications);
 
             if (phone == null)
             {
                 return NotFound();
             }
             
-            var phones = (from p in _itemsService.GetAllWithInclude(ph => ph.Specifications)
+            var phones = (from p in _phoneService.GetAllWithInclude(ph => ph.Specifications)
                 where p.Make == phone.Make && p.Model == phone.Model && p.Id != phone.Id
                 select p).ToList();
             
