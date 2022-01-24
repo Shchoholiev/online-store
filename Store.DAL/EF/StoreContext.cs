@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Store.DAL.Entities.Base;
+using Store.DAL.Entities.EntitiesForEnums;
 using Store.DAL.Entities.Laptop;
 using Store.DAL.Entities.Orders;
 using Store.DAL.Entities.Phone;
+using Store.DAL.Enums;
 
 namespace Store.DAL.EF;
 
@@ -24,10 +27,26 @@ public class StoreContext : IdentityDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //modelBuilder.Entity<Phone>()
-        //    .ToTable("Phones");
-        //modelBuilder.Entity<Laptop>()
-        //    .ToTable("Laptops");
+        modelBuilder
+            .Entity<ItemBase>()
+            .Property(i => i.BrandId)
+            .HasConversion<int>();
+
+        modelBuilder
+            .Entity<Brand>()
+            .Property(b => b.BrandId)
+            .HasConversion<int>();
+
+        modelBuilder
+            .Entity<Brand>().HasData(
+            Enum.GetValues(typeof(BrandId))
+                .Cast<BrandId>()
+                .Select(b => new Brand()
+                {
+                    BrandId = b,
+                    Name = b.ToString()
+                })
+            );
 
         modelBuilder.Entity<Phone>()
             .HasOne<PhoneSpecifications>(p => p.Specifications);
@@ -44,4 +63,6 @@ public class StoreContext : IdentityDbContext
     public DbSet<PhoneSpecifications> PhoneSpecifications { get; set; }
     
     public DbSet<Order> Orders { get; set; }
+
+    public DbSet<Brand> Brands { get; set; }
 }

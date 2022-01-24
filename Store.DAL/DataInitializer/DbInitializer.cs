@@ -1,6 +1,7 @@
 ﻿using Store.DAL.EF;
 using Store.DAL.Entities.Laptop;
 using Store.DAL.Entities.Phone;
+using Store.DAL.Enums;
 
 namespace Store.DAL.DataInitializer;
 
@@ -12,11 +13,11 @@ public class DbInitializer
 
             var Laptops = new List<Laptop>
             {
-                new Laptop{ Price = 1000, Amount = 11, Make = "Asus", Model = "TUF Gaming", 
+                new Laptop{ Price = 1000, Amount = 11, BrandId = BrandId.Asus, Model = "TUF Gaming", 
                             Processor = "Ryzen 7 4700H", RAM = 16, Memory = 512 },
-                new Laptop{ Price = 1300, Amount = 5, Make = "Lenovo", Model = "TUF Gaming", 
+                new Laptop{ Price = 1300, Amount = 5, BrandId = BrandId.Lenovo, Model = "TUF Gaming", 
                             Processor = "Intel Core i7 11700", RAM = 16, Memory = 1024 },
-                new Laptop{ Price = 800, Amount = 0, Make = "Asus", Model = "Strix", 
+                new Laptop{ Price = 800, Amount = 0, BrandId = BrandId.Asus, Model = "Strix", 
                             Processor = "Ryzen 5 4500U", RAM = 8, Memory = 256 },
             };
 
@@ -78,46 +79,46 @@ public class DbInitializer
 
             var Phones = new List<Phone>
             {
-                // new Phone{ Price = 1000, Amount = 30, Make = "Apple", 
+                // new Phone{ Price = 1000, Amount = 30, BrandId = "Apple", 
                 //            Model = "IPhone 11", Memory = 256, Image = imageI11 },
-                // new Phone{ Price = 1500, Amount = 25, Make = "Samsung", 
+                // new Phone{ Price = 1500, Amount = 25, BrandId = "Samsung", 
                 //            Model = "Galaxy 25", Memory = 512, Image = imageSas },
-                // new Phone{ Price = 200, Amount = 99, Make = "Xiaomi", 
+                // new Phone{ Price = 200, Amount = 99, BrandId = "Xiaomi", 
                 //            Memory = 32, Image = imageXi },
 
-                new Phone{ Price = 980, Amount = 32, Make = "Apple", Specifications = specs13, ColorHex = "fbe2dd",
+                new Phone{ Price = 980, Amount = 32, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "fbe2dd",
                            Model = "IPhone 13", Memory = 128, Color = "Pink", Image = image13Pink },
-                new Phone{ Price = 1080, Amount = 0, Make = "Apple", Specifications = specs13, ColorHex = "fbe2dd",
+                new Phone{ Price = 1080, Amount = 0, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "fbe2dd",
                            Model = "IPhone 13", Memory = 256, Color = "Pink", Image = image13Pink },
-                new Phone{ Price = 1170, Amount = 8, Make = "Apple", Specifications = specs13, ColorHex = "fbe2dd",
+                new Phone{ Price = 1170, Amount = 8, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "fbe2dd",
                            Model = "IPhone 13", Memory = 512, Color = "Pink", Image = image13Pink },
 
-                new Phone{ Price = 970, Amount = 10, Make = "Apple", Specifications = specs13, ColorHex = "437791",
+                new Phone{ Price = 970, Amount = 10, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "437791",
                            Model = "IPhone 13", Memory = 128, Color = "Blue", Image = image13Blue },
-                new Phone{ Price = 1070, Amount = 10, Make = "Apple", Specifications = specs13, ColorHex = "437791",
+                new Phone{ Price = 1070, Amount = 10, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "437791",
                            Model = "IPhone 13", Memory = 256, Color = "Blue", Image = image13Blue },
-                new Phone{ Price = 1200, Amount = 0, Make = "Apple", Specifications = specs13, ColorHex = "437791",
+                new Phone{ Price = 1200, Amount = 0, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "437791",
                            Model = "IPhone 13", Memory = 512, Color = "Blue", Image = image13Blue },
 
-                new Phone{ Price = 990, Amount = 0, Make = "Apple", Specifications = specs13, ColorHex = "42474d",
+                new Phone{ Price = 990, Amount = 0, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "42474d",
                            Model = "IPhone 13", Memory = 128, Color = "Midnight", Image = image13Midnight },
-                new Phone{ Price = 1100, Amount = 0, Make = "Apple", Specifications = specs13, ColorHex = "42474d",
+                new Phone{ Price = 1100, Amount = 0, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "42474d",
                            Model = "IPhone 13", Memory = 256, Color = "Midnight", Image = image13Midnight },
-                new Phone{ Price = 1220, Amount = 0, Make = "Apple", Specifications = specs13, ColorHex = "42474d",
+                new Phone{ Price = 1220, Amount = 0, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "42474d",
                            Model = "IPhone 13", Memory = 512, Color = "Midnight", Image = image13Midnight },
 
-                new Phone{ Price = 970, Amount = 10, Make = "Apple", Specifications = specs13, ColorHex = "c82332",
+                new Phone{ Price = 970, Amount = 10, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "c82332",
                            Model = "IPhone 13", Memory = 128, Color = "Red", Image = image13Red },
-                new Phone{ Price = 1090, Amount = 0, Make = "Apple", Specifications = specs13, ColorHex = "c82332",
+                new Phone{ Price = 1090, Amount = 0, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "c82332",
                            Model = "IPhone 13", Memory = 256, Color = "Red", Image = image13Red },
-                new Phone{ Price = 1190, Amount = 10, Make = "Apple", Specifications = specs13, ColorHex = "c82332",
+                new Phone{ Price = 1190, Amount = 10, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "c82332",
                            Model = "IPhone 13", Memory = 512, Color = "Red", Image = image13Red },
 
-                new Phone{ Price = 960, Amount = 0, Make = "Apple", Specifications = specs13, ColorHex = "fbf7f4",
+                new Phone{ Price = 960, Amount = 0, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "fbf7f4",
                            Model = "IPhone 13", Memory = 128, Color = "Starlight", Image = image13Starlight },
-                new Phone{ Price = 1070, Amount = 10, Make = "Apple", Specifications = specs13, ColorHex = "fbf7f4",
+                new Phone{ Price = 1070, Amount = 10, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "fbf7f4",
                            Model = "IPhone 13", Memory = 256, Color = "Starlight", Image = image13Starlight },
-                new Phone{ Price = 1200, Amount = 10, Make = "Apple", Specifications = specs13, ColorHex = "fbf7f4",
+                new Phone{ Price = 1200, Amount = 10, BrandId = BrandId.Apple, Specifications = specs13, ColorHex = "fbf7f4",
                            Model = "IPhone 13", Memory = 512, Color = "Starlight", Image = image13Starlight },
                 
             };

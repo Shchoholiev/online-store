@@ -1,14 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Store.DAL.Entities.Base;
+using Store.DAL.Enums;
 
 namespace Store.DAL.Entities.Phone;
 
 public partial class Phone : ItemBase
-{
-    [StringLength(50)]
-    public string Make { get; set; } = "No info";
-    
+{   
     [StringLength(50)]
     public string Model { get; set; } = "No info";
     

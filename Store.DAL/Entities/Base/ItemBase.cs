@@ -1,4 +1,7 @@
-﻿namespace Store.DAL.Entities.Base;
+﻿using Store.DAL.Entities.EntitiesForEnums;
+using Store.DAL.Enums;
+
+namespace Store.DAL.Entities.Base;
 
 public class ItemBase : EntityBase
 {
@@ -6,5 +9,7 @@ public class ItemBase : EntityBase
 
     public int Amount { get; set; }
 
-    public byte[]? Image { get; set; }
+    public byte[]? Image { get; set; } // temp
+
+    public BrandId BrandId { get; set; }
 }

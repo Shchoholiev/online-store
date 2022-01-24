@@ -48,7 +48,7 @@ namespace Store.Controllers
             }
 
             var phones = _phoneService.GetAllWithInclude(ph => ph.Specifications)
-                .Where(p => p.Make == phone.Make && p.Model == phone.Model && p.Id != phone.Id)
+                .Where(p => p.Brand == phone.Brand && p.Model == phone.Model && p.Id != phone.Id)
                 .Select(p => p);
 
             var model = _mapper.Map<PhoneViewModel>(phone);

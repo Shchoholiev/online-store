@@ -19,7 +19,9 @@ namespace Store.BLL.Mapper
                 opt => opt.MapFrom(src => src.Name));
 
             cfg.CreateMap<PhoneSpecifications, PhoneSpecificationsDTO>();
-            cfg.CreateMap<Phone, PhoneDTO>();
+            cfg.CreateMap<Phone, PhoneDTO>()
+                .ForMember(dest => dest.Brand,
+                 opt => opt.MapFrom(src => src.BrandId.ToString()));
 
             cfg.CreateMap<OrderDTO, Order>();
 
