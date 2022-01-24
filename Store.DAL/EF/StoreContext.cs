@@ -9,10 +9,10 @@ namespace Store.DAL.EF;
 public class StoreContext : IdentityDbContext
 {
     public StoreContext()
-    {
+    {        
     }
     public StoreContext(DbContextOptions<StoreContext> options) : base(options)
-    {
+    {        
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

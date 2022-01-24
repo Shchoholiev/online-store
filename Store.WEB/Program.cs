@@ -1,43 +1,26 @@
-using System;
-using Microsoft.AspNetCore.Builder;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Store.BLL.DTO;
-using Store.BLL.Interfaces;
-using Store.BLL.Services;
+using Store.Areas.Identity.ViewModels;
+using Store.BLL.DbInitialization;
+using Store.BLL.DI;
+using Store.FluentValidation;
 
-using Store.DAL.DataInitializer;
-using Store.DAL.EF;
-using Store.DAL.Entities.Identity;
-using Store.DAL.Entities.Phone;
-using Store.DAL.Repository;
-
-using (var context = new StoreContext())
-{
-    DbInitializer.Delete(context);
-    DbInitializer.Initialize(context);
-}
+var dbInitializer = new DbInitializerBLL();
+dbInitializer.DeleteAndInitialize();
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-string connectionString = @"server=(LocalDb)\MSSQLLocalDB;database=Store;integrated security=True;
-                    MultipleActiveResultSets=True;App=EntityFramework;";
+builder.Services.AddFluentValidation();
+builder.Services.AddTransient<IValidator<RegisterViewModel>, RegisterValidator>();
+builder.Services.AddTransient<IValidator<LoginViewModel>, LoginValidator>();
 
-builder.Services.AddDbContext<StoreContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddScoped<IGenericRepository<Phone>, GenericRepository<Phone>>();
-builder.Services.AddScoped<IItemsService<Phone, PhoneDTO, PhoneSpecifications, PhoneSpecificationsDTO>,
-    ItemsService<Phone, PhoneDTO, PhoneSpecifications, PhoneSpecificationsDTO>>();
-builder.Services.AddScoped<IUserService<User, UserDTO>, UserService<User, UserDTO>>();
-
-builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<StoreContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddDatabase();
+builder.Services.AddServices();
+builder.Services.AddIdentity();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
