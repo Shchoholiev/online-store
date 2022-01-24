@@ -1,33 +1,14 @@
-using System;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Store.BLL.DbInitialization;
 using Store.BLL.DI;
-using Store.BLL.DTO;
-using Store.BLL.Interfaces;
-using Store.BLL.Services;
 
-using Store.DAL.DataInitializer;
-using Store.DAL.EF;
-using Store.DAL.Entities.Identity;
-using Store.DAL.Entities.Phone;
-using Store.DAL.Repository;
-
-using (var context = new StoreContext())
-{
-    DbInitializer.Delete(context);
-    DbInitializer.Initialize(context);
-}
+var dbInitializer = new DbInitializerBLL();
+dbInitializer.DeleteAndInitialize();
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-string connectionString = @"server=(LocalDb)\MSSQLLocalDB;database=Store;integrated security=True;
-                    MultipleActiveResultSets=True;App=EntityFramework;";
 
 builder.Services.AddDatabase();
 builder.Services.AddServices();
