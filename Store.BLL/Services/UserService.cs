@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Store.BLL.DTO;
 using Store.BLL.Infrastructure;
@@ -40,7 +39,7 @@ public class UserService : IUserService
         var user = _mapper.Map(userDto);
         
         var result = await _userManager.CreateAsync(user, password);
-        if (!result.Succeeded )
+        if (!result.Succeeded)
         {
             foreach (var error in result.Errors)
             {
@@ -56,13 +55,16 @@ public class UserService : IUserService
 
     public async Task<OperationDetails> Login(UserDTO userDto, string password, bool rememberMe)
     {
-        var dbUser = await _userManager.Users.FirstAsync(u => u.NormalizedEmail == userDto.Email.ToUpper()
+        var dbUser = await _userManager.Users.FirstOrDefaultAsync(u => u.NormalizedEmail == userDto.Email.ToUpper()
                                                                         || u.PhoneNumber == userDto.PhoneNumber);
+
+        if (dbUser == null)
+            return new OperationDetails();
         
         var result = await _signInManager.PasswordSignInAsync(dbUser.UserName,
             password, rememberMe, lockoutOnFailure: false);
 
-        return new OperationDetails() {Succeeded = result.Succeeded};
+        return new OperationDetails() { Succeeded = result.Succeeded};
     }
 
     public async Task<OperationDetails> Logout()

@@ -1,6 +1,10 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
+using Store.Areas.Identity.ViewModels;
 using Store.BLL.DbInitialization;
 using Store.BLL.DI;
+using Store.FluentValidation;
 
 var dbInitializer = new DbInitializerBLL();
 dbInitializer.DeleteAndInitialize();
@@ -9,6 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddFluentValidation();
+builder.Services.AddTransient<IValidator<RegisterViewModel>, RegisterValidator>();
+builder.Services.AddTransient<IValidator<LoginViewModel>, LoginValidator>();
 
 builder.Services.AddDatabase();
 builder.Services.AddServices();
