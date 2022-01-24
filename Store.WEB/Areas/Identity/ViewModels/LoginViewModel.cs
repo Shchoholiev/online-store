@@ -4,8 +4,6 @@ namespace Store.Areas.Identity.ViewModels;
 
 public class LoginViewModel
 {
-    [Required]
-    [StringLength(50, ErrorMessage = "Is it valid login?")]
     [Display(Name = "Phone number or email")]
     public string Login { get; set; }
 

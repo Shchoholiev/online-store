@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Store.BLL.DTO;
 using Store.DAL.Entities.Identity;
+using Store.DAL.Entities.Orders;
 using Store.DAL.Entities.Phone;
 
 namespace Store.BLL.Mapper
@@ -19,6 +20,8 @@ namespace Store.BLL.Mapper
 
             cfg.CreateMap<PhoneSpecifications, PhoneSpecificationsDTO>();
             cfg.CreateMap<Phone, PhoneDTO>();
+
+            cfg.CreateMap<OrderDTO, Order>();
 
         }).CreateMapper();
 

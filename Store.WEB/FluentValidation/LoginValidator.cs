@@ -7,7 +7,7 @@ namespace Store.FluentValidation
     {
         public LoginValidator()
         {
-            RuleFor(u => u.Login).NotNull();
+            RuleFor(u => u.Login).NotNull().Length(0, 50);
             RuleFor(u => u.Password).NotNull().Length(6, 20);
         }
     }
