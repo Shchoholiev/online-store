@@ -4,6 +4,6 @@ public partial class PhoneViewModel
 {
     public string GetFullName()
     {
-        return $"{Make} {Model} {Memory}GB {Color}";
+        return $"{Brand} {Model} {Memory}GB {Color}";
     }
 }

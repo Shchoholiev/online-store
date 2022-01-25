@@ -12,4 +12,6 @@ public class ItemBase : EntityBase
     public byte[]? Image { get; set; } // temp
 
     public BrandId BrandId { get; set; }
+
+    public Brand Brand { get; set; }
 }

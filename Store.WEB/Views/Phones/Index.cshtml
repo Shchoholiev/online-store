@@ -48,7 +48,7 @@
             <div class="d-flex flex-wrap mb-3 mx-auto">
                 @foreach (var c in from m in Model 
                                     orderby m.Color
-                                   where m.Memory == p.Memory && m.Make == p.Make && m.Model == p.Model 
+                                   where m.Memory == p.Memory && m.Brand == p.Brand && m.Model == p.Model 
                                    select m)
                     {
                         if (c.Id == p.Id)
