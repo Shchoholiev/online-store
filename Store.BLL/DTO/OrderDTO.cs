@@ -17,9 +17,9 @@ namespace Store.BLL.DTO
 
         public DeliveryOptions Delivery { get; set; }
 
-        public PaymentOptions Payment { get; set; }
+        public string? DeliveryAdress { get; set; }
 
-        public DateTime CreationTime { get; set; }
+        public PaymentOptions Payment { get; set; }
 
         public bool IsPaid { get; set; }
 

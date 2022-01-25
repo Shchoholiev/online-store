@@ -64,5 +64,7 @@ public class StoreContext : IdentityDbContext
     
     public DbSet<Order> Orders { get; set; }
 
+    public DbSet<CartItem> CartItems { get; set; }
+
     public DbSet<Brand> Brands { get; set; }
 }

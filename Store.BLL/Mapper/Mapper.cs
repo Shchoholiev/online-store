@@ -32,6 +32,11 @@ namespace Store.BLL.Mapper
             return _mapper.Map<User>(source);
         }
 
+        public Order Map(OrderDTO source)
+        {
+            return _mapper.Map<Order>(source);
+        }
+
         public PhoneDTO Map(Phone source)
         {
             return _mapper.Map<PhoneDTO>(source);

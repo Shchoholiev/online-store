@@ -55,7 +55,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
     public TEntity GetItemWithInclude(int? id, params Expression<Func<TEntity, object>>[] includeProperties)
     {
-        return GetAllWithInclude(includeProperties).First(i => i.Id == id);
+        return GetAllWithInclude(includeProperties).FirstOrDefault(i => i.Id == id);
     }
 
     public IEnumerable<TEntity> GetAll()

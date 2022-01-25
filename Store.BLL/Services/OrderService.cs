@@ -8,23 +8,36 @@ namespace Store.BLL.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly IGenericRepository<Order> _repository;
+        private readonly IGenericRepository<Order> _orderRepository;
 
         private readonly IGenericRepository<ItemBase> _itemRepository;
 
         private readonly Mapper.Mapper _mapper = new();
 
-        public void MakeOrder(ItemBaseDTO item, UserDTO user, int amount)
+        public OrderService(IGenericRepository<Order> orderRepo, IGenericRepository<ItemBase> itemRepo)
         {
-            var order = new Order();
+            _orderRepository = orderRepo;
+            _itemRepository = itemRepo;
+        }
 
-            _repository.Add(order);
+        public void MakeOrder(OrderDTO orderDTO)
+        {
+            var order = _mapper.Map(orderDTO);
+
+            order.CreationTime = DateTime.Now;
+
+            _orderRepository.Add(order);
+        }
+
+        private bool CheckAmount(int itemId, int amount)
+        {
+            var item = _itemRepository.GetItem(itemId);
+
+            if (item == null) // ???
+                return false;
+
+            return item.Amount - amount >= 0;
         }
     }
 
-    enum ItemTypes
-    {
-        Phone,
-        Laptop
-    }
 }

@@ -9,6 +9,6 @@ namespace Store.BLL.Interfaces
 {
     public interface IOrderService
     {
-        public void MakeOrder(ItemBaseDTO item, UserDTO user, int amount);
+        public void MakeOrder(OrderDTO orderDTO);
     }
 }

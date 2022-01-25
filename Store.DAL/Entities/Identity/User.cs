@@ -7,4 +7,6 @@ namespace Store.DAL.Entities.Identity;
 public class User : IdentityUser
 {
     public List<Order>? Orders { get; set; }
+
+    public List<CartItem>? CartItems { get; set; }
 }
