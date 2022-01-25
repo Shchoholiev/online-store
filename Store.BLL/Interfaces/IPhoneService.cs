@@ -6,11 +6,14 @@ namespace Store.BLL.Interfaces;
 
 public interface IPhoneService
 {
-    public PhoneDTO GetItem(int? id);
+    PhoneDTO GetItem(int? id);
     
-    public PhoneDTO GetItemWithInclude(int? id, params Expression<Func<Phone, object>>[] includeProperties);
+    PhoneDTO GetItemWithInclude(int? id, params Expression<Func<Phone, object>>[] includeProperties);
 
-    public IEnumerable<PhoneDTO> GetAll();
+    IEnumerable<PhoneDTO> GetAll();
     
-    public IEnumerable<PhoneDTO> GetAllWithInclude(params Expression<Func<Phone, object>>[] includeProperties);
+    IEnumerable<PhoneDTO> GetAllWithInclude(params Expression<Func<Phone, object>>[] includeProperties);
+
+    IEnumerable<PhoneDTO> GetWithFiltersAndInclude(Expression<Func<Phone, bool>> predicate,
+                    params Expression<Func<Phone, object>>[] includeProperties);
 }

@@ -9,9 +9,7 @@ namespace Store.BLL.DTO
 {
     public class OrderDTO
     {
-        public ItemBaseDTO Item { get; set; }
-
-        public int ItemAmount { get; set; }
+        public List<CartItemDTO> Items { get; set; }
 
         public UserDTO User { get; set; }
 

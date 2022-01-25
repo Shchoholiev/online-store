@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Store.BLL.DTO;
+using Store.DAL.Entities.Base;
 using Store.DAL.Entities.Identity;
 using Store.DAL.Entities.Orders;
 using Store.DAL.Entities.Phone;
@@ -25,6 +26,15 @@ namespace Store.BLL.Mapper
 
             cfg.CreateMap<OrderDTO, Order>();
 
+            cfg.CreateMap<ItemBaseDTO, ItemBase>();
+
+            cfg.CreateMap<ItemBase, ItemBaseDTO>();
+
+            cfg.CreateMap<CartItemDTO, CartItem>();
+            cfg.CreateMap<Order, OrderDTO>();
+
+            cfg.CreateMap<CartItem, CartItemDTO>();
+
         }).CreateMapper();
 
         public User Map(UserDTO source)
@@ -37,6 +47,11 @@ namespace Store.BLL.Mapper
             return _mapper.Map<Order>(source);
         }
 
+        public CartItem Map(CartItemDTO source)
+        {
+            return _mapper.Map<CartItem>(source);
+        }
+
         public PhoneDTO Map(Phone source)
         {
             return _mapper.Map<PhoneDTO>(source);
@@ -45,6 +60,16 @@ namespace Store.BLL.Mapper
         public IEnumerable<PhoneDTO> Map(IEnumerable<Phone> source)
         {
             return _mapper.Map<IEnumerable<PhoneDTO>>(source);
+        }
+
+        public IEnumerable<OrderDTO> Map(IEnumerable<Order> source)
+        {
+            return _mapper.Map<IEnumerable<OrderDTO>>(source);
+        }
+
+        public IEnumerable<CartItemDTO> Map(IEnumerable<CartItem> source)
+        {
+            return _mapper.Map<IEnumerable<CartItemDTO>>(source);
         }
     }
 }

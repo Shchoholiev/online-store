@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Store.BLL.DTO
 {
-    public class CartItemDTO
+    public class CartItemDTO : EntityBaseDTO
     {
         public ItemBaseDTO Item { get; set; }
 
         public int Amount { get; set; }
 
-        public UserDTO User { get; set; }
+        public UserDTO? User { get; set; }
     }
 }

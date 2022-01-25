@@ -21,6 +21,13 @@ public interface IGenericRepository<TEntity>
     TEntity GetItemWithInclude(int? id, params Expression<Func<TEntity, object>>[] includeProperties);
     
     IEnumerable<TEntity> GetAll();
-    
+
+    IEnumerable<TEntity> GetWithFilters(Expression<Func<TEntity, bool>> predicate);
+
+    IEnumerable<TEntity> GetWithFiltersAndInclude(Expression<Func<TEntity, bool>> predicate,
+                        params Expression<Func<TEntity, object>>[] includeProperties);
+
     IEnumerable<TEntity> GetAllWithInclude(params Expression<Func<TEntity, object>>[] includeProperties);
+
+    void Attach(params object[] obj);
 }

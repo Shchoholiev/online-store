@@ -1,8 +1,7 @@
 ﻿namespace Store.ViewModels
 {
-    public partial class PhoneViewModel : Base
+    public partial class PhoneViewModel : ItemBase
     {
-        public string Brand { get; set; }
     
         public string Model { get; set; }
     

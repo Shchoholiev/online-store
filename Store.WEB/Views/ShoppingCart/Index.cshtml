@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Store.ViewModels.CartItemViewModel>
+
+@{
+    ViewData["Title"] = "Shopping cart";
+}
+
+<h3>Shopping cart</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Brand</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach (var cart in Model)
+      {
+          <tr>
+              <td>@cart.Id</td>
+              <td>@cart.Item.Brand</td>
+              <td>@cart.Amount</td>
+          </tr>
+      }
+  </tbody>
+</table>

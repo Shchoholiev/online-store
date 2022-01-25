@@ -1,13 +1,17 @@
 ﻿using Store.BLL.DTO;
 using Store.BLL.Infrastructure;
+using Store.DAL.Entities.Identity;
+using System.Security.Claims;
 
 namespace Store.BLL.Interfaces;
 
 public interface IUserService
 {
-    public Task<OperationDetails> Register(UserDTO userDto, string password);
+    Task<OperationDetails> Register(UserDTO userDto, string password);
 
-    public Task<OperationDetails> Login(UserDTO userDto, string password, bool rememberMe);
+    Task<OperationDetails> Login(UserDTO userDto, string password, bool rememberMe);
 
-    public Task<OperationDetails> Logout();
+    Task<OperationDetails> Logout();
+
+    Task<User> GetCurrentUser(ClaimsPrincipal claims);
 }

@@ -4,6 +4,7 @@ using Store.BLL.DTO;
 using Store.BLL.Infrastructure;
 using Store.BLL.Interfaces;
 using Store.DAL.Entities.Identity;
+using System.Security.Claims;
 
 namespace Store.BLL.Services;
 
@@ -71,5 +72,11 @@ public class UserService : IUserService
     {
         await _signInManager.SignOutAsync();
         return new OperationDetails() { Succeeded = true };
+    }
+
+    public async Task<User> GetCurrentUser(ClaimsPrincipal claims)
+    {
+        var user = await _userManager.GetUserAsync(claims);
+        return user;
     }
 }

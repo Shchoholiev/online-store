@@ -1,9 +1,9 @@
 ﻿namespace Store.ViewModels;
 
-public class Base
+public class ItemBase : EntityBaseViewModel
 {
-    public int Id { get; set; }
-    
+    public string Brand { get; set; }
+
     public uint Price { get; set; }
 
     public uint Amount { get; set; }

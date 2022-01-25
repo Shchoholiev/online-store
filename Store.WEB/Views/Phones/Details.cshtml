@@ -147,7 +147,9 @@
                 
                 @if (phone.Amount > 0)
                 {
-                    <button type="button" name="btn-buy" class="btn btn-primary">BUY</button>
+                    <form asp-controller="ShoppingCart" asp-action="buy" asp-route-itemId="@phone.Id">
+                        <button type="submit" name="btn-buy" class="btn btn-primary">BUY</button>
+                    </form>
                 }
                 else
                 {

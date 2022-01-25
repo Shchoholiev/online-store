@@ -2,20 +2,21 @@
 using Microsoft.EntityFrameworkCore;
 using Store.DAL.EF;
 using Store.DAL.Entities.Base;
+using Store.DAL.Entities.Identity;
 
 namespace Store.DAL.Repository;
 
-public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : ItemBase
+public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : EntityBase
 {
     private readonly StoreContext _db;
     private readonly DbSet<TEntity> _table;
-    
+
     public GenericRepository()
     {
         _db = new StoreContext();
         _table = _db.Set<TEntity>();
     }
-    
+
     public void Add(TEntity item)
     {
         _table.Add(item);
@@ -63,16 +64,45 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
         return _table.AsNoTracking();
     }
 
+    public IEnumerable<TEntity> GetWithFilters(Expression<Func<TEntity, bool>> predicate)
+    {
+        var entities = _table.Where(predicate);
+        return entities;
+    }
+
+    public IEnumerable<TEntity> GetWithFiltersAndInclude(Expression<Func<TEntity, bool>> predicate,
+        params Expression<Func<TEntity, object>>[] includeProperties)
+    {
+        return IncludeWithFilters(predicate, includeProperties);
+    }
+
     public IEnumerable<TEntity> GetAllWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
     {
         return Include(includeProperties);
     }
-    
+
     private IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includeProperties)
     {
         IQueryable<TEntity> query = _table.AsNoTracking();
         return includeProperties
-            .Aggregate(query, (current, includeProperty) 
+            .Aggregate(query, (current, includeProperty)
                 => current.Include(includeProperty));
+    }
+
+    private IQueryable<TEntity> IncludeWithFilters(Expression<Func<TEntity, bool>> predicate,
+        params Expression<Func<TEntity, object>>[] includeProperties)
+    {
+        IQueryable<TEntity> query = _table.AsNoTracking().Where(predicate);
+        return includeProperties
+            .Aggregate(query, (current, includeProperty)
+                => current.Include(includeProperty));
+    }
+
+    public void Attach(params object[] obj)
+    {
+        foreach (var o in obj)
+        {
+            _db.Attach(o);
+        }
     }
 }

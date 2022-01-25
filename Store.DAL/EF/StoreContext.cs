@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Store.DAL.Entities.Base;
 using Store.DAL.Entities.EntitiesForEnums;
+using Store.DAL.Entities.Identity;
 using Store.DAL.Entities.Laptop;
 using Store.DAL.Entities.Orders;
 using Store.DAL.Entities.Phone;
@@ -52,6 +53,16 @@ public class StoreContext : IdentityDbContext
             .HasOne<PhoneSpecifications>(p => p.Specifications);
         modelBuilder.Entity<Phone>()
             .Property(p => p.ColorHex).HasMaxLength(6);
+
+        //modelBuilder.Entity<User>()
+        //    .HasMany<CartItem>(u => u.CartItems)
+        //    .WithOne(c => c.User);
+
+        //modelBuilder.Entity<User>()
+        //    .HasMany<CartItem>(u => u.CartItems);
+
+        //modelBuilder.Entity<CartItem>()
+        //    .HasOne(c => c.Item);
 
         base.OnModelCreating(modelBuilder);
     }

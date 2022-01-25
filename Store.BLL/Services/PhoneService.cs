@@ -33,6 +33,13 @@ public class PhoneService : IPhoneService
         return _mapper.Map(_repository.GetAll());
     }
 
+    public IEnumerable<PhoneDTO> GetWithFiltersAndInclude(Expression<Func<Phone, bool>> predicate,
+                    params Expression<Func<Phone, object>>[] includeProperties)
+    {
+        var phones = _repository.GetWithFiltersAndInclude(predicate, includeProperties);
+        return _mapper.Map(phones);
+    }
+
     public IEnumerable<PhoneDTO> GetAllWithInclude(params Expression<Func<Phone, object>>[] includeProperties)
     {
         return _mapper.Map(_repository.GetAllWithInclude(includeProperties));

@@ -1,10 +1,8 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store.Areas.Identity.ViewModels;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
-using Store.DAL.Entities.Identity;
 
 namespace Store.Areas.Identity.Controllers;
 

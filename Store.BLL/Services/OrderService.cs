@@ -1,4 +1,5 @@
 ﻿using Store.BLL.DTO;
+using Store.BLL.Infrastructure;
 using Store.BLL.Interfaces;
 using Store.DAL.Entities.Base;
 using Store.DAL.Entities.Orders;
@@ -20,23 +21,56 @@ namespace Store.BLL.Services
             _itemRepository = itemRepo;
         }
 
-        public void MakeOrder(OrderDTO orderDTO)
+        public OperationDetails MakeOrder(OrderDTO orderDTO)
         {
-            var order = _mapper.Map(orderDTO);
+            var operationDetails = new OperationDetails();
 
+            foreach (var cart in orderDTO.Items)
+            {
+                if (!CheckAmount(cart.Item.Id, cart.Amount))
+                    operationDetails.AddError(
+                        $"There is no {cart.Item.Amount} {cart.Item.Brand}. " +
+                        $"Only {GetItemAmount(cart.Item.Id)} available.");
+            }
+
+            if (operationDetails.Errors.Count > 0)
+                return operationDetails;
+
+            var order = _mapper.Map(orderDTO);
             order.CreationTime = DateTime.Now;
 
+            // add transaction
+            foreach (var cart in order.Items)
+            {
+                var item = cart.Item;
+                item.Amount -= cart.Amount;
+                _itemRepository.Update(item);
+            }
+
             _orderRepository.Add(order);
+
+            operationDetails.Succeeded = true;
+            return operationDetails;
+        }
+
+        public IEnumerable<OrderDTO> GetOrders(int userId)
+        {
+            var orders = _orderRepository.GetWithFilters(o => o.User.Id == userId.ToString());
+
+            var orderDtos = _mapper.Map(orders);
+
+            return orderDtos;
         }
 
         private bool CheckAmount(int itemId, int amount)
         {
+            return GetItemAmount(itemId) - amount >= 0;
+        }
+
+        private int GetItemAmount(int itemId)
+        {
             var item = _itemRepository.GetItem(itemId);
-
-            if (item == null) // ???
-                return false;
-
-            return item.Amount - amount >= 0;
+            return item != null ? item.Amount : 0;
         }
     }
 

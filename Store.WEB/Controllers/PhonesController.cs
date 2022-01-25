@@ -1,11 +1,8 @@
 ﻿#nullable disable
-using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
-using Store.DAL.Entities.Phone;
 using Store.ViewModels;
 
 namespace Store.Controllers
@@ -13,6 +10,8 @@ namespace Store.Controllers
     public class PhonesController : Controller
     {
         private readonly IPhoneService _phoneService;
+
+        // temp
         private readonly IMapper _mapper = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<PhoneDTO, PhoneViewModel>();
@@ -47,9 +46,9 @@ namespace Store.Controllers
                 return NotFound();
             }
 
-            var phones = _phoneService.GetAllWithInclude(ph => ph.Specifications)
-                .Where(p => p.Brand == phone.Brand && p.Model == phone.Model && p.Id != phone.Id)
-                .Select(p => p);
+            var phones = _phoneService.GetWithFiltersAndInclude(
+                        p => p.Brand.Name == phone.Brand && p.Model == phone.Model && p.Id != phone.Id,
+                        ph => ph.Specifications);
 
             var model = _mapper.Map<PhoneViewModel>(phone);
             _mapper.Map(phone.Specifications, model);
