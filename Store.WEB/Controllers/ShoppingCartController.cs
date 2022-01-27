@@ -27,17 +27,16 @@ namespace Store.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<CartItemViewModel> carItems = null;
+            var cartItems = new List<CartItemViewModel>();
 
-            var user = await _userService.GetCurrentUser(User);
-
-            var cartItemDTOs = _shoppingCartService.GetItems(user);
-            if (cartItemDTOs != null)
+            if (User != null)
             {
-                carItems = _mapper.Map<IEnumerable<CartItemViewModel>>(cartItemDTOs).ToList();
+                var user = await _userService.GetCurrentUser(User);
+                var cartItemDTOs = _shoppingCartService.GetItems(user);
+                cartItems = _mapper.Map<IEnumerable<CartItemViewModel>>(cartItemDTOs).ToList();
             }
 
-            return View(carItems);
+            return View(cartItems);
         }
 
         public async Task<IActionResult> Buy(int itemId)

@@ -28,7 +28,9 @@ namespace Store.BLL.Mapper
 
             cfg.CreateMap<ItemBaseDTO, ItemBase>();
 
-            cfg.CreateMap<ItemBase, ItemBaseDTO>();
+            cfg.CreateMap<ItemBase, ItemBaseDTO>()
+                .ForMember(dest => dest.Brand,
+                opt => opt.MapFrom(src => src.BrandId.ToString()));
 
             cfg.CreateMap<CartItemDTO, CartItem>();
             cfg.CreateMap<Order, OrderDTO>();
