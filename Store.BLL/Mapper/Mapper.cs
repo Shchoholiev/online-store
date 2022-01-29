@@ -21,16 +21,16 @@ namespace Store.BLL.Mapper
 
             cfg.CreateMap<PhoneSpecifications, PhoneSpecificationsDTO>();
             cfg.CreateMap<Phone, PhoneDTO>()
-                .ForMember(dest => dest.Brand,
-                 opt => opt.MapFrom(src => src.BrandId.ToString()));
+            .ForMember(dest => dest.Brand,
+                opt => opt.MapFrom(src => src.Brand.Name))
+            .ForMember(dest => dest.Model,
+                opt => opt.MapFrom(src => src.Model.Name));
 
             cfg.CreateMap<OrderDTO, Order>();
 
             cfg.CreateMap<ItemBaseDTO, ItemBase>();
 
-            cfg.CreateMap<ItemBase, ItemBaseDTO>()
-                .ForMember(dest => dest.Brand,
-                opt => opt.MapFrom(src => src.BrandId.ToString()));
+            cfg.CreateMap<ItemBase, ItemBaseDTO>();
 
             cfg.CreateMap<CartItemDTO, CartItem>();
             cfg.CreateMap<Order, OrderDTO>();

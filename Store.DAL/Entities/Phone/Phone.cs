@@ -7,9 +7,6 @@ namespace Store.DAL.Entities.Phone;
 
 public partial class Phone : ItemBase
 {   
-    [StringLength(50)]
-    public string Model { get; set; } = "No info";
-    
     public int Memory { get; set; }
     
     [StringLength(20)]

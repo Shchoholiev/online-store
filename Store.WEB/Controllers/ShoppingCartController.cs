@@ -29,7 +29,7 @@ namespace Store.Controllers
         {
             var cartItems = new List<CartItemViewModel>();
 
-            if (User != null)
+            if (User.Identity.IsAuthenticated)
             {
                 var user = await _userService.GetCurrentUser(User);
                 var cartItemDTOs = _shoppingCartService.GetItems(user);
@@ -41,17 +41,21 @@ namespace Store.Controllers
 
         public async Task<IActionResult> Buy(int itemId)
         {
-            var user = await _userService.GetCurrentUser(User);
-            var userDto = new UserDTO() { Email = user.Email, PhoneNumber = user.PhoneNumber };
-
-            var cartItem = new CartItemDTO()
+            if (User.Identity.IsAuthenticated)
             {
-                Item = new ItemBaseDTO() { Id = itemId },
-                Amount = 1,
-                User = userDto,
-            };
+                var user = await _userService.GetCurrentUser(User);
+                var userDto = new UserDTO() { Email = user.Email, PhoneNumber = user.PhoneNumber };
 
-            _shoppingCartService.AddItem(cartItem);
+                var cartItem = new CartItemDTO()
+                {
+                    Item = new ItemBaseDTO() { Id = itemId },
+                    Amount = 1,
+                    User = userDto,
+                };
+
+                _shoppingCartService.AddItem(cartItem);
+            }
+
             return Redirect("Index");
         }
     }

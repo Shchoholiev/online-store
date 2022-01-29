@@ -27,7 +27,7 @@ namespace Store.Controllers
         // GET: Phones
         public  ActionResult Index()
         {
-            var phoneDtos = _phoneService.GetAll();
+            var phoneDtos = _phoneService.GetAllWithInclude(p => p.Brand, p => p.Model, p => p.Specifications);
             return View(_mapper.Map<List<PhoneViewModel>>(phoneDtos));
         }
         
@@ -39,7 +39,10 @@ namespace Store.Controllers
                 return NotFound();
             }
 
-            var phone = _phoneService.GetItemWithInclude(id, p => p.Specifications);
+            var phone = _phoneService.GetItemWithInclude(id, 
+                p => p.Specifications,
+                p => p.Brand,
+                p => p.Model);
 
             if (phone == null)
             {
@@ -47,8 +50,8 @@ namespace Store.Controllers
             }
 
             var phones = _phoneService.GetWithFiltersAndInclude(
-                        p => p.Brand.Name == phone.Brand && p.Model == phone.Model && p.Id != phone.Id,
-                        ph => ph.Specifications);
+                        p => p.Brand.Name == phone.Brand && p.Model.Name == phone.Model && p.Id != phone.Id,
+                        ph => ph.Specifications, p => p.Brand, p => p.Model);
 
             var model = _mapper.Map<PhoneViewModel>(phone);
             _mapper.Map(phone.Specifications, model);
