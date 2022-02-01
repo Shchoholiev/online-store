@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Store.BLL.DTO;
 using Store.DAL.Entities.Base;
 using Store.DAL.Entities.Identity;
 using Store.DAL.Entities.Orders;
 using Store.DAL.Entities.Phone;
 
-namespace Store.BLL.Mapper
+namespace Store.BLL.Mappers
 {
     public class Mapper
     {
@@ -30,7 +25,11 @@ namespace Store.BLL.Mapper
 
             cfg.CreateMap<ItemBaseDTO, ItemBase>();
 
-            cfg.CreateMap<ItemBase, ItemBaseDTO>();
+            cfg.CreateMap<ItemBase, ItemBaseDTO>()
+                .ForMember(dest => dest.Brand,
+                opt => opt.MapFrom(src => src.Brand.Name))
+                .ForMember(dest => dest.Model,
+                opt => opt.MapFrom(src => src.Model.Name));
 
             cfg.CreateMap<CartItemDTO, CartItem>();
             cfg.CreateMap<Order, OrderDTO>();
@@ -52,6 +51,11 @@ namespace Store.BLL.Mapper
         public CartItem Map(CartItemDTO source)
         {
             return _mapper.Map<CartItem>(source);
+        }
+
+        public ItemBaseDTO Map(ItemBase source)
+        {
+            return _mapper.Map<ItemBaseDTO>(source);
         }
 
         public PhoneDTO Map(Phone source)

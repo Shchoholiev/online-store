@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
-using AutoMapper;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
+using Store.BLL.Mappers;
 using Store.DAL.Entities.Phone;
 using Store.DAL.Repository;
 
@@ -11,7 +11,7 @@ public class PhoneService : IPhoneService
 {
     private readonly IGenericRepository<Phone> _repository;
 
-    private readonly Mapper.Mapper _mapper = new();
+    private readonly Mapper _mapper = new();
 
     public PhoneService(IGenericRepository<Phone> repository)
     {

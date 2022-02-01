@@ -1,8 +1,8 @@
 ﻿#nullable disable
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
+using Store.ViewMappers;
 using Store.ViewModels;
 
 namespace Store.Controllers
@@ -12,12 +12,7 @@ namespace Store.Controllers
         private readonly IPhoneService _phoneService;
 
         // temp
-        private readonly IMapper _mapper = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<PhoneDTO, PhoneViewModel>();
-            cfg.CreateMap<PhoneSpecificationsDTO, PhoneViewModel>().ForMember(s => s.Id, 
-                opt => opt.Ignore());
-        }).CreateMapper();
+        private readonly Mapper _mapper = new();
 
         public PhonesController(IPhoneService phoneService)
         {
@@ -28,7 +23,9 @@ namespace Store.Controllers
         public  ActionResult Index()
         {
             var phoneDtos = _phoneService.GetAllWithInclude(p => p.Brand, p => p.Model, p => p.Specifications);
-            return View(_mapper.Map<List<PhoneViewModel>>(phoneDtos));
+            var phoneViewModels = _mapper.Map(phoneDtos).ToList();
+
+            return View(phoneViewModels);
         }
         
         // GET: Phones/Details/5
@@ -53,10 +50,9 @@ namespace Store.Controllers
                         p => p.Brand.Name == phone.Brand && p.Model.Name == phone.Model && p.Id != phone.Id,
                         ph => ph.Specifications, p => p.Brand, p => p.Model);
 
-            var model = _mapper.Map<PhoneViewModel>(phone);
-            _mapper.Map(phone.Specifications, model);
+            var model = _mapper.Map(phone);
             
-            var modelList = _mapper.Map<List<PhoneViewModel>>(phones);
+            var modelList = _mapper.Map(phones).ToList();
             modelList.Insert(0, model);
         
             return View(modelList);

@@ -9,6 +9,7 @@ using Store.BLL.Services;
 using Store.DAL.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Store.DAL.Entities.Orders;
+using Store.DAL.Entities.Base;
 
 namespace Store.BLL.DI
 {
@@ -26,6 +27,7 @@ namespace Store.BLL.DI
 
             services.AddScoped<IGenericRepository<Phone>, GenericRepository<Phone>>();
             services.AddScoped<IGenericRepository<CartItem>, GenericRepository<CartItem>>();
+            services.AddScoped<IGenericRepository<ItemBase>, GenericRepository<ItemBase>>();
 
             return services;
         }

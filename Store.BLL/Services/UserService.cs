@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Store.BLL.DTO;
 using Store.BLL.Infrastructure;
 using Store.BLL.Interfaces;
+using Store.BLL.Mappers;
 using Store.DAL.Entities.Identity;
 using System.Security.Claims;
 
@@ -14,31 +15,27 @@ public class UserService : IUserService
     
     private readonly SignInManager<User> _signInManager;
 
-    private readonly Mapper.Mapper _mapper = new();
+    private readonly Mapper _mapper = new();
 
     public UserService(UserManager<User> userManager, SignInManager<User> signInManager)
     {
-        _userManager = userManager;
-        _signInManager = signInManager;
+        this._userManager = userManager;
+        this._signInManager = signInManager;
     }
     
     public async Task<OperationDetails> Register(UserDTO userDto, string password)
     {
-        var operationDetails = new OperationDetails();
-        
         var dbUser = await _userManager.FindByEmailAsync(userDto.Email);
         if (dbUser != null) 
-            operationDetails.AddError("This email already used.");
+            return new OperationDetails("This email already used.");
 
         dbUser = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == userDto.PhoneNumber);
-        if (dbUser != null) 
-            operationDetails.AddError("This phone number already used.");
-
-        if (operationDetails.ErrorsCount() > 0)
-            return operationDetails;
+        if (dbUser != null)
+            return new OperationDetails("This email already used.");
 
         var user = _mapper.Map(userDto);
-        
+
+        var operationDetails = new OperationDetails();
         var result = await _userManager.CreateAsync(user, password);
         if (!result.Succeeded)
         {
@@ -47,10 +44,12 @@ public class UserService : IUserService
                 operationDetails.AddError(error.Description);
             }
         }
+        else
+        {
+            await _signInManager.SignInAsync(user, false);
+        }
 
-        await _signInManager.SignInAsync(user, false);
-
-        operationDetails.Succeeded = true;
+        operationDetails.Succeeded = result.Succeeded;
         return operationDetails;
     }
 

@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
+using Store.ViewMappers;
 using Store.ViewModels;
 
 namespace Store.Controllers
@@ -12,28 +12,32 @@ namespace Store.Controllers
 
         private readonly IUserService _userService;
 
-        // temp
-        private readonly IMapper _mapper = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<ItemBaseDTO, ItemBase>();
-            cfg.CreateMap<CartItemDTO, CartItemViewModel>();
-        }).CreateMapper();
+        private readonly Mapper _mapper = new();
 
         public ShoppingCartController(IShoppingCartService shoppingCartService, IUserService userService)
         {
-            _shoppingCartService = shoppingCartService;
-            _userService = userService;
+            this._shoppingCartService = shoppingCartService;
+            this._userService = userService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var cartItems = new List<CartItemViewModel>();
+             var cartItems = new List<CartItemViewModel>();
 
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _userService.GetCurrentUser(User);
                 var cartItemDTOs = _shoppingCartService.GetItems(user);
-                cartItems = _mapper.Map<IEnumerable<CartItemViewModel>>(cartItemDTOs).ToList();
+                cartItems = _mapper.Map(cartItemDTOs).ToList();
+            }
+            else
+            {
+                var cookies = Request.Cookies["StoreName_CartItems"];
+                if (cookies != null)
+                {
+                    var cartItemDTOs = _shoppingCartService.GetDeserializedCartItems(cookies);
+                    cartItems = _mapper.Map(cartItemDTOs).ToList();
+                }
             }
 
             return View(cartItems);
@@ -41,19 +45,36 @@ namespace Store.Controllers
 
         public async Task<IActionResult> Buy(int itemId)
         {
+            var cartItemDTO = new CartItemDTO()
+            {
+                Item = new ItemBaseDTO() { Id = itemId },
+                Amount = 1,
+            };
+
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _userService.GetCurrentUser(User);
                 var userDto = new UserDTO() { Email = user.Email, PhoneNumber = user.PhoneNumber };
+                cartItemDTO.User = userDto;
+                _shoppingCartService.AddItem(cartItemDTO);
+            }
+            else
+            {
+                var cookies = Request.Cookies["StoreName_CartItems"];
+                var serializedCartItem = _shoppingCartService.GetSerializedCartItem(cartItemDTO);
 
-                var cartItem = new CartItemDTO()
+                if (cookies != null)
                 {
-                    Item = new ItemBaseDTO() { Id = itemId },
-                    Amount = 1,
-                    User = userDto,
-                };
+                    cookies += $"-{serializedCartItem}";
+                }
+                else
+                {
+                    cookies = serializedCartItem;
+                }
 
-                _shoppingCartService.AddItem(cartItem);
+                var cookieOptions = new CookieOptions();
+                cookieOptions.Expires = DateTime.Now.AddDays(7);
+                HttpContext.Response.Cookies.Append("StoreName_CartItems", cookies, cookieOptions);
             }
 
             return Redirect("Index");

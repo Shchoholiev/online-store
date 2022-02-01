@@ -2,8 +2,6 @@
 
 public class PhoneDTO : ItemBaseDTO
 {   
-    public string Model { get; set; }
-    
     public ushort Memory { get; set; }
     
     public string Color { get; set; }

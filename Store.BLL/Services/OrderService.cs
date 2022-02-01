@@ -1,6 +1,7 @@
 ﻿using Store.BLL.DTO;
 using Store.BLL.Infrastructure;
 using Store.BLL.Interfaces;
+using Store.BLL.Mappers;
 using Store.DAL.Entities.Base;
 using Store.DAL.Entities.Orders;
 using Store.DAL.Repository;
@@ -13,7 +14,7 @@ namespace Store.BLL.Services
 
         private readonly IGenericRepository<ItemBase> _itemRepository;
 
-        private readonly Mapper.Mapper _mapper = new();
+        private readonly Mapper _mapper = new();
 
         public OrderService(IGenericRepository<Order> orderRepo, IGenericRepository<ItemBase> itemRepo)
         {
@@ -25,13 +26,13 @@ namespace Store.BLL.Services
         {
             var operationDetails = new OperationDetails();
 
-            foreach (var cart in orderDTO.Items)
-            {
-                if (!CheckAmount(cart.Item.Id, cart.Amount))
-                    operationDetails.AddError(
-                        $"There is no {cart.Item.Amount} {cart.Item.Brand}. " +
-                        $"Only {GetItemAmount(cart.Item.Id)} available.");
-            }
+            //foreach (var cart in orderDTO.Items)
+            //{
+            //    if (!CheckAmount(cart.Item.Id, cart.Amount))
+            //        operationDetails.AddError(
+            //            $"There is no {cart.Item.Amount} {cart.Item.Brand}. " +
+            //            $"Only {GetItemAmount(cart.Item.Id)} available.");
+            //}
 
             if (operationDetails.Errors.Count > 0)
                 return operationDetails;
