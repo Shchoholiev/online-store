@@ -10,5 +10,5 @@ public class ItemBaseViewModel : EntityBaseViewModel
 
     public uint Amount { get; set; }
 
-    public byte[]? Image { get; set; }
+    public string Image { get; set; }
 }

@@ -66,4 +66,6 @@ public class StoreContext : IdentityDbContext
     public DbSet<Model> Models { get; set; }
 
     public DbSet<Color> Colors { get; set; }
+
+    public DbSet<Image> Images { get; set; }
 }

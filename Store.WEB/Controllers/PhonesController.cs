@@ -44,8 +44,7 @@ namespace Store.Controllers
             }
 
             var phones = _phoneService.GetAll(
-                        p => p.Brand.Name == phone.Brand && p.Model.Name == phone.Model && p.Id != phone.Id,
-                        ph => ph.Specifications, p => p.Brand, p => p.Model);
+                        p => p.Brand.Name == phone.Brand && p.Model.Name == phone.Model && p.Id != phone.Id);
 
             var model = _mapper.Map(phone);
             

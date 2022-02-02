@@ -23,7 +23,9 @@ namespace Store.BLL.Mappers
             .ForMember(dest => dest.Color,
                 opt => opt.MapFrom(src => src.Color.Name))
             .ForMember(dest => dest.ColorHex,
-                opt => opt.MapFrom(src => src.Color.Hex));
+                opt => opt.MapFrom(src => src.Color.Hex))
+            .ForMember(dest => dest.Image,
+                opt => opt.MapFrom(src => src.Image.Link));
 
             cfg.CreateMap<OrderDTO, Order>();
 
@@ -37,7 +39,9 @@ namespace Store.BLL.Mappers
             .ForMember(dest => dest.Color,
                 opt => opt.MapFrom(src => src.Color.Name))
             .ForMember(dest => dest.ColorHex,
-                opt => opt.MapFrom(src => src.Color.Hex));
+                opt => opt.MapFrom(src => src.Color.Hex))
+            .ForMember(dest => dest.Image,
+                opt => opt.MapFrom(src => src.Image.Link));
 
             cfg.CreateMap<CartItemDTO, CartItem>();
             cfg.CreateMap<Order, OrderDTO>();

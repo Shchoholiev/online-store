@@ -20,9 +20,9 @@ public class DbInitializer
 
         var brands = new List<Brand>
         {
-            apple, 
-            asus, 
-            samsung, 
+            apple,
+            asus,
+            samsung,
             xiaomi
         };
 
@@ -72,6 +72,26 @@ public class DbInitializer
         }
         context.SaveChanges();
 
+        var image13Pink = new Image() { Link = "https://firebasestorage.googleapis.com/v0/b/store-4a733.appspot.com/o/13Pink.jpg?alt=media&token=bac56beb-fc7f-4350-982f-08f01e7d826e" };
+        var image13Blue = new Image() { Link = "https://firebasestorage.googleapis.com/v0/b/store-4a733.appspot.com/o/13Blue.jpg?alt=media&token=e6dc9c63-4cb7-43f3-bab2-1e33d9fd5311" };
+        var image13Midnight = new Image() { Link = "https://firebasestorage.googleapis.com/v0/b/store-4a733.appspot.com/o/13Midnight.jpg?alt=media&token=62808164-6f10-44fa-b545-76e375b03974" };
+        var image13Red = new Image() { Link = "https://firebasestorage.googleapis.com/v0/b/store-4a733.appspot.com/o/13Red.jpg?alt=media&token=68f88097-a882-4665-8a6d-9667956e7403" };
+        var image13Starlight = new Image() { Link = "https://firebasestorage.googleapis.com/v0/b/store-4a733.appspot.com/o/13Starlight.jpg?alt=media&token=c4746048-61e7-4632-a50d-66226da193de" };
+
+        var images = new List<Image>()
+        {
+            image13Pink,
+            image13Blue,
+            image13Midnight,
+            image13Red,
+            image13Starlight,
+        };
+
+        foreach (var i in images)
+        {
+            context.Images.Add(i);
+        }
+        context.SaveChanges();
 
         var Laptops = new List<Laptop>
             {
@@ -122,22 +142,20 @@ public class DbInitializer
             Weight = 173,
             InBox = "Smartphone USB-C to Lightning cable Instructions Warranty card",
             Warranty = 12,
-
         };
 
         context.PhoneSpecifications.Add(specs13);
         context.SaveChanges();
 
-        byte[] imageI11 = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\iphone11.jpg");
-        //byte[] imageI13 = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\iphone13.jpg");
-        byte[] imageSas = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\samsung.jpg");
-        byte[] imageXi = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\xiaomi.jpg");
-        byte[] imageI13ProMax = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13promax.jpg");
-        byte[] image13Pink = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Pink.jpg");
-        byte[] image13Blue = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Blue.jpg");
-        byte[] image13Midnight = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Midnight.jpg");
-        byte[] image13Red = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Red.jpg");
-        byte[] image13Starlight = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Starlight.jpg");
+        //byte[] imageI11 = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\iphone11.jpg");
+        //byte[] imageSas = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\samsung.jpg");
+        //byte[] imageXi = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\xiaomi.jpg");
+        //byte[] imageI13ProMax = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13promax.jpg");
+        //byte[] image13Pink = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Pink.jpg");
+        //byte[] image13Blue = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Blue.jpg");
+        //byte[] image13Midnight = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Midnight.jpg");
+        //byte[] image13Red = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Red.jpg");
+        //byte[] image13Starlight = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Starlight.jpg");
 
         var Phones = new List<Phone>
             {

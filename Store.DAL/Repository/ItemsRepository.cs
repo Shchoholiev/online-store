@@ -92,6 +92,7 @@ namespace Store.DAL.Repository
                 i => i.Brand,
                 i => i.Model,
                 i => i.Color,
+                i => i.Image,
             };
             includeProperties = includeProperties.Concat(include).ToArray();
 
