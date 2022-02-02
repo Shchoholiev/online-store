@@ -22,7 +22,7 @@ namespace Store.Controllers
         // GET: Phones
         public  ActionResult Index()
         {
-            var phoneDtos = _phoneService.GetAllWithInclude(p => p.Brand, p => p.Model, p => p.Specifications);
+            var phoneDtos = _phoneService.GetAll();
             var phoneViewModels = _mapper.Map(phoneDtos).ToList();
 
             return View(phoneViewModels);
@@ -36,17 +36,14 @@ namespace Store.Controllers
                 return NotFound();
             }
 
-            var phone = _phoneService.GetItemWithInclude(id, 
-                p => p.Specifications,
-                p => p.Brand,
-                p => p.Model);
+            var phone = _phoneService.GetItem(id, p => p.Specifications);
 
             if (phone == null)
             {
                 return NotFound();
             }
 
-            var phones = _phoneService.GetWithFiltersAndInclude(
+            var phones = _phoneService.GetAll(
                         p => p.Brand.Name == phone.Brand && p.Model.Name == phone.Model && p.Id != phone.Id,
                         ph => ph.Specifications, p => p.Brand, p => p.Model);
 

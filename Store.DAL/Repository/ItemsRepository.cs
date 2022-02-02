@@ -12,104 +12,92 @@ namespace Store.DAL.Repository
 
         public ItemsRepository()
         {
-            _db = new StoreContext();
-            _table = _db.Set<TItem>();
+            this._db = new StoreContext();
+            this._table = _db.Set<TItem>();
         }
 
         public void Add(TItem item)
         {
-            _table.Add(item);
-            Save();
+            this._table.Add(item);
+            this.Save();
         }
 
         public void Update(TItem item)
         {
-            _table.Update(item);
-            Save();
+            this._table.Update(item);
+            this.Save();
         }
 
         public void Delete(TItem item)
         {
-            _table.Remove(item);
-            Save();
+            this._table.Remove(item);
+            this.Save();
         }
 
         public void Delete(int id)
         {
-            TItem? item = GetItem(id);
+            TItem? item = this.GetItem(id);
             if (item != null)
             {
-                Delete(item);
+                this.Delete(item);
+            }
+        }
+
+        public void Attach(params object[] objects)
+        {
+            foreach (var obj in objects)
+            {
+                this._db.Attach(obj);
             }
         }
 
         public void Save()
         {
-            _db.SaveChanges();
+            this._db.SaveChanges();
         }
 
-        public TItem GetItem(int? id)
+        public TItem? GetItem(int? id)
         {
-            return GetAllWithInclude().FirstOrDefault(i => i.Id == id);
+            return this.GetAll(i => i.Id == id).FirstOrDefault();
         }
 
-        public TItem GetItemWithInclude(int? id, params Expression<Func<TItem, object>>[] includeProperties)
+        public TItem? GetItem(int? id, params Expression<Func<TItem, object>>[] includeProperties)
         {
-            return GetAllWithInclude(includeProperties).FirstOrDefault(i => i.Id == id);
+            return this.GetAll(i => i.Id == id, includeProperties).FirstOrDefault();
         }
 
         public IEnumerable<TItem> GetAll()
         {
-            return _table.AsNoTracking();
+            IQueryable<TItem> query = this._table.AsNoTracking();
+            return this.Include(query);
         }
 
-        public IEnumerable<TItem> GetWithFilters(Expression<Func<TItem, bool>> predicate)
+        public IEnumerable<TItem> GetAll(params Expression<Func<TItem, object>>[] includeProperties)
         {
-            var entities = _table.Where(predicate);
-            return entities;
+            IQueryable<TItem> query = this._table.AsNoTracking();
+            return this.Include(query, includeProperties);
         }
 
-        public IEnumerable<TItem> GetWithFiltersAndInclude(Expression<Func<TItem, bool>> predicate,
+        public IEnumerable<TItem> GetAll(Expression<Func<TItem, bool>> predicate,
             params Expression<Func<TItem, object>>[] includeProperties)
         {
-            return IncludeWithFilters(predicate, includeProperties);
+            IQueryable<TItem> query = this._table.AsNoTracking().Where(predicate);
+            return this.Include(query, includeProperties);
         }
 
-        public IEnumerable<TItem> GetAllWithInclude(params Expression<Func<TItem, object>>[] includeProperties)
+        private IQueryable<TItem> Include(IQueryable<TItem> query, params Expression<Func<TItem, object>>[] includeProperties)
         {
-            return Include(includeProperties);
-        }
-
-        private IQueryable<TItem> Include(params Expression<Func<TItem, object>>[] includeProperties)
-        {
-            List<Expression<Func<TItem, object>>> include = new()
+            var include = new Expression<Func<TItem, object>>[] 
             {
                 i => i.Brand,
-                i => i.Model
+                i => i.Model,
+                i => i.Color,
             };
-            includeProperties.Union(include);
+            includeProperties = includeProperties.Concat(include).ToArray();
 
-            IQueryable<TItem> query = _table.AsNoTracking();
             return includeProperties
                 .Aggregate(query, (current, includeProperty)
                     => current.Include(includeProperty));
-        }
-
-        private IQueryable<TItem> IncludeWithFilters(Expression<Func<TItem, bool>> predicate,
-            params Expression<Func<TItem, object>>[] includeProperties)
-        {
-            IQueryable<TItem> query = _table.AsNoTracking().Where(predicate);
-            return includeProperties
-                .Aggregate(query, (current, includeProperty)
-                    => current.Include(includeProperty));
-        }
-
-        public void Attach(params object[] obj)
-        {
-            foreach (var o in obj)
-            {
-                _db.Attach(o);
-            }
         }
     }
 }

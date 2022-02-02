@@ -14,4 +14,6 @@ public class ItemBase : EntityBase
     public Brand Brand { get; set; }
 
     public Model Model { get; set; }
+
+    public Color Color { get; set; }
 }

@@ -15,19 +15,17 @@ public interface IGenericRepository<TEntity>
     void Delete (int id);
         
     void Save();
-        
-    TEntity GetItem (int? id);
-        
-    TEntity GetItemWithInclude(int? id, params Expression<Func<TEntity, object>>[] includeProperties);
-    
-    IEnumerable<TEntity> GetAll();
-
-    IEnumerable<TEntity> GetWithFilters(Expression<Func<TEntity, bool>> predicate);
-
-    IEnumerable<TEntity> GetWithFiltersAndInclude(Expression<Func<TEntity, bool>> predicate,
-                        params Expression<Func<TEntity, object>>[] includeProperties);
-
-    IEnumerable<TEntity> GetAllWithInclude(params Expression<Func<TEntity, object>>[] includeProperties);
 
     void Attach(params object[] obj);
+
+    TEntity? GetItem (int? id);
+        
+    TEntity? GetItem(int? id, params Expression<Func<TEntity, object>>[] includeProperties);
+
+    IEnumerable<TEntity> GetAll();
+
+    IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includeProperties);
+
+    IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate,
+                        params Expression<Func<TEntity, object>>[] includeProperties);
 }

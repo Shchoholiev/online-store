@@ -8,12 +8,12 @@ public interface IPhoneService
 {
     PhoneDTO GetItem(int? id);
     
-    PhoneDTO GetItemWithInclude(int? id, params Expression<Func<Phone, object>>[] includeProperties);
+    PhoneDTO GetItem(int? id, params Expression<Func<Phone, object>>[] includeProperties);
 
     IEnumerable<PhoneDTO> GetAll();
     
-    IEnumerable<PhoneDTO> GetAllWithInclude(params Expression<Func<Phone, object>>[] includeProperties);
+    IEnumerable<PhoneDTO> GetAll(params Expression<Func<Phone, object>>[] includeProperties);
 
-    IEnumerable<PhoneDTO> GetWithFiltersAndInclude(Expression<Func<Phone, bool>> predicate,
+    IEnumerable<PhoneDTO> GetAll(Expression<Func<Phone, bool>> predicate,
                     params Expression<Func<Phone, object>>[] includeProperties);
 }

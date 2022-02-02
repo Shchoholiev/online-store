@@ -28,13 +28,15 @@ public class StoreContext : IdentityDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder
-            .Entity<ItemBase>();
+        modelBuilder.Entity<ItemBase>()
+            .HasOne<Brand>(i => i.Brand);
+        modelBuilder.Entity<ItemBase>()
+            .HasOne<Model>(i => i.Model);
+        modelBuilder.Entity<ItemBase>()
+            .HasOne<Color>(i => i.Color);
 
         modelBuilder.Entity<Phone>()
             .HasOne<PhoneSpecifications>(p => p.Specifications);
-        modelBuilder.Entity<Phone>()
-            .Property(p => p.ColorHex).HasMaxLength(6);
 
         //modelBuilder.Entity<User>()
         //    .HasMany<CartItem>(u => u.CartItems)
@@ -62,4 +64,6 @@ public class StoreContext : IdentityDbContext
     public DbSet<Brand> Brands { get; set; }
 
     public DbSet<Model> Models { get; set; }
+
+    public DbSet<Color> Colors { get; set; }
 }

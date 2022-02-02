@@ -33,8 +33,7 @@ namespace Store.BLL.Services
 
         public IEnumerable<CartItemDTO> GetItems(User user)
         {
-            var cartItems = _repository.GetWithFiltersAndInclude(
-                c => c.User == user, c => c.Item.Brand, c => c.Item.Model);
+            var cartItems = _repository.GetAll();
 
             var cartItemsDTO = _mapper.Map(cartItems);
 
@@ -67,7 +66,7 @@ namespace Store.BLL.Services
                              .Where(s => !string.IsNullOrWhiteSpace(s))
                              .Select(s => int.Parse(s))
                              .ToArray();
-            var item = _itemsRepository.GetItemWithInclude(array[0], c => c.Brand, c => c.Model);
+            var item = _itemsRepository.GetItem(array[0]);
             var itemDTO = _mapper.Map(item);
             var deserializedItem = new CartItemDTO() { Item = itemDTO, Amount = array[1] };
 

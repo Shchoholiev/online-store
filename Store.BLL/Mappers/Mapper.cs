@@ -19,17 +19,25 @@ namespace Store.BLL.Mappers
             .ForMember(dest => dest.Brand,
                 opt => opt.MapFrom(src => src.Brand.Name))
             .ForMember(dest => dest.Model,
-                opt => opt.MapFrom(src => src.Model.Name));
+                opt => opt.MapFrom(src => src.Model.Name))
+            .ForMember(dest => dest.Color,
+                opt => opt.MapFrom(src => src.Color.Name))
+            .ForMember(dest => dest.ColorHex,
+                opt => opt.MapFrom(src => src.Color.Hex));
 
             cfg.CreateMap<OrderDTO, Order>();
 
             cfg.CreateMap<ItemBaseDTO, ItemBase>();
 
             cfg.CreateMap<ItemBase, ItemBaseDTO>()
-                .ForMember(dest => dest.Brand,
+            .ForMember(dest => dest.Brand,
                 opt => opt.MapFrom(src => src.Brand.Name))
-                .ForMember(dest => dest.Model,
-                opt => opt.MapFrom(src => src.Model.Name));
+            .ForMember(dest => dest.Model,
+                opt => opt.MapFrom(src => src.Model.Name))
+            .ForMember(dest => dest.Color,
+                opt => opt.MapFrom(src => src.Color.Name))
+            .ForMember(dest => dest.ColorHex,
+                opt => opt.MapFrom(src => src.Color.Hex));
 
             cfg.CreateMap<CartItemDTO, CartItem>();
             cfg.CreateMap<Order, OrderDTO>();
@@ -40,42 +48,42 @@ namespace Store.BLL.Mappers
 
         public User Map(UserDTO source)
         {
-            return _mapper.Map<User>(source);
+            return this._mapper.Map<User>(source);
         }
 
         public Order Map(OrderDTO source)
         {
-            return _mapper.Map<Order>(source);
+            return this._mapper.Map<Order>(source);
         }
 
         public CartItem Map(CartItemDTO source)
         {
-            return _mapper.Map<CartItem>(source);
+            return this._mapper.Map<CartItem>(source);
         }
 
         public ItemBaseDTO Map(ItemBase source)
         {
-            return _mapper.Map<ItemBaseDTO>(source);
+            return this._mapper.Map<ItemBaseDTO>(source);
         }
 
         public PhoneDTO Map(Phone source)
         {
-            return _mapper.Map<PhoneDTO>(source);
+            return this._mapper.Map<PhoneDTO>(source);
         }
 
         public IEnumerable<PhoneDTO> Map(IEnumerable<Phone> source)
         {
-            return _mapper.Map<IEnumerable<PhoneDTO>>(source);
+            return this._mapper.Map<IEnumerable<PhoneDTO>>(source);
         }
 
         public IEnumerable<OrderDTO> Map(IEnumerable<Order> source)
         {
-            return _mapper.Map<IEnumerable<OrderDTO>>(source);
+            return this._mapper.Map<IEnumerable<OrderDTO>>(source);
         }
 
         public IEnumerable<CartItemDTO> Map(IEnumerable<CartItem> source)
         {
-            return _mapper.Map<IEnumerable<CartItemDTO>>(source);
+            return this._mapper.Map<IEnumerable<CartItemDTO>>(source);
         }
     }
 }

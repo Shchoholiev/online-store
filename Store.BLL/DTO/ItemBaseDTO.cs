@@ -11,4 +11,8 @@ public class ItemBaseDTO : EntityBaseDTO
     public string Brand { get; set; }
 
     public string Model { get; set; }
+
+    public string Color { get; set; }
+
+    public string ColorHex { get; set; }
 }

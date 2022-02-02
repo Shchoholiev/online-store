@@ -76,7 +76,7 @@ namespace Store.Controllers
                 cookieOptions.Expires = DateTime.Now.AddDays(7);
                 HttpContext.Response.Cookies.Append("StoreName_CartItems", cookies, cookieOptions);
             }
-
+            
             return Redirect("Index");
         }
     }

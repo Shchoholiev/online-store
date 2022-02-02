@@ -25,9 +25,10 @@ namespace Store.BLL.DI
                 //ServiceLifetime.Singleton
             );
 
-            services.AddScoped<IGenericRepository<Phone>, GenericRepository<Phone>>();
             services.AddScoped<IGenericRepository<CartItem>, GenericRepository<CartItem>>();
-            services.AddScoped<IGenericRepository<ItemBase>, GenericRepository<ItemBase>>();
+
+            services.AddScoped<IGenericRepository<Phone>, ItemsRepository<Phone>>();
+            services.AddScoped<IGenericRepository<ItemBase>, ItemsRepository<ItemBase>>();
 
             return services;
         }

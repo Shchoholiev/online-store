@@ -13,96 +13,83 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
     public GenericRepository()
     {
-        _db = new StoreContext();
-        _table = _db.Set<TEntity>();
+        this._db = new StoreContext();
+        this._table = _db.Set<TEntity>();
     }
 
     public void Add(TEntity item)
     {
-        _table.Add(item);
-        Save();
+        this._table.Add(item);
+        this.Save();
     }
 
     public void Update(TEntity item)
     {
-        _table.Update(item);
-        Save();
+        this._table.Update(item);
+        this.Save();
     }
 
     public void Delete(TEntity item)
     {
-        _table.Remove(item);
-        Save();
+        this._table.Remove(item);
+        this.Save();
     }
 
     public void Delete(int id)
     {
-        TEntity? item = GetItem(id);
+        TEntity? item = this.GetItem(id);
         if (item != null)
         {
-            Delete(item);
+            this.Delete(item);
         }
     }
 
     public void Save()
     {
-        _db.SaveChanges();
-    }
-
-    public TEntity GetItem(int? id)
-    {
-        return _table.Find(id);
-    }
-
-    public TEntity GetItemWithInclude(int? id, params Expression<Func<TEntity, object>>[] includeProperties)
-    {
-        return GetAllWithInclude(includeProperties).FirstOrDefault(i => i.Id == id);
-    }
-
-    public IEnumerable<TEntity> GetAll()
-    {
-        return _table.AsNoTracking();
-    }
-
-    public IEnumerable<TEntity> GetWithFilters(Expression<Func<TEntity, bool>> predicate)
-    {
-        var entities = _table.Where(predicate);
-        return entities;
-    }
-
-    public IEnumerable<TEntity> GetWithFiltersAndInclude(Expression<Func<TEntity, bool>> predicate,
-        params Expression<Func<TEntity, object>>[] includeProperties)
-    {
-        return IncludeWithFilters(predicate, includeProperties);
-    }
-
-    public IEnumerable<TEntity> GetAllWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
-    {
-        return Include(includeProperties);
-    }
-
-    private IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includeProperties)
-    {
-        IQueryable<TEntity> query = _table.AsNoTracking();
-        return includeProperties
-            .Aggregate(query, (current, includeProperty)
-                => current.Include(includeProperty));
-    }
-
-    private IQueryable<TEntity> IncludeWithFilters(Expression<Func<TEntity, bool>> predicate,
-        params Expression<Func<TEntity, object>>[] includeProperties)
-    {
-        IQueryable<TEntity> query = _table.AsNoTracking().Where(predicate);
-        return includeProperties
-            .Aggregate(query, (current, includeProperty)
-                => current.Include(includeProperty));
+        this._db.SaveChanges();
     }
 
     public void Attach(params object[] obj)
     {
         foreach (var o in obj)
         {
-            _db.Attach(o);
+            this._db.Attach(o);
         }
+    }
+
+    public TEntity? GetItem(int? id)
+    {
+        return this.GetAll(i => i.Id == id).FirstOrDefault();
+    }
+
+    public TEntity? GetItem(int? id, params Expression<Func<TEntity, object>>[] includeProperties)
+    {
+        return this.GetAll(i => i.Id == id, includeProperties).FirstOrDefault();
+    }
+
+    public IEnumerable<TEntity> GetAll()
+    {
+        IQueryable<TEntity> query = this._table.AsNoTracking();
+        return this.Include(query);
+    }
+
+    public IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includeProperties)
+    {
+        IQueryable<TEntity> query = this._table.AsNoTracking();
+        return this.Include(query, includeProperties);
+    }
+
+    public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate,
+        params Expression<Func<TEntity, object>>[] includeProperties)
+    {
+        IQueryable<TEntity> query = this._table.AsNoTracking().Where(predicate);
+        return this.Include(query, includeProperties);
+    }
+
+    private IQueryable<TEntity> Include(IQueryable<TEntity> query, params Expression<Func<TEntity, object>>[] includeProperties)
+    {
+        return includeProperties
+            .Aggregate(query, (current, includeProperty)
+                => current.Include(includeProperty));
     }
 }
