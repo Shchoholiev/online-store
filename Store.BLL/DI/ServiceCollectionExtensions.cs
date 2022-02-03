@@ -8,6 +8,8 @@ using Store.BLL.Interfaces;
 using Store.BLL.Services;
 using Store.DAL.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
+using Store.DAL.Entities.Orders;
+using Store.DAL.Entities.Base;
 
 namespace Store.BLL.DI
 {
@@ -19,11 +21,14 @@ namespace Store.BLL.DI
                     MultipleActiveResultSets=True;App=EntityFramework;";
 
             services.AddDbContext<StoreContext>(options =>
-            {
-                options.UseSqlServer(connectionString);
-            });
+                options.UseSqlServer(connectionString)
+                //ServiceLifetime.Singleton
+            );
 
-            services.AddScoped<IGenericRepository<Phone>, GenericRepository<Phone>>();
+            services.AddScoped<IGenericRepository<CartItem>, GenericRepository<CartItem>>();
+
+            services.AddScoped<IGenericRepository<Phone>, ItemsRepository<Phone>>();
+            services.AddScoped<IGenericRepository<ItemBase>, ItemsRepository<ItemBase>>();
 
             return services;
         }
@@ -32,6 +37,7 @@ namespace Store.BLL.DI
         {
             services.AddScoped<IPhoneService, PhoneService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IShoppingCartService, ShoppingCartService>();
 
             return services;
         }

@@ -2,6 +2,15 @@
 
 public class OperationDetails
 {
+    public OperationDetails()
+    {
+    }
+
+    public OperationDetails(string error)
+    {
+        Errors.Add(error);
+    }
+
     public bool Succeeded { get; set; } = false;
 
     public List<string> Errors { get; set; } = new List<string>();

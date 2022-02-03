@@ -22,6 +22,11 @@ builder.Services.AddDatabase();
 builder.Services.AddServices();
 builder.Services.AddIdentity();
 
+builder.Services.AddCookiePolicy(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
+
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Password settings.

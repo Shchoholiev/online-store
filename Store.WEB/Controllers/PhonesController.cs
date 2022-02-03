@@ -1,11 +1,8 @@
 ﻿#nullable disable
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
-using Store.DAL.Entities.Phone;
+using Store.ViewMappers;
 using Store.ViewModels;
 
 namespace Store.Controllers
@@ -13,12 +10,9 @@ namespace Store.Controllers
     public class PhonesController : Controller
     {
         private readonly IPhoneService _phoneService;
-        private readonly IMapper _mapper = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<PhoneDTO, PhoneViewModel>();
-            cfg.CreateMap<PhoneSpecificationsDTO, PhoneViewModel>().ForMember(s => s.Id, 
-                opt => opt.Ignore());
-        }).CreateMapper();
+
+        // temp
+        private readonly Mapper _mapper = new();
 
         public PhonesController(IPhoneService phoneService)
         {
@@ -29,7 +23,9 @@ namespace Store.Controllers
         public  ActionResult Index()
         {
             var phoneDtos = _phoneService.GetAll();
-            return View(_mapper.Map<List<PhoneViewModel>>(phoneDtos));
+            var phoneViewModels = _mapper.Map(phoneDtos).ToList();
+
+            return View(phoneViewModels);
         }
         
         // GET: Phones/Details/5
@@ -40,21 +36,19 @@ namespace Store.Controllers
                 return NotFound();
             }
 
-            var phone = _phoneService.GetItemWithInclude(id, p => p.Specifications);
+            var phone = _phoneService.GetItem(id, p => p.Specifications);
 
             if (phone == null)
             {
                 return NotFound();
             }
 
-            var phones = _phoneService.GetAllWithInclude(ph => ph.Specifications)
-                .Where(p => p.Brand == phone.Brand && p.Model == phone.Model && p.Id != phone.Id)
-                .Select(p => p);
+            var phones = _phoneService.GetAll(
+                        p => p.Brand.Name == phone.Brand && p.Model.Name == phone.Model && p.Id != phone.Id);
 
-            var model = _mapper.Map<PhoneViewModel>(phone);
-            _mapper.Map(phone.Specifications, model);
+            var model = _mapper.Map(phone);
             
-            var modelList = _mapper.Map<List<PhoneViewModel>>(phones);
+            var modelList = _mapper.Map(phones).ToList();
             modelList.Insert(0, model);
         
             return View(modelList);

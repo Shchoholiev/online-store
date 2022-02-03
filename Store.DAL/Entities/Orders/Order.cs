@@ -7,15 +7,13 @@ namespace Store.DAL.Entities.Orders;
 
 public class Order : EntityBase
 {
-    public ItemBase Item { get; set; }
-
-    
-
-    public int ItemAmount { get; set; }
+    public List<CartItem> Items { get; set; }
 
     public User User { get; set; }
 
     public DeliveryOptions Delivery { get; set; }
+
+    public string? DeliveryAdress { get; set; }
 
     public PaymentOptions Payment { get; set; }
 

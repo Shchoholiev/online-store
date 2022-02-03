@@ -7,8 +7,6 @@
 }
 
 @{
-    string imageSrc = "data:image/jpg;base64," + Convert.ToBase64String(phone?.Image);
-
     var memories = Model.OrderBy(p => p.Memory)
                    .Where(p => p.Color == phone.Color)
                    .Select(p => p);
@@ -77,7 +75,7 @@
         <div class="d-flex flex-row">
         
             <div class="container min-w50 w-50 d-flex justify-content-center">
-                 <img src="@imageSrc" style="max-height: 380px;" class="float-left"/>
+                 <img src="@phone.Image" style="max-height: 380px;" class="float-left"/>
             </div>
 
             <div class="container d-flex flex-column">
@@ -147,7 +145,9 @@
                 
                 @if (phone.Amount > 0)
                 {
-                    <button type="button" name="btn-buy" class="btn btn-primary">BUY</button>
+                    <form asp-controller="ShoppingCart" asp-action="buy" asp-route-itemId="@phone.Id">
+                        <button type="submit" name="btn-buy" class="btn btn-primary">BUY</button>
+                    </form>
                 }
                 else
                 {

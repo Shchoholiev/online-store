@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Store.ViewModels.CartItemViewModel>
+
+@{
+    ViewData["Title"] = "Shopping cart";
+}
+
+<h3>Shopping cart</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>//Item Id</th>
+      <th>Brand</th>
+      <th>Model</th>
+      <th>Amount</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach (var cart in Model)
+      {
+          <tr>
+              <td><img style="height: 100px" src="@cart.Item.Image"/></td>
+              <td>@cart.Item.Id</td>
+              <td>@cart.Item.Brand</td>
+              <td>@cart.Item.Model</td>
+              <td>@cart.Amount</td>
+              <td>@cart.Item.Price</td>
+          </tr>
+      }
+  </tbody>
+</table>

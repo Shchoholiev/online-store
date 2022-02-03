@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
-using AutoMapper;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
+using Store.BLL.Mappers;
 using Store.DAL.Entities.Phone;
 using Store.DAL.Repository;
 
@@ -11,30 +11,37 @@ public class PhoneService : IPhoneService
 {
     private readonly IGenericRepository<Phone> _repository;
 
-    private readonly Mapper.Mapper _mapper = new();
+    private readonly Mapper _mapper = new();
 
     public PhoneService(IGenericRepository<Phone> repository)
     {
-        _repository = repository;
+        this._repository = repository;
     }
 
     public PhoneDTO GetItem(int? id)
     {
-        return _mapper.Map(_repository.GetItem(id));
+        return this._mapper.Map(this._repository.GetItem(id));
     }
 
-    public PhoneDTO GetItemWithInclude(int? id, params Expression<Func<Phone, object>>[] includeProperties)
+    public PhoneDTO GetItem(int? id, params Expression<Func<Phone, object>>[] includeProperties)
     {
-        return _mapper.Map(_repository.GetItemWithInclude(id, includeProperties));
+        return this._mapper.Map(this._repository.GetItem(id, includeProperties));
     }
 
     public IEnumerable<PhoneDTO> GetAll()
     {
-        return _mapper.Map(_repository.GetAll());
+        return this._mapper.Map(this._repository.GetAll());
     }
 
-    public IEnumerable<PhoneDTO> GetAllWithInclude(params Expression<Func<Phone, object>>[] includeProperties)
+    public IEnumerable<PhoneDTO> GetAll(Expression<Func<Phone, bool>> predicate,
+                    params Expression<Func<Phone, object>>[] includeProperties)
     {
-        return _mapper.Map(_repository.GetAllWithInclude(includeProperties));
+        var phones = this._repository.GetAll(predicate, includeProperties);
+        return this._mapper.Map(phones);
+    }
+
+    public IEnumerable<PhoneDTO> GetAll(params Expression<Func<Phone, object>>[] includeProperties)
+    {
+        return this._mapper.Map(this._repository.GetAll(includeProperties));
     }
 }

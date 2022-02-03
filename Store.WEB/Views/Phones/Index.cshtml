@@ -41,7 +41,7 @@
             <div class="mw-100 m-3 d-flex justify-content-around">
                 <a asp-action="Details" asp-route-id="@p.Id">
                     <img class="mw-100" style="max-height: 160px" 
-                    src="data:image/jpg;base64,@Convert.ToBase64String(p.Image)"/>
+                    src="@p.Image"/>
                 </a>
             </div>
 

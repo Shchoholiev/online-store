@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Store.DAL.Entities.Base;
-using Store.DAL.Entities.EntitiesForEnums;
+using Store.DAL.Entities.Identity;
+using Store.DAL.Entities.ItemProperties;
 using Store.DAL.Entities.Laptop;
 using Store.DAL.Entities.Orders;
 using Store.DAL.Entities.Phone;
@@ -27,31 +28,25 @@ public class StoreContext : IdentityDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder
-            .Entity<ItemBase>()
-            .Property(i => i.BrandId)
-            .HasConversion<int>();
-
-        modelBuilder
-            .Entity<Brand>()
-            .Property(b => b.BrandId)
-            .HasConversion<int>();
-
-        modelBuilder
-            .Entity<Brand>().HasData(
-            Enum.GetValues(typeof(BrandId))
-                .Cast<BrandId>()
-                .Select(b => new Brand()
-                {
-                    BrandId = b,
-                    Name = b.ToString()
-                })
-            );
+        modelBuilder.Entity<ItemBase>()
+            .HasOne<Brand>(i => i.Brand);
+        modelBuilder.Entity<ItemBase>()
+            .HasOne<Model>(i => i.Model);
+        modelBuilder.Entity<ItemBase>()
+            .HasOne<Color>(i => i.Color);
 
         modelBuilder.Entity<Phone>()
             .HasOne<PhoneSpecifications>(p => p.Specifications);
-        modelBuilder.Entity<Phone>()
-            .Property(p => p.ColorHex).HasMaxLength(6);
+
+        //modelBuilder.Entity<User>()
+        //    .HasMany<CartItem>(u => u.CartItems)
+        //    .WithOne(c => c.User);
+
+        //modelBuilder.Entity<User>()
+        //    .HasMany<CartItem>(u => u.CartItems);
+
+        //modelBuilder.Entity<CartItem>()
+        //    .HasOne(c => c.Item);
 
         base.OnModelCreating(modelBuilder);
     }
@@ -64,5 +59,13 @@ public class StoreContext : IdentityDbContext
     
     public DbSet<Order> Orders { get; set; }
 
+    public DbSet<CartItem> CartItems { get; set; }
+
     public DbSet<Brand> Brands { get; set; }
+
+    public DbSet<Model> Models { get; set; }
+
+    public DbSet<Color> Colors { get; set; }
+
+    public DbSet<Image> Images { get; set; }
 }
