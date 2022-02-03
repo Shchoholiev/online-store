@@ -14,4 +14,6 @@ public interface IUserService
     Task<OperationDetails> Logout();
 
     Task<User> GetCurrentUser(ClaimsPrincipal claims);
+
+    string CheckReturnUrl(string returnUrl);
 }

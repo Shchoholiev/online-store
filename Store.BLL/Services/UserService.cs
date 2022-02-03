@@ -59,12 +59,19 @@ public class UserService : IUserService
                                                                         || u.PhoneNumber == userDto.PhoneNumber);
 
         if (dbUser == null)
-            return new OperationDetails();
+        {
+            return new OperationDetails() { Errors = new() { "Incorrect email or phone number" } };
+        }
         
         var result = await _signInManager.PasswordSignInAsync(dbUser.UserName,
             password, rememberMe, lockoutOnFailure: false);
 
-        return new OperationDetails() { Succeeded = result.Succeeded};
+        if (!result.Succeeded)
+        {
+            return new OperationDetails() { Errors = new() { "Incorrect password" } };
+        }
+
+        return new OperationDetails() { Succeeded = true };
     }
 
     public async Task<OperationDetails> Logout()
@@ -77,5 +84,16 @@ public class UserService : IUserService
     {
         var user = await _userManager.GetUserAsync(claims);
         return user;
+    }
+
+    public string CheckReturnUrl(string returnUrl)
+    {
+        if (string.IsNullOrEmpty(returnUrl)
+           || returnUrl.Contains("Register")
+           || returnUrl.Contains("Login"))
+        {
+            return "/";
+        }
+        return returnUrl;
     }
 }

@@ -20,6 +20,7 @@ public class AccountController : Controller
     [AllowAnonymous]
     public IActionResult Register(string returnUrl)
     {
+        returnUrl = _userService.CheckReturnUrl(returnUrl);
         return View(new RegisterViewModel {ReturnUrl = returnUrl});
     }
 
@@ -32,7 +33,7 @@ public class AccountController : Controller
             var user = new UserDTO { Name = model.Name, Email = model.Email, PhoneNumber = model.PhoneNumber};
 
             var result = await _userService.Register(user, model.Password);
-                
+
             if (result.Succeeded)
             {
                 return Redirect(model.ReturnUrl);
@@ -52,6 +53,7 @@ public class AccountController : Controller
     [AllowAnonymous]
     public IActionResult Login(string returnUrl)
     {
+        returnUrl = _userService.CheckReturnUrl(returnUrl);
         return View(new LoginViewModel { ReturnUrl = returnUrl });
     }
 
@@ -67,18 +69,14 @@ public class AccountController : Controller
                     
             if (result.Succeeded)
             {
-                if (!string.IsNullOrEmpty(model.ReturnUrl))
-                {
-                    return Redirect(model.ReturnUrl);
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+                return Redirect(model.ReturnUrl);
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Incorrect login or password");
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error);
+                }
             }
         }
         return View(model);
