@@ -44,19 +44,20 @@ public class UserService : IUserService
         user.Id = DateTime.Now.Ticks.ToString();
 
         var result = await _userManager.CreateAsync(user, password);
-        if (!result.Succeeded)
+        if (result.Succeeded)
+        {
+            await _signInManager.SignInAsync(user, false);
+        }
+        else
         {
             foreach (var error in result.Errors)
             {
                 operationDetails.AddMessage(error.Description);
             }
         }
-        else
-        {
-            await _signInManager.SignInAsync(user, false);
-        }
 
         operationDetails.Succeeded = result.Succeeded;
+        operationDetails.AddMessage(user.Id);
         return operationDetails;
     }
 
@@ -78,7 +79,9 @@ public class UserService : IUserService
             return new OperationDetails("Incorrect password");
         }
 
-        return new OperationDetails($"{dbUser.Name}") { Succeeded = true };
+        var operationDetails = new OperationDetails($"{dbUser.Name}") { Succeeded = true };
+        operationDetails.AddMessage(dbUser.Id);
+        return operationDetails;
     }
 
     public async Task<OperationDetails> Logout()

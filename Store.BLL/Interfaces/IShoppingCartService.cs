@@ -7,6 +7,8 @@ namespace Store.BLL.Interfaces
     {
         void AddItem(CartItemDTO cartItemDTO);
 
+        void AddItems(string cookies, string userId);
+
         void DeleteItem(int id);
 
         string DeleteItem(int id, string cookies);
@@ -16,8 +18,6 @@ namespace Store.BLL.Interfaces
         IEnumerable<CartItemDTO> GetItems(User user);
 
         string GetSerializedCartItem(CartItemDTO cartItemDTO);
-
-        CartItemDTO GetDeserializedCartItem(string serialized);
 
         List<CartItemDTO> GetDeserializedCartItems(string cookies);
 
