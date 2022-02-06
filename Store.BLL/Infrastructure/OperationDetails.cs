@@ -6,22 +6,22 @@ public class OperationDetails
     {
     }
 
-    public OperationDetails(string error)
+    public OperationDetails(string message)
     {
-        Errors.Add(error);
+        this.AddMessage(message);
     }
 
     public bool Succeeded { get; set; } = false;
 
-    public List<string> Errors { get; set; } = new List<string>();
+    public List<string> Messages { get; set; } = new List<string>();
 
-    public void AddError(string error)
+    public void AddMessage(string message)
     {
-        Errors.Add(error);
+        this.Messages.Add(message);
     }
 
-    public int ErrorsCount()
+    public int MessagesCount()
     {
-        return Errors.Count;
+        return Messages.Count;
     }
 }

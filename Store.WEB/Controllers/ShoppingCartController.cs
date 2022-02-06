@@ -54,7 +54,7 @@ namespace Store.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _userService.GetCurrentUser(User);
-                var userDto = new UserDTO() { Email = user.Email, PhoneNumber = user.PhoneNumber };
+                var userDto = new UserDTO() { Id = user.Id };
                 cartItemDTO.User = userDto;
                 _shoppingCartService.AddItem(cartItemDTO);
             }
@@ -120,7 +120,7 @@ namespace Store.Controllers
         private void SaveCookies(string cookies)
         {
             var cookieOptions = new CookieOptions() { Expires = DateTime.Now.AddDays(7) };
-            HttpContext.Response.Cookies.Append("StoreName_CartItems", cookies, cookieOptions);
+            Response.Cookies.Append("StoreName_CartItems", cookies, cookieOptions);
         }
     }
 }

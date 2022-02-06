@@ -42,7 +42,7 @@
                                     </form>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark">Hello @User.Identity.Name</a>
+                                    <a class="nav-link text-dark">Hello @Context.Request.Cookies["userName"]</a>                                    
                                 </li>
                             }
                             else

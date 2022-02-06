@@ -11,7 +11,7 @@ using Store.DAL.Enums;
 
 namespace Store.DAL.EF;
 
-public class StoreContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>
+public class StoreContext : IdentityDbContext
 {
     public StoreContext()
     {        
@@ -35,6 +35,10 @@ public class StoreContext : IdentityDbContext<IdentityUser<int>, IdentityRole<in
             .HasOne<Model>(i => i.Model);
         modelBuilder.Entity<ItemBase>()
             .HasOne<Color>(i => i.Color);
+
+        modelBuilder.Entity<CartItem>()
+            .HasOne(c => c.User)
+            .WithMany(u => u.CartItems);
 
         modelBuilder.Entity<Phone>()
             .HasOne<PhoneSpecifications>(p => p.Specifications);

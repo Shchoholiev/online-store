@@ -29,25 +29,26 @@ public class UserService : IUserService
 
         var dbUser = await _userManager.FindByEmailAsync(userDto.Email);
         if (dbUser != null)
-            operationDetails.AddError("This email already used.");
+            operationDetails.AddMessage("This email already used.");
 
         dbUser = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == userDto.PhoneNumber);
         if (dbUser != null)
-            operationDetails.AddError("This phone already used.");
+            operationDetails.AddMessage("This phone already used.");
 
-        if (operationDetails.Errors.Count > 0)
+        if (operationDetails.Messages.Count > 0)
         {
             return operationDetails;
         }
 
         var user = _mapper.Map(userDto);
+        user.Id = DateTime.Now.Ticks.ToString();
 
         var result = await _userManager.CreateAsync(user, password);
         if (!result.Succeeded)
         {
             foreach (var error in result.Errors)
             {
-                operationDetails.AddError(error.Description);
+                operationDetails.AddMessage(error.Description);
             }
         }
         else
@@ -66,7 +67,7 @@ public class UserService : IUserService
 
         if (dbUser == null)
         {
-            return new OperationDetails() { Errors = new() { "Incorrect email or phone number" } };
+            return new OperationDetails("Incorrect email or phone number");
         }
         
         var result = await _signInManager.PasswordSignInAsync(dbUser.UserName,
@@ -74,10 +75,10 @@ public class UserService : IUserService
 
         if (!result.Succeeded)
         {
-            return new OperationDetails() { Errors = new() { "Incorrect password" } };
+            return new OperationDetails("Incorrect password");
         }
 
-        return new OperationDetails() { Succeeded = true };
+        return new OperationDetails($"{dbUser.Name}") { Succeeded = true };
     }
 
     public async Task<OperationDetails> Logout()

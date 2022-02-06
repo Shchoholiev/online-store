@@ -44,7 +44,7 @@ namespace Store.BLL.DI
 
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
-            services.AddIdentity<User, IdentityRole<int>>()
+            services.AddIdentity<User, IdentityRole>()
                     .AddEntityFrameworkStores<StoreContext>()
                     .AddDefaultTokenProviders();
 

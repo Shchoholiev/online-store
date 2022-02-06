@@ -34,7 +34,7 @@ namespace Store.BLL.Services
             //            $"Only {GetItemAmount(cart.Item.Id)} available.");
             //}
 
-            if (operationDetails.Errors.Count > 0)
+            if (operationDetails.Messages.Count > 0)
                 return operationDetails;
 
             var order = _mapper.Map(orderDTO);
@@ -56,7 +56,7 @@ namespace Store.BLL.Services
 
         public IEnumerable<OrderDTO> GetOrders(int userId)
         {
-            var orders = _orderRepository.GetAll(o => o.User.Id == userId);
+            var orders = _orderRepository.GetAll(o => o.User.Id == userId.ToString());
 
             var orderDtos = _mapper.Map(orders);
 

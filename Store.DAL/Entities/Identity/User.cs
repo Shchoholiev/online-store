@@ -4,8 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Store.DAL.Entities.Identity;
 
-public class User : IdentityUser<int>
+public class User : IdentityUser
 {
+    public string Name { get; set; }
+
     public List<Order>? Orders { get; set; }
 
     public List<CartItem>? CartItems { get; set; }

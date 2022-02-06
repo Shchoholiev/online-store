@@ -12,7 +12,7 @@ namespace Store.BLL.Mappers
         private readonly IMapper _mapper = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<UserDTO, User>().ForMember(dest => dest.UserName,
-                opt => opt.MapFrom(src => src.Name));
+                opt => opt.MapFrom(src => src.Email ?? src.PhoneNumber));
 
             cfg.CreateMap<PhoneSpecifications, PhoneSpecificationsDTO>();
             cfg.CreateMap<Phone, PhoneDTO>()
