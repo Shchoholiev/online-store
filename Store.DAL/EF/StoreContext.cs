@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Store.DAL.Entities.Base;
 using Store.DAL.Entities.Identity;
@@ -10,7 +11,7 @@ using Store.DAL.Enums;
 
 namespace Store.DAL.EF;
 
-public class StoreContext : IdentityDbContext
+public class StoreContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>
 {
     public StoreContext()
     {        

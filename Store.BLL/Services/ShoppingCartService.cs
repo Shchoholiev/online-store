@@ -31,9 +31,31 @@ namespace Store.BLL.Services
             _repository.Add(cartItem);
         }
 
+        public void DeleteItem(int id)
+        {
+            _repository.Delete(id);
+        }
+
+        public string DeleteItem(int id, string cookies)
+        {
+            var matchRegex = new Regex(string.Format($"i{id}a[0-9]*"));
+            var newCookies = matchRegex.Replace(cookies, string.Empty);
+
+            return newCookies;
+        }
+
+        public CartItemDTO GetItem(int id)
+        {
+            var cartItem = _repository.GetItem(id);
+            var cartItemDTO = _mapper.Map(cartItem);
+
+            return cartItemDTO;
+        }
+
         public IEnumerable<CartItemDTO> GetItems(User user)
         {
-            var cartItems = _repository.GetAll();
+            var cartItems = _repository.GetAll(c => c.Item, 
+                c => c.Item.Brand, c => c.Item.Model, c => c.Item.Image);
 
             var cartItemsDTO = _mapper.Map(cartItems);
 
@@ -50,7 +72,8 @@ namespace Store.BLL.Services
         {
             var cartItemDTOs = new List<CartItemDTO>();
             var regex = new Regex("[-]");
-            var cookiesArray = regex.Split(cookies);
+            var cookiesArray = regex.Split(cookies)
+                                    .Where(s => !string.IsNullOrEmpty(s));
             foreach (var cookie in cookiesArray)
             {
                 cartItemDTOs.Add(this.GetDeserializedCartItem(cookie));
@@ -64,13 +87,62 @@ namespace Store.BLL.Services
             var regex = new Regex("[ia]");
             var array = regex.Split(serialized)
                              .Where(s => !string.IsNullOrWhiteSpace(s))
-                             .Select(s => int.Parse(s))
+                             .Select(s => int.Parse(s)) 
                              .ToArray();
             var item = _itemsRepository.GetItem(array[0]);
             var itemDTO = _mapper.Map(item);
-            var deserializedItem = new CartItemDTO() { Item = itemDTO, Amount = array[1] };
+            var deserializedItem = new CartItemDTO() { Id = array[0], Item = itemDTO, Amount = array[1] };
 
             return deserializedItem;
+        }
+
+        public void ChangeAmountToNew(int id, int amount)
+        {
+            var cartItem = _repository.GetItem(id, c => c.Item);
+            cartItem.Amount = amount;
+            _repository.Update(cartItem);
+        }
+
+        public string ChangeAmountToNew(int id, int amount, string cookies)
+        {
+            var matchRegex = new Regex(string.Format($"i{id}a[0-9]*"));
+            var newCookies = matchRegex.Replace(cookies, $"i{id}a{amount}");
+
+            return newCookies;
+        }
+
+        public void ChangeAmount(int id, int amount)
+        {
+            var cartItem = _repository.GetItem(id, c => c.Item);            
+            cartItem.Amount += amount;
+            if (cartItem.Amount == 0)
+            {
+                this.DeleteItem(id);
+                return;
+            }
+            _repository.Update(cartItem);
+        }
+
+        public string ChangeAmount(int id, int amount, string cookies)
+        {
+            string newCookies;
+            var matchRegex = new Regex(string.Format($"i{id}a[0-9]*"));
+            var cartItem = matchRegex.Match(cookies).ToString();
+
+            var amountRegex = new Regex(string.Format($"i{id}a"));
+            int.TryParse(amountRegex.Replace(cartItem, string.Empty), out int itemAmount);
+
+            itemAmount += amount;
+            if (itemAmount == 0)
+            {
+                newCookies = this.DeleteItem(id, cookies);
+            }
+            else 
+            {
+                newCookies = matchRegex.Replace(cookies, $"i{id}a{itemAmount}");
+            }
+
+            return newCookies;
         }
     }
 }

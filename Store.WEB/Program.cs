@@ -7,7 +7,7 @@ using Store.BLL.DI;
 using Store.FluentValidation;
 
 var dbInitializer = new DbInitializerBLL();
-dbInitializer.DeleteAndInitialize();
+//dbInitializer.DeleteAndInitialize();
 
 var builder = WebApplication.CreateBuilder(args);
 

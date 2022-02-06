@@ -25,17 +25,23 @@ public class UserService : IUserService
     
     public async Task<OperationDetails> Register(UserDTO userDto, string password)
     {
+        var operationDetails = new OperationDetails();
+
         var dbUser = await _userManager.FindByEmailAsync(userDto.Email);
-        if (dbUser != null) 
-            return new OperationDetails("This email already used.");
+        if (dbUser != null)
+            operationDetails.AddError("This email already used.");
 
         dbUser = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == userDto.PhoneNumber);
         if (dbUser != null)
-            return new OperationDetails("This email already used.");
+            operationDetails.AddError("This phone already used.");
+
+        if (operationDetails.Errors.Count > 0)
+        {
+            return operationDetails;
+        }
 
         var user = _mapper.Map(userDto);
 
-        var operationDetails = new OperationDetails();
         var result = await _userManager.CreateAsync(user, password);
         if (!result.Succeeded)
         {

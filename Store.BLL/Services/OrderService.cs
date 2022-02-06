@@ -56,7 +56,7 @@ namespace Store.BLL.Services
 
         public IEnumerable<OrderDTO> GetOrders(int userId)
         {
-            var orders = _orderRepository.GetAll(o => o.User.Id == userId.ToString());
+            var orders = _orderRepository.GetAll(o => o.User.Id == userId);
 
             var orderDtos = _mapper.Map(orders);
 

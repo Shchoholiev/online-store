@@ -65,6 +65,11 @@ namespace Store.BLL.Mappers
             return this._mapper.Map<CartItem>(source);
         }
 
+        public CartItemDTO Map(CartItem source)
+        {
+            return this._mapper.Map<CartItemDTO>(source);
+        }
+
         public ItemBaseDTO Map(ItemBase source)
         {
             return this._mapper.Map<ItemBaseDTO>(source);

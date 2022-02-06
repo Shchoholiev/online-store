@@ -62,22 +62,65 @@ namespace Store.Controllers
             {
                 var cookies = Request.Cookies["StoreName_CartItems"];
                 var serializedCartItem = _shoppingCartService.GetSerializedCartItem(cartItemDTO);
-
-                if (cookies != null)
-                {
-                    cookies += $"-{serializedCartItem}";
-                }
-                else
-                {
-                    cookies = serializedCartItem;
-                }
-
-                var cookieOptions = new CookieOptions();
-                cookieOptions.Expires = DateTime.Now.AddDays(7);
-                HttpContext.Response.Cookies.Append("StoreName_CartItems", cookies, cookieOptions);
+                cookies += $"-{serializedCartItem}";
+                this.SaveCookies(cookies);
             }
             
             return Redirect("Index");
+        }
+
+        public IActionResult ChangeAmountToNew(int cartItemId, int amount)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                _shoppingCartService.ChangeAmountToNew(cartItemId, amount);
+            }
+            else
+            {
+                var cookies = Request.Cookies["StoreName_CartItems"];
+                var newCookies = this._shoppingCartService.ChangeAmountToNew(cartItemId, amount, cookies);
+                this.SaveCookies(newCookies);
+            }
+
+            return Redirect("Index");
+        }
+
+        public IActionResult ChangeAmount(int cartItemId, int amount)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                _shoppingCartService.ChangeAmount(cartItemId, amount);
+            }
+            else
+            {
+                var cookies = Request.Cookies["StoreName_CartItems"];
+                var newCookies = this._shoppingCartService.ChangeAmount(cartItemId, amount, cookies);
+                this.SaveCookies(newCookies);
+            }
+
+            return Redirect("Index");
+        }
+
+        public IActionResult Delete(int cartItemId)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                _shoppingCartService.DeleteItem(cartItemId);
+            }
+            else
+            {
+                var cookies = Request.Cookies["StoreName_CartItems"];
+                var newCookies = _shoppingCartService.DeleteItem(cartItemId, cookies);
+                this.SaveCookies(newCookies);
+            }
+
+            return Redirect("Index");
+        }
+
+        private void SaveCookies(string cookies)
+        {
+            var cookieOptions = new CookieOptions() { Expires = DateTime.Now.AddDays(7) };
+            HttpContext.Response.Cookies.Append("StoreName_CartItems", cookies, cookieOptions);
         }
     }
 }
