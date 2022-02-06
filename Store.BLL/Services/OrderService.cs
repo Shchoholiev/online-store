@@ -34,7 +34,7 @@ namespace Store.BLL.Services
             //            $"Only {GetItemAmount(cart.Item.Id)} available.");
             //}
 
-            if (operationDetails.Errors.Count > 0)
+            if (operationDetails.Messages.Count > 0)
                 return operationDetails;
 
             var order = _mapper.Map(orderDTO);

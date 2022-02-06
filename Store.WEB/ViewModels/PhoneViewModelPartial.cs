@@ -2,7 +2,7 @@
 
 public partial class PhoneViewModel
 {
-    public string GetFullName()
+    public override string GetFullName()
     {
         return $"{Brand} {Model} {Memory}GB {Color}";
     }

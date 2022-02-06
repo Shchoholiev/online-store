@@ -7,7 +7,7 @@ using Store.BLL.DI;
 using Store.FluentValidation;
 
 var dbInitializer = new DbInitializerBLL();
-dbInitializer.DeleteAndInitialize();
+//dbInitializer.DeleteAndInitialize();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,8 +45,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     // User settings.
     options.User.AllowedUserNameCharacters =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ " +
-    "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
-    options.User.RequireUniqueEmail = true;
+    "@1234567890.";
 });
 
 var app = builder.Build();

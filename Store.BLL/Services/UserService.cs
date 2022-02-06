@@ -25,31 +25,39 @@ public class UserService : IUserService
     
     public async Task<OperationDetails> Register(UserDTO userDto, string password)
     {
+        var operationDetails = new OperationDetails();
+
         var dbUser = await _userManager.FindByEmailAsync(userDto.Email);
-        if (dbUser != null) 
-            return new OperationDetails("This email already used.");
+        if (dbUser != null)
+            operationDetails.AddMessage("This email already used.");
 
         dbUser = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == userDto.PhoneNumber);
         if (dbUser != null)
-            return new OperationDetails("This email already used.");
+            operationDetails.AddMessage("This phone already used.");
+
+        if (operationDetails.Messages.Count > 0)
+        {
+            return operationDetails;
+        }
 
         var user = _mapper.Map(userDto);
+        user.Id = DateTime.Now.Ticks.ToString();
 
-        var operationDetails = new OperationDetails();
         var result = await _userManager.CreateAsync(user, password);
-        if (!result.Succeeded)
-        {
-            foreach (var error in result.Errors)
-            {
-                operationDetails.AddError(error.Description);
-            }
-        }
-        else
+        if (result.Succeeded)
         {
             await _signInManager.SignInAsync(user, false);
         }
+        else
+        {
+            foreach (var error in result.Errors)
+            {
+                operationDetails.AddMessage(error.Description);
+            }
+        }
 
         operationDetails.Succeeded = result.Succeeded;
+        operationDetails.AddMessage(user.Id);
         return operationDetails;
     }
 
@@ -60,7 +68,7 @@ public class UserService : IUserService
 
         if (dbUser == null)
         {
-            return new OperationDetails() { Errors = new() { "Incorrect email or phone number" } };
+            return new OperationDetails("Incorrect email or phone number");
         }
         
         var result = await _signInManager.PasswordSignInAsync(dbUser.UserName,
@@ -68,10 +76,12 @@ public class UserService : IUserService
 
         if (!result.Succeeded)
         {
-            return new OperationDetails() { Errors = new() { "Incorrect password" } };
+            return new OperationDetails("Incorrect password");
         }
 
-        return new OperationDetails() { Succeeded = true };
+        var operationDetails = new OperationDetails($"{dbUser.Name}") { Succeeded = true };
+        operationDetails.AddMessage(dbUser.Id);
+        return operationDetails;
     }
 
     public async Task<OperationDetails> Logout()

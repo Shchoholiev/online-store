@@ -2,9 +2,9 @@
 
 public class ItemBaseDTO : EntityBaseDTO
 {
-    public uint Price { get; set; }
+    public int Price { get; set; }
 
-    public uint Amount { get; set; }
+    public int Amount { get; set; }
 
     public string Image { get; set; }
 
