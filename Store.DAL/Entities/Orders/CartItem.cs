@@ -15,5 +15,7 @@ namespace Store.DAL.Entities.Orders
         public int Amount { get; set; }
 
         public User User { get; set; }
+
+        public Order? Order { get; set; }
     }
 }

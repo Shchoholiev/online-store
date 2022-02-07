@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Store.ViewModels.OrderViewModel>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h3>Orders</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>//Order Id</th>
+      <th>Items</th>
+      <th>Amount</th>
+      <th>Total Price</th>
+      <th>Paid Status</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach (var order in Model)
+      {
+          <tr>
+              <td>@order.Id</td>
+              @foreach (var cartItem in order.Items)
+              {
+                  <td>@cartItem.Item.Brand + @cartItem.Item.Model</td>
+                  <td>@cartItem.Amount</td>
+              }
+              <td>@order.TotalPrice</td>
+              <td>@order.IsPaid</td>
+          </tr>
+      }
+  </tbody>
+</table>

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Store.BLL.DTO;
+using Store.BLL.DTO.OrdersDTO;
 using Store.DAL.Entities.Base;
 using Store.DAL.Entities.Identity;
 using Store.DAL.Entities.Orders;
@@ -27,9 +28,17 @@ namespace Store.BLL.Mappers
             .ForMember(dest => dest.Image,
                 opt => opt.MapFrom(src => src.Image.Link));
 
-            cfg.CreateMap<OrderDTO, Order>();
+            cfg.CreateMap<OrderDTO, Order>()
+                .ForMember(dest => dest.Delivery,
+                opt => opt.MapFrom(src => new DeliveryOption { Id = src.Delivery }))
+                .ForMember(dest => dest.Payment,
+                opt => opt.MapFrom(src => new PaymentOption { Id = src.Payment }));
 
-            cfg.CreateMap<ItemBaseDTO, ItemBase>();
+            cfg.CreateMap<ItemBaseDTO, ItemBase>()
+            .ForMember(dest => dest.Brand, opt => opt.Ignore())
+            .ForMember(dest => dest.Model, opt => opt.Ignore())
+            .ForMember(dest => dest.Color, opt => opt.Ignore())
+            .ForMember(dest => dest.Image, opt => opt.Ignore());
 
             cfg.CreateMap<ItemBase, ItemBaseDTO>()
             .ForMember(dest => dest.Brand,
@@ -47,6 +56,10 @@ namespace Store.BLL.Mappers
             cfg.CreateMap<Order, OrderDTO>();
 
             cfg.CreateMap<CartItem, CartItemDTO>();
+
+            cfg.CreateMap<DeliveryOption, DeliveryOptionDTO>();
+
+            cfg.CreateMap<PaymentOption, PaymentOptionDTO>();
 
         }).CreateMapper();
 
@@ -93,6 +106,16 @@ namespace Store.BLL.Mappers
         public IEnumerable<CartItemDTO> Map(IEnumerable<CartItem> source)
         {
             return this._mapper.Map<IEnumerable<CartItemDTO>>(source);
+        }
+
+        public IEnumerable<DeliveryOptionDTO> Map(IEnumerable<DeliveryOption> source)
+        {
+            return this._mapper.Map<IEnumerable<DeliveryOptionDTO>>(source);
+        }
+
+        public IEnumerable<PaymentOptionDTO> Map(IEnumerable<PaymentOption> source)
+        {
+            return this._mapper.Map<IEnumerable<PaymentOptionDTO>>(source);
         }
     }
 }

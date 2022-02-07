@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Store.DAL.Entities.Base;
-using Store.DAL.Enums;
+﻿using Store.DAL.Entities.Base;
 
 namespace Store.DAL.Entities.Phone;
 

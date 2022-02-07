@@ -1,5 +1,4 @@
-﻿#nullable disable
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
 using Store.ViewMappers;
@@ -11,7 +10,6 @@ namespace Store.Controllers
     {
         private readonly IPhoneService _phoneService;
 
-        // temp
         private readonly Mapper _mapper = new();
 
         public PhonesController(IPhoneService phoneService)

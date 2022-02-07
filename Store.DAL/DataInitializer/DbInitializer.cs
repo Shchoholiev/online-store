@@ -1,8 +1,8 @@
 ﻿using Store.DAL.EF;
 using Store.DAL.Entities.ItemProperties;
 using Store.DAL.Entities.Laptop;
+using Store.DAL.Entities.Orders;
 using Store.DAL.Entities.Phone;
-using Store.DAL.Enums;
 
 namespace Store.DAL.DataInitializer;
 
@@ -157,7 +157,7 @@ public class DbInitializer
         //byte[] image13Red = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Red.jpg");
         //byte[] image13Starlight = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Starlight.jpg");
 
-        var Phones = new List<Phone>
+        var phones = new List<Phone>
             {
                 // new Phone{ Price = 1000, Amount = 30, BrandId = "Apple", 
                 //            Model = "IPhone 11", Memory = 256, Image = imageI11 },
@@ -203,11 +203,38 @@ public class DbInitializer
 
             };
 
-        foreach (var p in Phones)
+        foreach (var p in phones)
         {
             context.Phones.Add(p);
         }
         context.SaveChanges();
+
+        var deliveryOptions = new List<DeliveryOption>
+        {
+            new DeliveryOption { Name = "In Store" },
+            new DeliveryOption { Name = "NovaPoshta" },
+            new DeliveryOption { Name = "UkrPoshta" },
+            new DeliveryOption { Name = "Justin" },
+        };
+
+        foreach (var d in deliveryOptions)
+        {
+            context.DeliveryOptions.Add(d);
+        }
+        context.SaveChanges();
+
+        var paymentOptions = new List<PaymentOption>
+        {
+            new PaymentOption { Name = "Card" },
+            new PaymentOption { Name = "Cash" },
+        };
+
+        foreach (var p in paymentOptions)
+        {
+            context.PaymentOptions.Add(p);
+        }
+        context.SaveChanges();
+
     }
 
     public static void Delete(StoreContext context)

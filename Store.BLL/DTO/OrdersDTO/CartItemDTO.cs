@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Store.BLL.DTO
+﻿namespace Store.BLL.DTO.OrdersDTO
 {
     public class CartItemDTO : EntityBaseDTO
     {

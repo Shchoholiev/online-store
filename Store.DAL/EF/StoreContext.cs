@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Store.DAL.Entities.Base;
-using Store.DAL.Entities.Identity;
 using Store.DAL.Entities.ItemProperties;
 using Store.DAL.Entities.Laptop;
 using Store.DAL.Entities.Orders;
 using Store.DAL.Entities.Phone;
-using Store.DAL.Enums;
 
 namespace Store.DAL.EF;
 
@@ -56,16 +53,6 @@ public class StoreContext : IdentityDbContext
         base.OnModelCreating(modelBuilder);
     }
 
-    public DbSet<Laptop> Laptops { get; set; }
-    
-    public DbSet<Phone> Phones { get; set; }
-    
-    public DbSet<PhoneSpecifications> PhoneSpecifications { get; set; }
-    
-    public DbSet<Order> Orders { get; set; }
-
-    public DbSet<CartItem> CartItems { get; set; }
-
     public DbSet<Brand> Brands { get; set; }
 
     public DbSet<Model> Models { get; set; }
@@ -73,4 +60,18 @@ public class StoreContext : IdentityDbContext
     public DbSet<Color> Colors { get; set; }
 
     public DbSet<Image> Images { get; set; }
+
+    public DbSet<Laptop> Laptops { get; set; }
+
+    public DbSet<Phone> Phones { get; set; }
+
+    public DbSet<PhoneSpecifications> PhoneSpecifications { get; set; }
+
+    public DbSet<DeliveryOption> DeliveryOptions { get; set; }
+
+    public DbSet<PaymentOption> PaymentOptions { get; set; }
+
+    public DbSet<Order> Orders { get; set; }
+
+    public DbSet<CartItem> CartItems { get; set; }
 }

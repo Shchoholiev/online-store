@@ -1,4 +1,4 @@
-﻿using Store.BLL.DTO;
+﻿using Store.BLL.DTO.OrdersDTO;
 using Store.DAL.Entities.Identity;
 
 namespace Store.BLL.Interfaces

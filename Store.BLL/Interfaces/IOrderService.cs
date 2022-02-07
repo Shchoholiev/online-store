@@ -1,4 +1,4 @@
-﻿using Store.BLL.DTO;
+﻿using Store.BLL.DTO.OrdersDTO;
 using Store.BLL.Infrastructure;
 
 namespace Store.BLL.Interfaces
@@ -7,6 +7,10 @@ namespace Store.BLL.Interfaces
     {
         OperationDetails MakeOrder(OrderDTO orderDTO);
 
-        IEnumerable<OrderDTO> GetOrders(int userId);
+        IEnumerable<OrderDTO> GetOrders(string userId);
+
+        IEnumerable<DeliveryOptionDTO> GetDeliveryOptions();
+
+        IEnumerable<PaymentOptionDTO> GetPaymentOptions();
     }
 }
