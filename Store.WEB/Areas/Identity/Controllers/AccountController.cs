@@ -39,7 +39,7 @@ public class AccountController : Controller
             if (result.Succeeded)
             {
                 this.SetCookies(user.Name);
-                this.CookiesCartToDatabase(result.Messages.FirstOrDefault());
+                //this.CookiesCartToDatabase(result.Messages.FirstOrDefault());
                 return Redirect(model.ReturnUrl);
             }
             else
@@ -74,7 +74,7 @@ public class AccountController : Controller
             if (result.Succeeded)
             {
                 this.SetCookies(result.Messages.FirstOrDefault());
-                this.CookiesCartToDatabase(result.Messages.LastOrDefault());
+                //this.CookiesCartToDatabase(result.Messages.LastOrDefault());
                 return Redirect(model.ReturnUrl);
             }
             else

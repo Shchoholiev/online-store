@@ -44,7 +44,10 @@ namespace Store.BLL.Services
                 cartItemDTO.User = userDTO;
                 var cartItem = _mapper.Map(cartItemDTO);
 
-                var dbCartItem = _repository.GetAll(c => c.Item.Id == cartItem.Item.Id, c => c.Item).FirstOrDefault();
+                var dbCartItem = _repository.GetAll(
+                    c => c.User.Id == cartItem.User.Id
+                    && c.Item.Id == cartItem.Item.Id, 
+                    c => c.Item).FirstOrDefault();
                 if (dbCartItem == null)
                 {
                     _repository.Attach(cartItem.Item);
