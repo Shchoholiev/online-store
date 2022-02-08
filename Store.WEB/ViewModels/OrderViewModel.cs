@@ -25,6 +25,8 @@
 
         public int Payment { get; set; }
 
+        public DateTime CreationTime { get; set; }
+
         public bool IsPaid { get; set; }
 
         public string? Details { get; set; }

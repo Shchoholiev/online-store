@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Store.Areas.Identity.ViewModels;
 using Store.BLL.DTO;
 using Store.BLL.DTO.OrdersDTO;
 using Store.ViewModels;
@@ -16,9 +17,12 @@ namespace Store.ViewMappers
             cfg.CreateMap<PhoneSpecificationsDTO, PhoneViewModel>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
 
-            cfg.CreateMap<OrderDTO, OrderViewModel>();
+            cfg.CreateMap<OrderDTO, OrderViewModel>()
+                .ConstructUsing(o => new OrderViewModel());
 
             cfg.CreateMap<OrderViewModel, OrderDTO>();
+
+            cfg.CreateMap<UserDTO, UserViewModel>();
 
         }).CreateMapper();
 
@@ -33,6 +37,11 @@ namespace Store.ViewMappers
         public OrderDTO Map(OrderViewModel source)
         {
             return _mapper.Map<OrderDTO>(source);
+        }
+
+        public UserViewModel Map(UserDTO source)
+        {
+            return _mapper.Map<UserViewModel>(source);
         }
 
         public IEnumerable<CartItemViewModel> Map(IEnumerable<CartItemDTO> source)

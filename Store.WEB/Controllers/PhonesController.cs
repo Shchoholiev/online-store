@@ -18,7 +18,7 @@ namespace Store.Controllers
         }
 
         // GET: Phones
-        public  ActionResult Index()
+        public ActionResult Index()
         {
             var phoneDtos = _phoneService.GetAll();
             var phoneViewModels = _mapper.Map(phoneDtos).ToList();

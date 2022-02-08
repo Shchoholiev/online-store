@@ -1,6 +1,6 @@
 ﻿namespace Store.BLL.DTO.OrdersDTO
 {
-    public class OrderDTO
+    public class OrderDTO : EntityBaseDTO
     {
         public IEnumerable<CartItemDTO> Items { get; set; }
 
@@ -11,6 +11,8 @@
         public int Delivery { get; set; }
 
         public string? DeliveryAddress { get; set; }
+
+        public DateTime CreationTime { get; set; }
 
         public int Payment { get; set; }
 

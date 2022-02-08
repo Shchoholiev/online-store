@@ -9,9 +9,8 @@
 <table class="table">
   <thead>
     <tr>
-      <th>//Order Id</th>
-      <th>Items</th>
-      <th>Amount</th>
+      <th>Order Number</th>
+      <th>Date</th>
       <th>Total Price</th>
       <th>Paid Status</th>
     </tr>
@@ -21,12 +20,8 @@
       {
           <tr>
               <td>@order.Id</td>
-              @foreach (var cartItem in order.Items)
-              {
-                  <td>@cartItem.Item.Brand + @cartItem.Item.Model</td>
-                  <td>@cartItem.Amount</td>
-              }
-              <td>@order.TotalPrice</td>
+              <td>@order.CreationTime</td>
+              <td>$@order.TotalPrice</td>
               <td>@order.IsPaid</td>
           </tr>
       }

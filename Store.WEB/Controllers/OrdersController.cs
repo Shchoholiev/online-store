@@ -25,8 +25,8 @@ namespace Store.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var user = await this._userService.GetCurrentUser(User);
-            var orderDTOs = this._orderService.GetOrders(user.Id);
+            var userDTO = await this._userService.GetCurrentUser(User);
+            var orderDTOs = this._orderService.GetOrders(userDTO.Id);
             var orders = this._mapper.Map(orderDTOs);
 
             return View(orders);
@@ -36,7 +36,7 @@ namespace Store.Controllers
         public async Task<IActionResult> MakeOrder()
         {
             var user = await this._userService.GetCurrentUser(User);
-            var cartItemDTOs = this._shoppingCartService.GetItems(user);
+            var cartItemDTOs = this._shoppingCartService.GetItems(user.Id);
             var cartItems = this._mapper.Map(cartItemDTOs).ToList();
 
             return View(new OrderViewModel(cartItems));
@@ -47,7 +47,7 @@ namespace Store.Controllers
                                                     OrderViewModel order)
         {
             var user = await this._userService.GetCurrentUser(User);
-            var cartItemDTOs = this._shoppingCartService.GetItems(user);
+            var cartItemDTOs = this._shoppingCartService.GetItems(user.Id);
             var orderDTO = this._mapper.Map(order);
             orderDTO.Items = cartItemDTOs;
             orderDTO.User = new UserDTO { Id = user.Id };

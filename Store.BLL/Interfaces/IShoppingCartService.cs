@@ -15,7 +15,7 @@ namespace Store.BLL.Interfaces
 
         CartItemDTO GetItem(int id);
 
-        IEnumerable<CartItemDTO> GetItems(User user);
+        IEnumerable<CartItemDTO> GetItems(string userId);
 
         string GetSerializedCartItem(CartItemDTO cartItemDTO);
 

@@ -28,7 +28,7 @@ namespace Store.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _userService.GetCurrentUser(User);
-                var cartItemDTOs = _shoppingCartService.GetItems(user);
+                var cartItemDTOs = _shoppingCartService.GetItems(user.Id);
                 cartItems = _mapper.Map(cartItemDTOs).ToList();
             }
             else

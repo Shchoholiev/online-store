@@ -36,9 +36,9 @@ namespace Store.BLL.Services
             foreach (var cart in orderDTO.Items)
             {
                 if (!CheckAmount(cart.Item.Id, cart.Amount))
-                    operationDetails.AddMessage(
-                        $"There is no {cart.Amount} {cart.Item.Brand} {cart.Item.Model}. " + //change to method in ItemBase
-                        $"Only {GetItemAmount(cart.Item.Id)} available.");
+                {
+                    operationDetails.AddMessage($"There is no {cart.Amount} {cart.Item.Brand} {cart.Item.Model}.");
+                }
             }
 
             if (operationDetails.Messages.Count > 0)
