@@ -5,6 +5,8 @@ using Store.BLL.Mappers;
 using Store.DAL.Entities.Base;
 using Store.DAL.Entities.Orders;
 using Store.DAL.Repository;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Store.BLL.Services
 {
@@ -12,14 +14,18 @@ namespace Store.BLL.Services
     {
         private readonly IGenericRepository<Order> _orderRepository;
 
+        private readonly IGenericRepository<CartItem> _cartItemRepository;
+
         private readonly IGenericRepository<ItemBase> _itemRepository;
 
         private readonly Mapper _mapper = new();
 
-        public OrderService(IGenericRepository<Order> orderRepo, IGenericRepository<ItemBase> itemRepo)
+        public OrderService(IGenericRepository<Order> orderRepo, IGenericRepository<ItemBase> itemRepo, 
+            IGenericRepository<CartItem> cartRepo)
         {
             _orderRepository = orderRepo;
             _itemRepository = itemRepo;
+            _cartItemRepository = cartRepo;
         }
 
         public OperationDetails MakeOrder(OrderDTO orderDTO)
@@ -56,6 +62,24 @@ namespace Store.BLL.Services
 
             operationDetails.Succeeded = true;
             return operationDetails;
+        }
+
+        public OrderDTO GetOrder(int id)
+        {
+            var order = this._orderRepository.GetItem(id, o => o.Items);
+            var orderDTO = this._mapper.Map(order);
+
+            var cartItemDTOs = new List<CartItemDTO>();
+            foreach (var cartItem in order.Items)
+            {
+                var cartItemDb = this._cartItemRepository.GetItem(cartItem.Id, c => c.Item, 
+                    c => c.Item.Image, c => c.Item.Brand, c => c.Item.Model, c => c.Item.Color );
+                var cartItemDTO = _mapper.Map(cartItemDb);
+                cartItemDTOs.Add(cartItemDTO);
+            }
+            orderDTO.Items = cartItemDTOs;
+
+            return orderDTO;
         }
 
         public IEnumerable<OrderDTO> GetOrders(string userId)

@@ -39,6 +39,11 @@ namespace Store.ViewMappers
             return _mapper.Map<OrderDTO>(source);
         }
 
+        public OrderViewModel Map(OrderDTO source)
+        {
+            return _mapper.Map<OrderViewModel>(source);
+        }
+
         public UserViewModel Map(UserDTO source)
         {
             return _mapper.Map<UserViewModel>(source);

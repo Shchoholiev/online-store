@@ -34,7 +34,7 @@
                 <input asp-for="Details" class="form-control" />
                 <span asp-validation-for="Details" class="text-danger"></span>
             </div>
-            <input hidden asp-for="TotalPrice" class="form-control" value="@Model.TotalPrice" readonly/>
+            <input hidden asp-for="TotalPrice" class="form-control" value="@Model.TotalPrice"/>
             <div class="text-primary my-2 fs-3 fw-bold">$@Model.TotalPrice</div>
             <input type="submit" value="Order" class="btn btn-primary"/>
         </form>

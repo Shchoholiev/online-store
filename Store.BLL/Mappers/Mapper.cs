@@ -58,6 +58,7 @@ namespace Store.BLL.Mappers
                 opt => opt.MapFrom(src => src.Image.Link));
 
             cfg.CreateMap<CartItemDTO, CartItem>();
+
             cfg.CreateMap<Order, OrderDTO>();
 
             cfg.CreateMap<CartItem, CartItemDTO>();
@@ -77,6 +78,11 @@ namespace Store.BLL.Mappers
         public Order Map(OrderDTO source)
         {
             return this._mapper.Map<Order>(source);
+        }
+
+        public OrderDTO Map(Order source)
+        {
+            return this._mapper.Map<OrderDTO>(source);
         }
 
         public CartItem Map(CartItemDTO source)

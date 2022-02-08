@@ -13,6 +13,7 @@
       <th>Date</th>
       <th>Total Price</th>
       <th>Paid Status</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,11 @@
               <td>@order.CreationTime</td>
               <td>$@order.TotalPrice</td>
               <td>@order.IsPaid</td>
+              <td>
+                  <form method="get" asp-action="Details" asp-route-id="@order.Id">
+                      <input type="submit" class="btn btn-primary" value="Details"/>
+                  </form>
+              </td>
           </tr>
       }
   </tbody>

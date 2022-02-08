@@ -7,6 +7,8 @@ namespace Store.BLL.Interfaces
     {
         OperationDetails MakeOrder(OrderDTO orderDTO);
 
+        OrderDTO GetOrder(int id);
+
         IEnumerable<OrderDTO> GetOrders(string userId);
     }
 }

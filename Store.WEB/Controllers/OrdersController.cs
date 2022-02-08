@@ -32,6 +32,14 @@ namespace Store.Controllers
             return View(orders);
         }
 
+        public IActionResult Details(int id)
+        {
+            var orderDTO = this._orderService.GetOrder(id);
+            var order = this._mapper.Map(orderDTO);
+
+            return View(order);
+        }
+
         [HttpGet]
         public async Task<IActionResult> MakeOrder()
         {
@@ -43,8 +51,7 @@ namespace Store.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> MakeOrder([Bind("Delivery,DeliveryAddress,Payment,Details,TotalPrice")] 
-                                                    OrderViewModel order)
+        public async Task<IActionResult> MakeOrder([Bind("Delivery,DeliveryAddress,Payment,Details,TotalPrice")] OrderViewModel order)
         {
             var user = await this._userService.GetCurrentUser(User);
             var cartItemDTOs = this._shoppingCartService.GetItems(user.Id);
@@ -70,6 +77,5 @@ namespace Store.Controllers
 
             return View(order);
         }
-
     }
 }

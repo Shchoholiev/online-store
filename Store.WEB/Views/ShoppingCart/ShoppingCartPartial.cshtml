@@ -20,9 +20,7 @@
           <tr>
               <td>@cart.Id</td>
               <td style="width:100px; height:100px">
-                  <a asp-controller="Phones" asp-action="Details" asp-route-id="@cart.Item.Id">
-                      <img style="height: 100px" src="@cart.Item.Image"/>
-                  </a>
+                  <img style="height: 100px" src="@cart.Item.Image"/>
               </td>
               <td>@cart.Item.Id</td>
               <td>@cart.Item.Brand</td>
