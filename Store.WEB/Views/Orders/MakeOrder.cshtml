@@ -2,21 +2,7 @@
 @model Store.ViewModels.OrderViewModel
 
 @{
-    ViewData["Title"] = "Make Order";
-
-    var deliveryOptions = new SelectList(new string[]
-    {
-        "InStore",
-        "NovaPoshta",
-        "UkrPoshta",
-        "Justin"
-    });
-
-    var paymentOptions = new SelectList(new string[]
-    {
-        "Cash",
-        "Card",
-    });    
+    ViewData["Title"] = "Make Order";  
 }
 
 <h3>Your Order</h3>

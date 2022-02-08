@@ -8,9 +8,5 @@ namespace Store.BLL.Interfaces
         OperationDetails MakeOrder(OrderDTO orderDTO);
 
         IEnumerable<OrderDTO> GetOrders(string userId);
-
-        IEnumerable<DeliveryOptionDTO> GetDeliveryOptions();
-
-        IEnumerable<PaymentOptionDTO> GetPaymentOptions();
     }
 }

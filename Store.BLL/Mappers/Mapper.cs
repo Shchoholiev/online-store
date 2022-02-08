@@ -62,10 +62,6 @@ namespace Store.BLL.Mappers
 
             cfg.CreateMap<CartItem, CartItemDTO>();
 
-            cfg.CreateMap<DeliveryOption, DeliveryOptionDTO>();
-
-            cfg.CreateMap<PaymentOption, PaymentOptionDTO>();
-
         }).CreateMapper();
 
         public User Map(UserDTO source)
@@ -116,16 +112,6 @@ namespace Store.BLL.Mappers
         public IEnumerable<CartItemDTO> Map(IEnumerable<CartItem> source)
         {
             return this._mapper.Map<IEnumerable<CartItemDTO>>(source);
-        }
-
-        public IEnumerable<DeliveryOptionDTO> Map(IEnumerable<DeliveryOption> source)
-        {
-            return this._mapper.Map<IEnumerable<DeliveryOptionDTO>>(source);
-        }
-
-        public IEnumerable<PaymentOptionDTO> Map(IEnumerable<PaymentOption> source)
-        {
-            return this._mapper.Map<IEnumerable<PaymentOptionDTO>>(source);
         }
     }
 }

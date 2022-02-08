@@ -14,19 +14,12 @@ namespace Store.BLL.Services
 
         private readonly IGenericRepository<ItemBase> _itemRepository;
 
-        private readonly IGenericRepository<DeliveryOption> _deliveryOptionsRepository;
-
-        private readonly IGenericRepository<PaymentOption> _paymentOptionsRepository;
-
         private readonly Mapper _mapper = new();
 
-        public OrderService(IGenericRepository<Order> orderRepo, IGenericRepository<ItemBase> itemRepo,
-                            IGenericRepository<DeliveryOption> deliveryRepo, IGenericRepository<PaymentOption> paymentRepo)
+        public OrderService(IGenericRepository<Order> orderRepo, IGenericRepository<ItemBase> itemRepo)
         {
             _orderRepository = orderRepo;
             _itemRepository = itemRepo;
-            _deliveryOptionsRepository = deliveryRepo;
-            _paymentOptionsRepository = paymentRepo;
         }
 
         public OperationDetails MakeOrder(OrderDTO orderDTO)
@@ -65,21 +58,9 @@ namespace Store.BLL.Services
             return operationDetails;
         }
 
-        public IEnumerable<DeliveryOptionDTO> GetDeliveryOptions()
-        {
-            var deliveryOptions = this._deliveryOptionsRepository.GetAll();
-            return this._mapper.Map(deliveryOptions);
-        }
-
-        public IEnumerable<PaymentOptionDTO> GetPaymentOptions()
-        {
-            var paymentOptions = this._paymentOptionsRepository.GetAll();
-            return this._mapper.Map(paymentOptions);
-        }
-
         public IEnumerable<OrderDTO> GetOrders(string userId)
         {
-            var orders = _orderRepository.GetAll(o => o.User.Id == userId, o => o.Items);
+            var orders = _orderRepository.GetAll(o => o.User.Id == userId);
             var orderDtos = _mapper.Map(orders);
 
             return orderDtos;
