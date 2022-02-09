@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Store.Areas.Identity.ViewModels;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
 using Store.ViewMappers;
@@ -43,6 +44,11 @@ namespace Store.Controllers
         [HttpGet]
         public async Task<IActionResult> MakeOrder()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Register", "Account", new { area = "Identity", ReturnUrl = "/Orders/MakeOrder" });
+            }
+
             var user = await this._userService.GetCurrentUser(User);
             var cartItemDTOs = this._shoppingCartService.GetItems(user.Id);
             var cartItems = this._mapper.Map(cartItemDTOs).ToList();
