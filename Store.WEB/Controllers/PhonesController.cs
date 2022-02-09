@@ -1,5 +1,4 @@
-﻿#nullable disable
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
 using Store.ViewMappers;
@@ -11,7 +10,6 @@ namespace Store.Controllers
     {
         private readonly IPhoneService _phoneService;
 
-        // temp
         private readonly Mapper _mapper = new();
 
         public PhonesController(IPhoneService phoneService)
@@ -20,7 +18,7 @@ namespace Store.Controllers
         }
 
         // GET: Phones
-        public  ActionResult Index()
+        public ActionResult Index()
         {
             var phoneDtos = _phoneService.GetAll();
             var phoneViewModels = _mapper.Map(phoneDtos).ToList();

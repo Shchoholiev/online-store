@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace Store.BLL.DTO;
+﻿namespace Store.BLL.DTO;
 
 public class UserDTO
 {

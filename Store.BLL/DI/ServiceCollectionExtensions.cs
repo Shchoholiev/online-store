@@ -26,6 +26,9 @@ namespace Store.BLL.DI
             );
 
             services.AddScoped<IGenericRepository<CartItem>, GenericRepository<CartItem>>();
+            services.AddScoped<IGenericRepository<Order>, GenericRepository<Order>>();
+            services.AddScoped<IGenericRepository<DeliveryOption>, GenericRepository<DeliveryOption>>();
+            services.AddScoped<IGenericRepository<PaymentOption>, GenericRepository<PaymentOption>>();
 
             services.AddScoped<IGenericRepository<Phone>, ItemsRepository<Phone>>();
             services.AddScoped<IGenericRepository<ItemBase>, ItemsRepository<ItemBase>>();
@@ -38,6 +41,7 @@ namespace Store.BLL.DI
             services.AddScoped<IPhoneService, PhoneService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IShoppingCartService, ShoppingCartService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             return services;
         }

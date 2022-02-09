@@ -90,10 +90,12 @@ public class UserService : IUserService
         return new OperationDetails() { Succeeded = true };
     }
 
-    public async Task<User> GetCurrentUser(ClaimsPrincipal claims)
+    public async Task<UserDTO> GetCurrentUser(ClaimsPrincipal claims)
     {
-        var user = await _userManager.GetUserAsync(claims);
-        return user;
+        var user = await this._userManager.GetUserAsync(claims);
+        var userDTO = this._mapper.Map(user);
+
+        return userDTO;
     }
 
     public string CheckReturnUrl(string returnUrl)

@@ -1,4 +1,4 @@
-﻿using Store.BLL.DTO;
+﻿using Store.BLL.DTO.OrdersDTO;
 using Store.DAL.Entities.Identity;
 
 namespace Store.BLL.Interfaces
@@ -15,7 +15,7 @@ namespace Store.BLL.Interfaces
 
         CartItemDTO GetItem(int id);
 
-        IEnumerable<CartItemDTO> GetItems(User user);
+        IEnumerable<CartItemDTO> GetItems(string userId);
 
         string GetSerializedCartItem(CartItemDTO cartItemDTO);
 

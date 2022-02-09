@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Store.BLL.DTO;
+using Store.BLL.DTO.OrdersDTO;
 using Store.DAL.Entities.Base;
 using Store.DAL.Entities.Identity;
 using Store.DAL.Entities.Orders;
@@ -11,8 +12,13 @@ namespace Store.BLL.Mappers
     {
         private readonly IMapper _mapper = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<UserDTO, User>().ForMember(dest => dest.UserName,
+            cfg.CreateMap<UserDTO, User>()
+            .ForMember(dest => dest.UserName,
                 opt => opt.MapFrom(src => src.Email ?? src.PhoneNumber));
+
+            cfg.CreateMap<User, UserDTO>()
+            .ForMember(dest => dest.Name,
+                opt => opt.MapFrom(src => src.Name));
 
             cfg.CreateMap<PhoneSpecifications, PhoneSpecificationsDTO>();
             cfg.CreateMap<Phone, PhoneDTO>()
@@ -27,9 +33,17 @@ namespace Store.BLL.Mappers
             .ForMember(dest => dest.Image,
                 opt => opt.MapFrom(src => src.Image.Link));
 
-            cfg.CreateMap<OrderDTO, Order>();
+            cfg.CreateMap<OrderDTO, Order>()
+                .ForMember(dest => dest.Delivery,
+                opt => opt.MapFrom(src => new DeliveryOption { Id = src.Delivery }))
+                .ForMember(dest => dest.Payment,
+                opt => opt.MapFrom(src => new PaymentOption { Id = src.Payment }));
 
-            cfg.CreateMap<ItemBaseDTO, ItemBase>();
+            cfg.CreateMap<ItemBaseDTO, ItemBase>()
+            .ForMember(dest => dest.Brand, opt => opt.Ignore())
+            .ForMember(dest => dest.Model, opt => opt.Ignore())
+            .ForMember(dest => dest.Color, opt => opt.Ignore())
+            .ForMember(dest => dest.Image, opt => opt.Ignore());
 
             cfg.CreateMap<ItemBase, ItemBaseDTO>()
             .ForMember(dest => dest.Brand,
@@ -44,6 +58,7 @@ namespace Store.BLL.Mappers
                 opt => opt.MapFrom(src => src.Image.Link));
 
             cfg.CreateMap<CartItemDTO, CartItem>();
+
             cfg.CreateMap<Order, OrderDTO>();
 
             cfg.CreateMap<CartItem, CartItemDTO>();
@@ -55,9 +70,19 @@ namespace Store.BLL.Mappers
             return this._mapper.Map<User>(source);
         }
 
+        public UserDTO Map(User source)
+        {
+            return this._mapper.Map<UserDTO>(source);
+        }
+
         public Order Map(OrderDTO source)
         {
             return this._mapper.Map<Order>(source);
+        }
+
+        public OrderDTO Map(Order source)
+        {
+            return this._mapper.Map<OrderDTO>(source);
         }
 
         public CartItem Map(CartItemDTO source)

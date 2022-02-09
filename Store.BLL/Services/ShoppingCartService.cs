@@ -1,4 +1,5 @@
 ﻿using Store.BLL.DTO;
+using Store.BLL.DTO.OrdersDTO;
 using Store.BLL.Interfaces;
 using Store.BLL.Mappers;
 using Store.DAL.Entities.Base;
@@ -77,10 +78,10 @@ namespace Store.BLL.Services
             return cartItemDTO;
         }
 
-        public IEnumerable<CartItemDTO> GetItems(User user)
+        public IEnumerable<CartItemDTO> GetItems(string userId)
         {
-            var cartItems = _repository.GetAll(c => c.Item, 
-                c => c.Item.Brand, c => c.Item.Model, c => c.Item.Image);
+            var cartItems = _repository.GetAll(c => c.User.Id == userId && c.Order == null,
+                c => c.Item, c => c.Item.Brand, c => c.Item.Model, c => c.Item.Image);
 
             var cartItemsDTO = _mapper.Map(cartItems);
 

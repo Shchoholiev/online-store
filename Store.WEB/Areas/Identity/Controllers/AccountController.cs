@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Store.Areas.Identity.ViewModels;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
+using Store.ViewMappers;
 
 namespace Store.Areas.Identity.Controllers;
 
@@ -12,6 +13,8 @@ public class AccountController : Controller
     private readonly IUserService _userService;
 
     private readonly IShoppingCartService _shoppingCartService;
+
+    private readonly Mapper _mapper = new();
 
     public AccountController(IUserService userService, IShoppingCartService shoppingCartService)
     {
@@ -95,6 +98,14 @@ public class AccountController : Controller
         await this._userService.Logout();
         Response.Cookies.Append("userName", string.Empty, new CookieOptions { Expires = DateTime.Now.AddDays(-1) });
         return RedirectToAction("Index", "Home", new {area = ""});
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        var userDTO = await this._userService.GetCurrentUser(User);
+        var user = this._mapper.Map(userDTO);
+
+        return View(user);
     }
 
     private void SetCookies(string userName)

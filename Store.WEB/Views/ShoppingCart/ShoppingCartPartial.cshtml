@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Store.ViewModels.CartItemViewModel>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>//Сart Id</th>
+      <th>Image</th>
+      <th>//Item Id</th>
+      <th>Brand</th>
+      <th>Model</th>
+      <th>Amount</th>
+      <th>Price</th>
+      <th>Total Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach (var cart in Model)
+      {
+          <tr>
+              <td>@cart.Id</td>
+              <td style="width:100px; height:100px">
+                  <img style="height: 100px" src="@cart.Item.Image"/>
+              </td>
+              <td>@cart.Item.Id</td>
+              <td>@cart.Item.Brand</td>
+              <td>@cart.Item.Model</td>
+              <td>
+                  <div class="d-flex">
+                      <form asp-controller="ShoppingCart" asp-action="ChangeAmount" 
+                            asp-route-cartItemId="@cart.Id" asp-route-amount="-1"> 
+                          <input type="submit" value="-" class="btn btn-secondary" style="width:50px">
+                      </form>
+                      <form asp-controller="ShoppingCart" asp-action="ChangeAmountToNew" asp-route-cartItemId="@cart.Id">
+                          <input name="amount" min="1" asp-for="@cart.Amount" style="width:50px"/>
+                      </form>                  
+                      <form asp-controller="ShoppingCart" asp-action="ChangeAmount" 
+                            asp-route-cartItemId="@cart.Id" asp-route-amount="1"> 
+                          <input type="submit" value="+" class="btn btn-secondary" style="width:50px">
+                      </form>
+                  </div>
+              </td>
+              <td>$@cart.Item.Price</td>
+              <td>$@cart.GetTotalPrice()</td>
+              <td>
+                  <form asp-controller="ShoppingCart" asp-action="Delete" asp-route-cartItemId="@cart.Id">
+                      <input type="submit" class="btn btn-danger" value="Delete"/>
+                  </form>
+              </td>
+          </tr>
+      }
+  </tbody>
+</table>
