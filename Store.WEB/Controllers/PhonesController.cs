@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
+using Store.Infrastructure;
 using Store.ViewMappers;
 using Store.ViewModels;
 
@@ -14,16 +15,18 @@ namespace Store.Controllers
 
         public PhonesController(IPhoneService phoneService)
         {
-            _phoneService = phoneService;
+            this._phoneService = phoneService;
         }
 
         // GET: Phones
-        public ActionResult Index()
+        public ActionResult Index(PageParameters pageParameters)
         {
-            var phoneDtos = _phoneService.GetAll();
-            var phoneViewModels = _mapper.Map(phoneDtos).ToList();
+            var phoneDtos = this._phoneService.GetPage(pageParameters.PageSize, pageParameters.PageNumber);
+            var count = this._phoneService.GetCount();
+            var phoneViewModels = _mapper.Map(phoneDtos);
+            var pagedPhones = new PagedList<PhoneViewModel>(phoneViewModels, pageParameters, count);
 
-            return View(phoneViewModels);
+            return View(pagedPhones);
         }
         
         // GET: Phones/Details/5
@@ -41,8 +44,9 @@ namespace Store.Controllers
                 return NotFound();
             }
 
-            var phones = _phoneService.GetAll(
-                        p => p.Brand.Name == phone.Brand && p.Model.Name == phone.Model && p.Id != phone.Id);
+            var phones = _phoneService.GetAll(p => p.Brand.Name == phone.Brand 
+                                                && p.Model.Name == phone.Model 
+                                                && p.Id != phone.Id);
 
             var model = _mapper.Map(phone);
             

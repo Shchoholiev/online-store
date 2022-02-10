@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using LinqKit;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
 using Store.BLL.Mappers;
@@ -43,5 +44,36 @@ public class PhoneService : IPhoneService
     public IEnumerable<PhoneDTO> GetAll(params Expression<Func<Phone, object>>[] includeProperties)
     {
         return this._mapper.Map(this._repository.GetAll(includeProperties));
+    }
+
+    public IEnumerable<PhoneDTO> GetPage(int pageSize, int pageNumber)
+    {
+        var page = this._repository.GetPage(pageSize, pageNumber).ToList();
+
+        var phoneModels = new List<string>();
+        foreach (var phone in page)
+        {
+            if (!phoneModels.Contains(phone.Model.Name))
+            {
+                phoneModels.Add(phone.Model.Name);
+            }
+        }
+
+        var predicate = PredicateBuilder.New<Phone>();
+        foreach (var model in phoneModels)
+        {
+            predicate = predicate.Or(p => p.Model.Name == model);
+        }
+
+        var otherPhones = this._repository.GetAll(predicate);
+        page.AddRange(otherPhones);
+        page = page.DistinctBy(p => p.Id).ToList();
+
+        return this._mapper.Map(page);
+    }
+
+    public int GetCount()
+    {
+        return this._repository.GetCount();
     }
 }
