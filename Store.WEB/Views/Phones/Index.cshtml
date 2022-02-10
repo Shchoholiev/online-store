@@ -35,7 +35,7 @@
 <div class="d-flex flex-wrap">
     @{
         var end = (Model.PageNumber * Model.PageSize > Model.TotalItems)
-                  ? Model.TotalItems - Model.PageNumber * Model.PageSize
+                  ? Model.TotalItems - (Model.PageNumber - 1) * Model.PageSize
                   : Model.PageSize;
     }
     @for (var i = 0; i < end; i++)
@@ -45,13 +45,13 @@
         class="bg-white m-1 p-3 d-flex flex-column justify-content-between">
             <div class="mw-100 m-3 d-flex justify-content-around">
                 <a asp-action="Details" asp-route-id="@p.Id">
-                    <img class="mw-100" style="max-height: 160px" src="@p.Image"/>
+                    <img class="mw-100" style="height: 160px" src="@p.Image"/>
                 </a>
             </div>
 
             <div class="d-flex flex-wrap mb-3 mx-auto">
-                @foreach (var c in Model.OrderBy(m => m.Color)
-                                        .Where(m => m.Memory == p.Memory && m.Brand == p.Brand && m.Model == p.Model))
+                @foreach (var c in Model.Where(m => m.Memory == p.Memory && m.Brand == p.Brand && m.Model == p.Model)
+                                        .OrderBy(m => m.Color))
                 {
                     string style = (c.Id == p.Id) ? "border-color: #007BFF; border-width: 1.5px" : "";
                     <a asp-action="Details" asp-route-id="@c.Id" title="@c.Color">
