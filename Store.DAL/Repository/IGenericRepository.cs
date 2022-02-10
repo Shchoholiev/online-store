@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace Store.DAL.Repository;
 
@@ -28,4 +26,8 @@ public interface IGenericRepository<TEntity>
 
     IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate,
                         params Expression<Func<TEntity, object>>[] includeProperties);
+
+    IEnumerable<TEntity> GetPage(int pageSize, int pageNumber);
+
+    int GetCount();
 }

@@ -85,6 +85,19 @@ namespace Store.DAL.Repository
             return this.Include(query, includeProperties);
         }
 
+        public IEnumerable<TItem> GetPage(int pageSize, int pageNumber)
+        {
+            IQueryable<TItem> query = this._table.AsNoTracking()
+                                                 .Skip((pageNumber - 1) * pageSize)
+                                                 .Take(pageSize);
+            return this.Include(query);
+        }
+
+        public int GetCount()
+        {
+            return this._table.Count();
+        }
+
         private IQueryable<TItem> Include(IQueryable<TItem> query, params Expression<Func<TItem, object>>[] includeProperties)
         {
             var include = new Expression<Func<TItem, object>>[] 

@@ -86,6 +86,19 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
         return this.Include(query, includeProperties);
     }
 
+    public IEnumerable<TEntity> GetPage(int pageSize, int pageNumber)
+    {
+        IQueryable<TEntity> query = this._table.AsNoTracking()
+                                             .Skip((pageNumber - 1) * pageSize)
+                                             .Take(pageSize);
+        return this.Include(query);
+    }
+
+    public int GetCount()
+    {
+        return this._table.Count();
+    }
+
     private IQueryable<TEntity> Include(IQueryable<TEntity> query, params Expression<Func<TEntity, object>>[] includeProperties)
     {
         return includeProperties
