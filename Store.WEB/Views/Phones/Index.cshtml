@@ -35,10 +35,10 @@
 <div class="d-flex flex-wrap">
     @{
         var end = (Model.PageNumber * Model.PageSize > Model.TotalItems)
-                  ? Model.TotalItems
-                  : Model.PageNumber * Model.PageSize;
+                  ? Model.TotalItems - Model.PageNumber * Model.PageSize
+                  : Model.PageSize;
     }
-    @for (var i = (Model.PageNumber - 1) * Model.PageSize; i < end; i++)
+    @for (var i = 0; i < end; i++)
     {
         var p = Model[i];
         <div style="min-width: 200px; max-width: 220px; width: 100%" 

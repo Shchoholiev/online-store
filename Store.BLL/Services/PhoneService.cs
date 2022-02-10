@@ -48,14 +48,14 @@ public class PhoneService : IPhoneService
 
     public IEnumerable<PhoneDTO> GetPage(int pageSize, int pageNumber)
     {
-        var page = this._mapper.Map(this._repository.GetPage(pageSize, pageNumber));
+        var page = this._repository.GetPage(pageSize, pageNumber).ToList();
 
         var phoneModels = new List<string>();
         foreach (var phone in page)
         {
-            if (!phoneModels.Contains(phone.Model))
+            if (!phoneModels.Contains(phone.Model.Name))
             {
-                phoneModels.Add(phone.Model);
+                phoneModels.Add(phone.Model.Name);
             }
         }
 
@@ -65,7 +65,11 @@ public class PhoneService : IPhoneService
             predicate = predicate.Or(p => p.Model.Name == model);
         }
 
-        return this._mapper.Map(this._repository.GetAll(predicate));
+        var otherPhones = this._repository.GetAll(predicate);
+        page.AddRange(otherPhones);
+        page = page.DistinctBy(p => p.Id).ToList();
+
+        return this._mapper.Map(page);
     }
 
     public int GetCount()

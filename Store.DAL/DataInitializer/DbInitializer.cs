@@ -35,12 +35,14 @@ public class DbInitializer
         var tufGaming = new Model() { Name = "TUF Gaming" };
         var strix = new Model() { Name = "Strix" };
         var iphone13 = new Model() { Name = "IPhone 13" };
+        var iphone11 = new Model() { Name = "IPhone 11" };
 
         var models = new List<Model>
         {
             tufGaming,
             strix,
-            iphone13
+            iphone13,
+            iphone11,
         };
 
         foreach (var m in models)
@@ -147,24 +149,14 @@ public class DbInitializer
         context.PhoneSpecifications.Add(specs13);
         context.SaveChanges();
 
-        //byte[] imageI11 = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\iphone11.jpg");
-        //byte[] imageSas = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\samsung.jpg");
-        //byte[] imageXi = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\xiaomi.jpg");
-        //byte[] imageI13ProMax = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13promax.jpg");
-        //byte[] image13Pink = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Pink.jpg");
-        //byte[] image13Blue = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Blue.jpg");
-        //byte[] image13Midnight = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Midnight.jpg");
-        //byte[] image13Red = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Red.jpg");
-        //byte[] image13Starlight = System.IO.File.ReadAllBytes(@"C:\Users\rareb\Desktop\images\13Starlight.jpg");
-
         var phones = new List<Phone>
-            {
-                // new Phone{ Price = 1000, Amount = 30, BrandId = "Apple", 
-                //            Model = "IPhone 11", Memory = 256, Image = imageI11 },
-                // new Phone{ Price = 1500, Amount = 25, BrandId = "Samsung", 
-                //            Model = "Galaxy 25", Memory = 512, Image = imageSas },
-                // new Phone{ Price = 200, Amount = 99, BrandId = "Xiaomi", 
-                //            Memory = 32, Image = imageXi },
+        {
+            new Phone{ Price = 700, Amount = 32, Brand = apple, Specifications = specs13,
+                       Model = iphone11, Memory = 128, Color = pink, Image = image13Pink },
+            new Phone{ Price = 750, Amount = 0, Brand = apple, Specifications = specs13,
+                       Model = iphone11, Memory = 256, Color = pink, Image = image13Pink },
+            new Phone{ Price = 810, Amount = 8, Brand = apple, Specifications = specs13,
+                       Model = iphone11, Memory = 512, Color = pink, Image = image13Pink },
 
                 new Phone{ Price = 980, Amount = 32, Brand = apple, Specifications = specs13,
                            Model = iphone13, Memory = 128, Color = pink, Image = image13Pink },
@@ -201,7 +193,7 @@ public class DbInitializer
                 new Phone{ Price = 1200, Amount = 10, Brand = apple, Specifications = specs13,
                            Model = iphone13, Memory = 512, Color = starlight, Image = image13Starlight },
 
-            };
+        };
 
         foreach (var p in phones)
         {
