@@ -1,5 +1,7 @@
-﻿using Store.DAL.DataInitializer;
+﻿using Microsoft.AspNetCore.Identity;
+using Store.DAL.DataInitializer;
 using Store.DAL.EF;
+using Store.DAL.Entities.Identity;
 
 namespace Store.BLL.DbInitialization
 {
@@ -12,6 +14,13 @@ namespace Store.BLL.DbInitialization
                 DbInitializer.Delete(context);
                 DbInitializer.Initialize(context);
             }
+        }
+
+        public async Task InitializeRoles(IServiceProvider services)
+        {
+            var userManager = (UserManager<User>)services.GetService(typeof(UserManager<User>));
+            var roleManager = (RoleManager<IdentityRole>)services.GetService(typeof(RoleManager<IdentityRole>));
+            await RoleInitializer.InitializeAsync(userManager, roleManager);
         }
     }
 }

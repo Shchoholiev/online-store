@@ -17,7 +17,13 @@ public interface IPhoneService
     IEnumerable<PhoneDTO> GetAll(Expression<Func<Phone, bool>> predicate,
                     params Expression<Func<Phone, object>>[] includeProperties);
 
-    public IEnumerable<PhoneDTO> GetPage(int pageSize, int pageNumber);
+    IEnumerable<PhoneDTO> GetPage(int pageSize, int pageNumber);
 
-    public int GetCount();
+    IEnumerable<PhoneDTO> GetPageWithAdditionalItem(int pageSize, int pageNumber);
+
+    int GetCount();
+
+    void Edit(PhoneDTO phoneDTO);
+
+    void Delete(int id);
 }

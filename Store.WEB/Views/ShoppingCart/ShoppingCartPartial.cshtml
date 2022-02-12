@@ -33,7 +33,7 @@
                       </form>
                       <form asp-controller="ShoppingCart" asp-action="ChangeAmountToNew" asp-route-cartItemId="@cart.Id">
                           <input name="amount" min="1" asp-for="@cart.Amount" style="width:50px"/>
-                      </form>                  
+                      </form>
                       <form asp-controller="ShoppingCart" asp-action="ChangeAmount" 
                             asp-route-cartItemId="@cart.Id" asp-route-amount="1"> 
                           <input type="submit" value="+" class="btn btn-secondary" style="width:50px">

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
 using Store.Infrastructure;
@@ -21,7 +22,7 @@ namespace Store.Controllers
         // GET: Phones
         public ActionResult Index(PageParameters pageParameters)
         {
-            var phoneDtos = this._phoneService.GetPage(pageParameters.PageSize, pageParameters.PageNumber);
+            var phoneDtos = this._phoneService.GetPageWithAdditionalItem(pageParameters.PageSize, pageParameters.PageNumber);
             var count = this._phoneService.GetCount();
             var phoneViewModels = _mapper.Map(phoneDtos);
             var pagedPhones = new PagedList<PhoneViewModel>(phoneViewModels, pageParameters, count);
@@ -55,7 +56,43 @@ namespace Store.Controllers
         
             return View(modelList);
         }
-        //
+
+        [Authorize(Roles = "admin")]
+        [HttpGet]
+        public ActionResult EditPanel(PageParameters pageParameters)
+        {
+            var phoneDtos = this._phoneService.GetPage(pageParameters.PageSize, pageParameters.PageNumber);
+            var count = this._phoneService.GetCount();
+            var phoneViewModels = _mapper.Map(phoneDtos);
+            var pagedPhones = new PagedList<PhoneViewModel>(phoneViewModels, pageParameters, count);
+
+            return View("EditPhones", pagedPhones);
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult Edit([Bind("Id,Brand,Model,Image,Color,ColorHex,Memory,Amount,Price")] PhoneDTO phone)
+        {
+            this._phoneService.Edit(phone);
+            return RedirectToAction("EditPanel");
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var phone = this._mapper.Map(this._phoneService.GetItem(id, p => p.Specifications));
+            return View(phone);
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult Delete(int id)
+        {
+            this._phoneService.Delete(id);
+            return RedirectToAction("EditPanel");
+        }
+
+
         // // GET: Phones/Create
         // public IActionResult Create()
         // {

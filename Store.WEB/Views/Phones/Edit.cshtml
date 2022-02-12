@@ -1,68 +1,64 @@
-﻿@model Store.DAL.Entities.Phone.Phone
+﻿@using Store.Infrastructure
+@model Store.ViewModels.PhoneViewModel
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-@* *@
-@* <h4>Phone</h4> *@
-@* <hr /> *@
-@* <div class="row"> *@
-@*     <div class="col-md-4"> *@
-@*         <form asp-action="Edit"> *@
-@*             <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
-@*             <div class="form-group"> *@
-@*                 <label asp-for="Make" class="control-label"></label> *@
-@*                 <input asp-for="Make" class="form-control" /> *@
-@*                 <span asp-validation-for="Make" class="text-danger"></span> *@
-@*             </div> *@
-@*             <div class="form-group"> *@
-@*                 <label asp-for="Model" class="control-label"></label> *@
-@*                 <input asp-for="Model" class="form-control" /> *@
-@*                 <span asp-validation-for="Model" class="text-danger"></span> *@
-@*             </div> *@
-@*             <div class="form-group"> *@
-@*                 <label asp-for="Memory" class="control-label"></label> *@
-@*                 <input asp-for="Memory" class="form-control" /> *@
-@*                 <span asp-validation-for="Memory" class="text-danger"></span> *@
-@*             </div> *@
-@*             <div class="form-group"> *@
-@*                 <label asp-for="Color" class="control-label"></label> *@
-@*                 <input asp-for="Color" class="form-control" /> *@
-@*                 <span asp-validation-for="Color" class="text-danger"></span> *@
-@*             </div> *@
-@*             <div class="form-group"> *@
-@*                 <label asp-for="ColorHex" class="control-label"></label> *@
-@*                 <input asp-for="ColorHex" class="form-control" /> *@
-@*                 <span asp-validation-for="ColorHex" class="text-danger"></span> *@
-@*             </div> *@
-@*             <div class="form-group"> *@
-@*                 <label asp-for="Price" class="control-label"></label> *@
-@*                 <input asp-for="Price" class="form-control" /> *@
-@*                 <span asp-validation-for="Price" class="text-danger"></span> *@
-@*             </div> *@
-@*             <div class="form-group"> *@
-@*                 <label asp-for="Amount" class="control-label"></label> *@
-@*                 <input asp-for="Amount" class="form-control" /> *@
-@*                 <span asp-validation-for="Amount" class="text-danger"></span> *@
-@*             </div> *@
-@*             <div class="form-group"> *@
-@*                 <label asp-for="Image" class="control-label"></label> *@
-@*                 <input asp-for="Image" class="form-control" /> *@
-@*                 <span asp-validation-for="Image" class="text-danger"></span> *@
-@*             </div> *@
-@*             <input type="hidden" asp-for="Id" /> *@
-@*             <div class="form-group"> *@
-@*                 <input type="submit" value="Save" class="btn btn-primary" /> *@
-@*             </div> *@
-@*         </form> *@
-@*     </div> *@
-@* </div> *@
-@* *@
-@* <div> *@
-@*     <a asp-action="Index">Back to List</a> *@
-@* </div> *@
+<h4>Phone Editing</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-route-id="@Model.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control"/>
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control"/>
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control"/>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Color" class="control-label"></label>
+                <input asp-for="Color" class="form-control"/>
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ColorHex" class="control-label"></label>
+                <input asp-for="ColorHex" class="form-control"/>
+                <span asp-validation-for="ColorHex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Memory" class="control-label"></label>
+                <input asp-for="Memory" class="form-control"/>
+                <span asp-validation-for="Memory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control"/>
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control"/>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="d-flex flex-row my-2">
+                <input type="submit" class="btn-primary btn" value="Save Changes"/>
+                <a asp-action="EditPhones" class="btn-danger btn">Cancel</a>
+            </div>            
+        </form>        
+    </div>
+</div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

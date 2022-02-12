@@ -32,6 +32,13 @@
 
 <h3>Phones</h3>
 
+@if (User.IsInRole("admin"))
+{
+    <form method="get" asp-action="EditPanel">
+        <input type="submit" class="btn btn-primary" value="Edit"/>
+    </form>
+}
+
 <div class="d-flex flex-wrap">
     @{
         var end = (Model.PageNumber * Model.PageSize > Model.TotalItems)

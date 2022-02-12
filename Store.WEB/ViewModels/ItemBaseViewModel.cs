@@ -12,6 +12,10 @@ public class ItemBaseViewModel : EntityBaseViewModel
 
     public string Image { get; set; }
 
+    public string Color { get; set; }
+
+    public string ColorHex { get; set; }
+
     public virtual string GetFullName()
     {
         return $"{Brand} {Model}";

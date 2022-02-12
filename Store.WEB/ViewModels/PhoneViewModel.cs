@@ -3,10 +3,6 @@
     public partial class PhoneViewModel : ItemBaseViewModel
     {    
         public ushort Memory { get; set; }
-    
-        public string Color { get; set; }
-    
-        public string ColorHex { get; set; }
         
         public double Diagonal { get; set; }
     

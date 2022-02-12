@@ -79,6 +79,7 @@ public class DbInitializer
         var image13Midnight = new Image() { Link = "https://firebasestorage.googleapis.com/v0/b/store-4a733.appspot.com/o/13Midnight.jpg?alt=media&token=62808164-6f10-44fa-b545-76e375b03974" };
         var image13Red = new Image() { Link = "https://firebasestorage.googleapis.com/v0/b/store-4a733.appspot.com/o/13Red.jpg?alt=media&token=68f88097-a882-4665-8a6d-9667956e7403" };
         var image13Starlight = new Image() { Link = "https://firebasestorage.googleapis.com/v0/b/store-4a733.appspot.com/o/13Starlight.jpg?alt=media&token=c4746048-61e7-4632-a50d-66226da193de" };
+        var image11Red = new Image() { Link = "https://firebasestorage.googleapis.com/v0/b/store-4a733.appspot.com/o/11Red.jpg?alt=media&token=ad6aac76-3b97-4470-98d9-0932511710f8" };
 
         var images = new List<Image>()
         {
@@ -152,11 +153,11 @@ public class DbInitializer
         var phones = new List<Phone>
         {
             new Phone{ Price = 700, Amount = 32, Brand = apple, Specifications = specs13,
-                       Model = iphone11, Memory = 128, Color = pink, Image = image13Pink },
+                       Model = iphone11, Memory = 128, Color = red, Image = image11Red },
             new Phone{ Price = 750, Amount = 0, Brand = apple, Specifications = specs13,
-                       Model = iphone11, Memory = 256, Color = pink, Image = image13Pink },
+                       Model = iphone11, Memory = 256, Color = red, Image = image11Red },
             new Phone{ Price = 810, Amount = 8, Brand = apple, Specifications = specs13,
-                       Model = iphone11, Memory = 512, Color = pink, Image = image13Pink },
+                       Model = iphone11, Memory = 512, Color = red, Image = image11Red },
 
                 new Phone{ Price = 980, Amount = 32, Brand = apple, Specifications = specs13,
                            Model = iphone13, Memory = 128, Color = pink, Image = image13Pink },

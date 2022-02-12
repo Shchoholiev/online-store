@@ -3,6 +3,7 @@ using Store.BLL.DTO;
 using Store.BLL.DTO.OrdersDTO;
 using Store.DAL.Entities.Base;
 using Store.DAL.Entities.Identity;
+using Store.DAL.Entities.ItemProperties;
 using Store.DAL.Entities.Orders;
 using Store.DAL.Entities.Phone;
 
@@ -32,6 +33,16 @@ namespace Store.BLL.Mappers
                 opt => opt.MapFrom(src => src.Color.Hex))
             .ForMember(dest => dest.Image,
                 opt => opt.MapFrom(src => src.Image.Link));
+
+            cfg.CreateMap<PhoneDTO, Phone>()
+            .ForMember(dest => dest.Brand,
+                opt => opt.MapFrom(src => new Brand { Name = src.Brand }))
+            .ForMember(dest => dest.Model,
+                opt => opt.MapFrom(src => new Model { Name = src.Model }))
+            .ForMember(dest => dest.Color,
+                opt => opt.MapFrom(src => new Color { Name = src.Color, Hex = src.ColorHex }))
+            .ForMember(dest => dest.Image,
+                opt => opt.MapFrom(src => new Image { Link = src.Image }));
 
             cfg.CreateMap<OrderDTO, Order>()
                 .ForMember(dest => dest.Delivery,
@@ -103,6 +114,11 @@ namespace Store.BLL.Mappers
         public PhoneDTO Map(Phone source)
         {
             return this._mapper.Map<PhoneDTO>(source);
+        }
+
+        public Phone Map(PhoneDTO source)
+        {
+            return this._mapper.Map<Phone>(source);
         }
 
         public IEnumerable<PhoneDTO> Map(IEnumerable<Phone> source)

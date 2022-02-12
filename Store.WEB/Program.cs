@@ -58,6 +58,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await dbInitializer.InitializeRoles(services);
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -73,6 +79,13 @@ app.UseEndpoints(endpoints =>
         areaName: "Identity",
         pattern: "Identity/{controller=Home}/{action=Index}/{id?}"
         );
+
+    endpoints.MapAreaControllerRoute(
+        name: "AdminArea",
+        areaName: "Admin",
+        pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
+        );
+
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}"

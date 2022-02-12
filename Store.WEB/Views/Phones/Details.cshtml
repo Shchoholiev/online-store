@@ -8,12 +8,10 @@
 
 @{
     var memories = Model.OrderBy(p => p.Memory)
-                   .Where(p => p.Color == phone.Color)
-                   .Select(p => p);
+                   .Where(p => p.Color == phone.Color);
 
     var colors = Model.OrderBy(p => p.Color)
                  .Where(p => p.Memory == phone.Memory)
-                 .Select(p => p)
                  .DistinctBy(p => p.Color);
 }
 
@@ -61,6 +59,13 @@
     }
  
 </style>
+
+@if (User.IsInRole("admin"))
+{
+    <form method="get" asp-action="Edit" asp-route-id="@phone.Id">
+        <input type="submit" class="btn btn-primary" value="Edit"/>
+    </form>
+}
 
 <div>
     <h6 class="mb-4 fw-normal">

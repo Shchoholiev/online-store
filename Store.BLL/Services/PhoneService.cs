@@ -48,6 +48,11 @@ public class PhoneService : IPhoneService
 
     public IEnumerable<PhoneDTO> GetPage(int pageSize, int pageNumber)
     {
+        return this._mapper.Map(this._repository.GetPage(pageSize, pageNumber));
+    }
+
+    public IEnumerable<PhoneDTO> GetPageWithAdditionalItem(int pageSize, int pageNumber)
+    {
         var page = this._repository.GetPage(pageSize, pageNumber).ToList();
 
         var phoneModels = new List<string>();
@@ -75,5 +80,20 @@ public class PhoneService : IPhoneService
     public int GetCount()
     {
         return this._repository.GetCount();
+    }
+
+    public void Edit(PhoneDTO phoneDTO)
+    {
+        var phone = this._repository.GetItem(phoneDTO.Id);
+
+        phone.Amount = phoneDTO.Amount;
+        phone.Price = phoneDTO.Price;
+
+        this._repository.Update(phone);
+    }
+
+    public void Delete(int id)
+    {
+        this._repository.Delete(id);
     }
 }
