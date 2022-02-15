@@ -5,6 +5,7 @@ using Store.BLL.Interfaces;
 using Store.Infrastructure;
 using Store.ViewMappers;
 using Store.ViewModels;
+using Store.ViewModels.Phone;
 
 namespace Store.Controllers
 {
@@ -29,8 +30,9 @@ namespace Store.Controllers
 
             return View(pagedPhones);
         }
-        
+
         // GET: Phones/Details/5
+        [HttpGet]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -45,8 +47,8 @@ namespace Store.Controllers
                 return NotFound();
             }
 
-            var phones = _phoneService.GetAll(p => p.Brand.Name == phone.Brand 
-                                                && p.Model.Name == phone.Model 
+            var phones = _phoneService.GetAll(p => p.Brand.Name == phone.Brand.Name
+                                                && p.Model.Name == phone.Model.Name
                                                 && p.Id != phone.Id);
 
             var model = _mapper.Map(phone);
@@ -71,21 +73,34 @@ namespace Store.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult Edit([Bind("Id,Brand,Model,Image,Color,ColorHex,Memory,Amount,Price")] PhoneDTO phone)
+        public ActionResult EditPartial(int id, int amount, int price, PageParameters pageParameters)
         {
-            this._phoneService.Edit(phone);
-            return RedirectToAction("EditPanel");
+            this._phoneService.Edit(id, amount, price);
+            return RedirectToAction("EditPanel", pageParameters);
         }
 
         [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var phone = this._mapper.Map(this._phoneService.GetItem(id, p => p.Specifications));
+            var phone = this._mapper.MapForEdit(this._phoneService.GetItem(id, p => p.Specifications));
+            phone.Brands = this._mapper.Map(this._phoneService.GetBrands());
+            phone.Models = this._mapper.Map(this._phoneService.GetModels());
+            phone.Colors = this._mapper.Map(this._phoneService.GetColors());
+
             return View(phone);
         }
 
         [Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult Edit([Bind("Id,Brand,Model,Image,Color,Memory,Specifications,Amount,Price")] PhoneDTO phone)
+        {
+            this._phoneService.Edit(phone);
+            return RedirectToAction("Details", new { id = phone.Id });
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpDelete]
         public ActionResult Delete(int id)
         {
             this._phoneService.Delete(id);

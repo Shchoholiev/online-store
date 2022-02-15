@@ -21,5 +21,7 @@ public class Order : EntityBase
 
     public bool IsPaid { get; set; }
 
+    public OrderStatus Status { get; set; }
+
     public string? Details { get; set; }
 }

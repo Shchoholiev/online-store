@@ -1,5 +1,5 @@
 ﻿@using Store.Infrastructure
-@model PagedList<Store.ViewModels.PhoneViewModel>
+@model PagedList<Store.ViewModels.Phone.PhoneViewModel>
 
 @{
     ViewData["Title"] = "Phones";
@@ -52,7 +52,7 @@
         class="bg-white m-1 p-3 d-flex flex-column justify-content-between">
             <div class="mw-100 m-3 d-flex justify-content-around">
                 <a asp-action="Details" asp-route-id="@p.Id">
-                    <img class="mw-100" style="height: 160px" src="@p.Image"/>
+                    <img class="mw-100" style="height: 160px" src="@p.Images.FirstOrDefault().Link"/>
                 </a>
             </div>
 
@@ -63,7 +63,7 @@
                     string style = (c.Id == p.Id) ? "border-color: #007BFF; border-width: 1.5px" : "";
                     <a asp-action="Details" asp-route-id="@c.Id" title="@c.Color">
                         <div class="d-flex flex-column align-items-center mx-1">
-                            <div class="color-circle" style="background:#@c.ColorHex; @style"></div>
+                            <div class="color-circle" style="background:@c.ColorHex; @style"></div>
                         </div>
                     </a>
                 }

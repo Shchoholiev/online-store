@@ -51,12 +51,12 @@ public class DbInitializer
         }
         context.SaveChanges();
 
-        var pink = new Color() { Name = "Pink", Hex = "fbe2dd" };
-        var blue = new Color() { Name = "Blue", Hex = "437791" };
-        var midnight = new Color() { Name = "Midnight", Hex = "42474d" };
-        var red = new Color() { Name = "Red", Hex = "c82332" };
-        var starlight = new Color() { Name = "Starlight", Hex = "fbf7f4" };
-        var grey = new Color() { Name = "Grey", Hex = "333333" };
+        var pink = new Color() { Name = "Pink", Hex = "#fbe2dd" };
+        var blue = new Color() { Name = "Blue", Hex = "#437791" };
+        var midnight = new Color() { Name = "Midnight", Hex = "#42474d" };
+        var red = new Color() { Name = "Red", Hex = "#c82332" };
+        var starlight = new Color() { Name = "Starlight", Hex = "#fbf7f4" };
+        var grey = new Color() { Name = "Grey", Hex = "#333333" };
 
         var colors = new List<Color>()
         {
@@ -153,46 +153,46 @@ public class DbInitializer
         var phones = new List<Phone>
         {
             new Phone{ Price = 700, Amount = 32, Brand = apple, Specifications = specs13,
-                       Model = iphone11, Memory = 128, Color = red, Image = image11Red },
+                       Model = iphone11, Memory = 128, Color = red, Images = new List<Image> { image11Red } },
             new Phone{ Price = 750, Amount = 0, Brand = apple, Specifications = specs13,
-                       Model = iphone11, Memory = 256, Color = red, Image = image11Red },
+                       Model = iphone11, Memory = 256, Color = red, Images = new List<Image> { image11Red } },
             new Phone{ Price = 810, Amount = 8, Brand = apple, Specifications = specs13,
-                       Model = iphone11, Memory = 512, Color = red, Image = image11Red },
+                       Model = iphone11, Memory = 512, Color = red, Images = new List<Image> { image11Red } },
 
                 new Phone{ Price = 980, Amount = 32, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 128, Color = pink, Image = image13Pink },
+                           Model = iphone13, Memory = 128, Color = pink, Images = new List<Image> { image13Pink } },
                 new Phone{ Price = 1080, Amount = 0, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 256, Color = pink, Image = image13Pink },
+                           Model = iphone13, Memory = 256, Color = pink, Images = new List<Image> { image13Pink } },
                 new Phone{ Price = 1170, Amount = 8, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 512, Color = pink, Image = image13Pink },
+                           Model = iphone13, Memory = 512, Color = pink, Images = new List<Image> { image13Pink } },
 
                 new Phone{ Price = 970, Amount = 10, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 128, Color = blue, Image = image13Blue },
+                           Model = iphone13, Memory = 128, Color = blue, Images = new List<Image> { image13Blue } },
                 new Phone{ Price = 1070, Amount = 10, Brand = apple, Specifications = specs13, 
-                           Model = iphone13, Memory = 256, Color = blue, Image = image13Blue },
+                           Model = iphone13, Memory = 256, Color = blue, Images = new List<Image> { image13Blue } },
                 new Phone{ Price = 1200, Amount = 0, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 512, Color = blue, Image = image13Blue },
+                           Model = iphone13, Memory = 512, Color = blue, Images = new List<Image> { image13Blue } },
 
                 new Phone{ Price = 990, Amount = 0, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 128, Color = midnight, Image = image13Midnight },
+                           Model = iphone13, Memory = 128, Color = midnight, Images = new List<Image> { image13Midnight } },
                 new Phone{ Price = 1100, Amount = 0, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 256, Color = midnight, Image = image13Midnight },
+                           Model = iphone13, Memory = 256, Color = midnight, Images = new List<Image> { image13Midnight } },
                 new Phone{ Price = 1220, Amount = 0, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 512, Color = midnight, Image = image13Midnight },
+                           Model = iphone13, Memory = 512, Color = midnight, Images = new List<Image> { image13Midnight } },
 
                 new Phone{ Price = 970, Amount = 10, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 128, Color = red, Image = image13Red },
+                           Model = iphone13, Memory = 128, Color = red, Images = new List<Image> { image13Red } },
                 new Phone{ Price = 1090, Amount = 0, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 256, Color = red, Image = image13Red },
+                           Model = iphone13, Memory = 256, Color = red, Images = new List<Image> { image13Red } },
                 new Phone{ Price = 1190, Amount = 10, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 512, Color = red, Image = image13Red },
+                           Model = iphone13, Memory = 512, Color = red, Images = new List<Image> { image13Red } },
 
                 new Phone{ Price = 960, Amount = 0, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 128, Color = starlight, Image = image13Starlight },
+                           Model = iphone13, Memory = 128, Color = starlight, Images = new List<Image> { image13Starlight } },
                 new Phone{ Price = 1070, Amount = 10, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 256, Color = starlight, Image = image13Starlight },
+                           Model = iphone13, Memory = 256, Color = starlight, Images = new List<Image> { image13Starlight } },
                 new Phone{ Price = 1200, Amount = 10, Brand = apple, Specifications = specs13,
-                           Model = iphone13, Memory = 512, Color = starlight, Image = image13Starlight },
+                           Model = iphone13, Memory = 512, Color = starlight, Images = new List<Image> { image13Starlight } },
 
         };
 
@@ -228,6 +228,20 @@ public class DbInitializer
         }
         context.SaveChanges();
 
+        var orderStatuses = new List<OrderStatus>
+        {
+            new OrderStatus { Name = "Processing" },
+            new OrderStatus { Name = "Sent" },
+            new OrderStatus { Name = "Delivered" },
+            new OrderStatus { Name = "Received" },
+            new OrderStatus { Name = "Canceled" },
+        };
+
+        foreach (var o in orderStatuses)
+        {
+            context.OrderStatuses.Add(o);
+        }
+        context.SaveChanges();
     }
 
     public static void Delete(StoreContext context)

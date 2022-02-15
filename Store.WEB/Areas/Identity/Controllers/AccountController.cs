@@ -78,6 +78,12 @@ public class AccountController : Controller
             {
                 this.SetCookies(result.Messages.FirstOrDefault());
                 //this.CookiesCartToDatabase(result.Messages.LastOrDefault());
+
+                //if (User.IsInRole("admin"))
+                //{
+                //    return RedirectToAction("Index", "Admin");
+                //}
+
                 return Redirect(model.ReturnUrl);
             }
             else

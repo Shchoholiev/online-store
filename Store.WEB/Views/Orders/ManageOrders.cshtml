@@ -1,0 +1,83 @@
+﻿@using Store.Infrastructure
+@model PagedList<Store.ViewModels.OrderViewModel>
+
+@{
+    ViewData["Title"] = "Manage Orders";
+}
+
+<h3>Orders</h3>
+
+<div class="container p-4 card">
+    <div class="row">
+        <h6 class="col">Number</h6>
+        <h6 class="col">Delivery</h6>
+        <h6 class="col-2">Delivery Address</h6>
+        <h6 class="col">Payment</h6>
+        <h6 class="col">Total Price</h6>
+        <h6 class="col">Status</h6>
+        <h6 class="col"></h6>
+    </div>
+
+    <hr />
+
+    @foreach (var order in Model)
+    {
+        <form asp-action="Edit" asp-route-id="@order.Id" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <a asp-action="Edit" asp-route-id="@order.Id" class="col">@order.Id</a>
+            <select asp-for="@order.Delivery" name="Delivery" class="col form-select" style="height:40px">
+                <option value="1">In Store</option>
+                <option value="2">NovaPoshta</option>
+                <option value="3">UkrPoshta</option>
+                <option value="4">Justin</option>
+            </select>
+            <div class="col-2">
+                <input name="DeliveryAddress" asp-for="@order.DeliveryAddress" class="form-control" />
+                <span asp-validation-for="@order.DeliveryAddress" class="text-danger"></span>
+            </div>            
+            <select asp-for="@order.Payment" name="Payment" class="col form-select" style="height:40px">
+                <option value="1">Cash</option>
+                <option value="2">Card</option>
+            </select>
+            <div class="col">
+                <input asp-for="@order.TotalPrice" class="form-control"/>
+                <span asp-validation-for="@order.TotalPrice" class="text-danger"></span>
+            </div>
+            <select asp-for="@order.Status" name="Status" class="col form-select" style="height:40px">
+                <option value="1">Processing</option>
+                <option value="2">Sent</option>
+                <option value="3">Delivered</option>
+                <option value="4">Received</option>
+                <option value="4">Canceled</option>
+            </select>
+            <div class="col">
+                <input type="submit" class="btn btn-secondary col" value="Save Changes">
+            </div>
+        </form>
+        <hr />
+    }
+</div>
+
+@{
+    var previousPage = (Model.HasPreviousPage) ? "" : "disabled";
+    var previousPageNumber = Model.PageNumber - 1;
+    var nextPage = (Model.HasNextPage) ? "" : "disabled";
+    var nextPageNumber = Model.PageNumber + 1;
+}
+<nav class=mt-3>
+    <ul class="pagination justify-content-center">
+        <li class="page-item @previousPage">
+            <a asp-action="ManageOrders" asp-route-PageNumber="@previousPageNumber" class="page-link">Previous</a>
+        </li>
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            string linkStatus = (i == Model.PageNumber) ? "active" : "";
+            <li class="page-item @linkStatus">
+                <a asp-action="ManageOrders" asp-route-PageNumber="@i" class="page-link">@i</a>
+            </li>
+        }
+        <li class="page-item @nextPage">
+            <a asp-action="ManageOrders" asp-route-PageNumber="@nextPageNumber" class="page-link">Next</a>
+        </li>
+    </ul>
+</nav>

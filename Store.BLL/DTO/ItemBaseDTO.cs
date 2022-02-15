@@ -1,4 +1,6 @@
-﻿namespace Store.BLL.DTO;
+﻿using Store.BLL.DTO.ItemsProperties;
+
+namespace Store.BLL.DTO;
 
 public class ItemBaseDTO : EntityBaseDTO
 {
@@ -6,13 +8,11 @@ public class ItemBaseDTO : EntityBaseDTO
 
     public int Amount { get; set; }
 
-    public string Image { get; set; }
+    public List<ImageDTO> Images { get; set; }
 
-    public string Brand { get; set; }
+    public BrandDTO Brand { get; set; }
 
-    public string Model { get; set; }
+    public ModelDTO Model { get; set; }
 
-    public string Color { get; set; }
-
-    public string ColorHex { get; set; }
+    public ColorDTO Color { get; set; }
 }

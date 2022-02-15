@@ -18,7 +18,7 @@
           <tr>
               <td>@cart.Id</td>
               <td style="width:100px; height:100px">
-                   <img style="height: 100px" src="@cart.Item.Image"/>
+                   <img style="height: 100px" src="@cart.Item.Images.FirstOrDefault().Link"/>
               </td>
               <td>@cart.Item.Id</td>
               <td>@cart.Item.Brand</td>

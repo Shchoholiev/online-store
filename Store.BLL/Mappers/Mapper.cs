@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Store.BLL.DTO;
+using Store.BLL.DTO.ItemsProperties;
 using Store.BLL.DTO.OrdersDTO;
 using Store.DAL.Entities.Base;
 using Store.DAL.Entities.Identity;
@@ -22,57 +23,68 @@ namespace Store.BLL.Mappers
                 opt => opt.MapFrom(src => src.Name));
 
             cfg.CreateMap<PhoneSpecifications, PhoneSpecificationsDTO>();
-            cfg.CreateMap<Phone, PhoneDTO>()
-            .ForMember(dest => dest.Brand,
-                opt => opt.MapFrom(src => src.Brand.Name))
-            .ForMember(dest => dest.Model,
-                opt => opt.MapFrom(src => src.Model.Name))
-            .ForMember(dest => dest.Color,
-                opt => opt.MapFrom(src => src.Color.Name))
-            .ForMember(dest => dest.ColorHex,
-                opt => opt.MapFrom(src => src.Color.Hex))
-            .ForMember(dest => dest.Image,
-                opt => opt.MapFrom(src => src.Image.Link));
-
-            cfg.CreateMap<PhoneDTO, Phone>()
-            .ForMember(dest => dest.Brand,
-                opt => opt.MapFrom(src => new Brand { Name = src.Brand }))
-            .ForMember(dest => dest.Model,
-                opt => opt.MapFrom(src => new Model { Name = src.Model }))
-            .ForMember(dest => dest.Color,
-                opt => opt.MapFrom(src => new Color { Name = src.Color, Hex = src.ColorHex }))
-            .ForMember(dest => dest.Image,
-                opt => opt.MapFrom(src => new Image { Link = src.Image }));
+            cfg.CreateMap<Phone, PhoneDTO>();
+            //.ForMember(dest => dest.Brand,
+            //    opt => opt.MapFrom(src => src.Brand.Name))
+            //.ForMember(dest => dest.Model,
+            //    opt => opt.MapFrom(src => src.Model.Name))
+            //.ForMember(dest => dest.Color,
+            //    opt => opt.MapFrom(src => src.Color.Name))
+            //.ForMember(dest => dest.ColorHex,
+            //    opt => opt.MapFrom(src => src.Color.Hex))
+            //.ForMember(dest => dest.Image,
+            //    opt => opt.MapFrom(src => src.Image.Link));
 
             cfg.CreateMap<OrderDTO, Order>()
                 .ForMember(dest => dest.Delivery,
                 opt => opt.MapFrom(src => new DeliveryOption { Id = src.Delivery }))
                 .ForMember(dest => dest.Payment,
-                opt => opt.MapFrom(src => new PaymentOption { Id = src.Payment }));
+                opt => opt.MapFrom(src => new PaymentOption { Id = src.Payment }))
+                .ForMember(dest => dest.Status,
+                opt => opt.MapFrom(src => new OrderStatus { Id = src.Status }));
 
             cfg.CreateMap<ItemBaseDTO, ItemBase>()
             .ForMember(dest => dest.Brand, opt => opt.Ignore())
             .ForMember(dest => dest.Model, opt => opt.Ignore())
             .ForMember(dest => dest.Color, opt => opt.Ignore())
-            .ForMember(dest => dest.Image, opt => opt.Ignore());
+            .ForMember(dest => dest.Images, opt => opt.Ignore());
 
-            cfg.CreateMap<ItemBase, ItemBaseDTO>()
-            .ForMember(dest => dest.Brand,
-                opt => opt.MapFrom(src => src.Brand.Name))
-            .ForMember(dest => dest.Model,
-                opt => opt.MapFrom(src => src.Model.Name))
-            .ForMember(dest => dest.Color,
-                opt => opt.MapFrom(src => src.Color.Name))
-            .ForMember(dest => dest.ColorHex,
-                opt => opt.MapFrom(src => src.Color.Hex))
-            .ForMember(dest => dest.Image,
-                opt => opt.MapFrom(src => src.Image.Link));
+            cfg.CreateMap<ItemBase, ItemBaseDTO>();
+            //.ForMember(dest => dest.Brand,
+            //    opt => opt.MapFrom(src => src.Brand.Name))
+            //.ForMember(dest => dest.Model,
+            //    opt => opt.MapFrom(src => src.Model.Name))
+            //.ForMember(dest => dest.Color,
+            //    opt => opt.MapFrom(src => src.Color.Name))
+            //.ForMember(dest => dest.ColorHex,
+            //    opt => opt.MapFrom(src => src.Color.Hex))
+            //.ForMember(dest => dest.Image,
+            //    opt => opt.MapFrom(src => src.Image.Link));
 
             cfg.CreateMap<CartItemDTO, CartItem>();
-
             cfg.CreateMap<Order, OrderDTO>();
-
             cfg.CreateMap<CartItem, CartItemDTO>();
+
+            cfg.CreateMap<Brand, BrandDTO>();
+            cfg.CreateMap<Model, ModelDTO>();
+            cfg.CreateMap<Color, ColorDTO>();
+            cfg.CreateMap<Image, ImageDTO>();
+
+            cfg.CreateMap<BrandDTO, Brand>();
+            cfg.CreateMap<ModelDTO, Model>();
+            cfg.CreateMap<ColorDTO, Color>();
+            cfg.CreateMap<ImageDTO, Image>();
+
+            cfg.CreateMap<PhoneSpecificationsDTO, PhoneSpecifications>();
+            cfg.CreateMap<PhoneDTO, Phone>();
+            //.ForMember(dest => dest.Brand,
+            //    opt => opt.MapFrom(src => new Brand { Name = src.Brand }))
+            //.ForMember(dest => dest.Model,
+            //    opt => opt.MapFrom(src => new Model { Name = src.Model }))
+            //.ForMember(dest => dest.Color,
+            //    opt => opt.MapFrom(src => new Color { Name = src.Color, Hex = src.ColorHex }))
+            //.ForMember(dest => dest.Image,
+            //    opt => opt.MapFrom(src => new Image { Link = src.Image }));
 
         }).CreateMapper();
 
@@ -134,6 +146,21 @@ namespace Store.BLL.Mappers
         public IEnumerable<CartItemDTO> Map(IEnumerable<CartItem> source)
         {
             return this._mapper.Map<IEnumerable<CartItemDTO>>(source);
+        }
+
+        public IEnumerable<BrandDTO> Map(IEnumerable<Brand> source)
+        {
+            return this._mapper.Map<IEnumerable<BrandDTO>>(source);
+        }
+
+        public IEnumerable<ModelDTO> Map(IEnumerable<Model> source)
+        {
+            return this._mapper.Map<IEnumerable<ModelDTO>>(source);
+        }
+
+        public IEnumerable<ColorDTO> Map(IEnumerable<Color> source)
+        {
+            return this._mapper.Map<IEnumerable<ColorDTO>>(source);
         }
     }
 }

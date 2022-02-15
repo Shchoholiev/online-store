@@ -18,6 +18,8 @@
 
         public bool IsPaid { get; set; }
 
+        public int Status { get; set; }
+
         public string? Details { get; set; }
     }
 }

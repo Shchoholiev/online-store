@@ -59,7 +59,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
     public TEntity? GetItem(int? id)
     {
-        return this.GetAll(i => i.Id == id).FirstOrDefault();
+        return this._table.Find(id);
     }
 
     public TEntity? GetItem(int? id, params Expression<Func<TEntity, object>>[] includeProperties)
@@ -69,8 +69,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
     public IEnumerable<TEntity> GetAll()
     {
-        IQueryable<TEntity> query = this._table.AsNoTracking();
-        return this.Include(query);
+        return this._table.AsNoTracking();
     }
 
     public IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includeProperties)

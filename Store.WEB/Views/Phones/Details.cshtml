@@ -1,8 +1,7 @@
-﻿@using Store.ViewModels
-@model List<Store.ViewModels.PhoneViewModel>
+﻿@model List<Store.ViewModels.Phone.PhoneViewModel>
 
 @{
-    PhoneViewModel phone = @Model.FirstOrDefault();
+    var phone = @Model.FirstOrDefault();
     ViewData["Title"] = phone?.GetFullName();
 }
 
@@ -12,7 +11,7 @@
 
     var colors = Model.OrderBy(p => p.Color)
                  .Where(p => p.Memory == phone.Memory)
-                 .DistinctBy(p => p.Color);
+                 .DistinctBy(p => p.ColorHex);
 }
 
 <style>
@@ -80,7 +79,7 @@
         <div class="d-flex flex-row">
         
             <div class="container min-w50 w-50 d-flex justify-content-center">
-                 <img src="@phone.Image" style="max-height: 380px;" class="float-left"/>
+                 <img src="@phone.Images.FirstOrDefault().Link" style="max-height: 380px;" class="float-left"/>
             </div>
 
             <div class="container d-flex flex-column">
@@ -118,7 +117,7 @@
                         if (c.Id == phone.Id)
                         {
                             <div class="d-flex flex-column color align-items-center" style="border-color: #007BFF;">
-                                    <div class="color-circle" style="background:#@c.ColorHex;"></div>
+                                    <div class="color-circle" style="background:@c.ColorHex;"></div>
                                     <h6 class="mb-0 text-primary">@c.Color</h6>
                             </div>
                         } 
@@ -126,7 +125,7 @@
                         {
                             <a asp-action="Details" asp-route-id="@c.Id">
                                 <div class="d-flex flex-column color align-items-center" style="">
-                                    <div class="color-circle" style="background:#@c.ColorHex;"></div>
+                                    <div class="color-circle" style="background:@c.ColorHex;"></div>
                                     <h6 class="mb-0">@c.Color</h6>
                                 </div>
                             </a>

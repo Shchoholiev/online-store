@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using Store.Areas.Identity.ViewModels;
 using Store.BLL.DTO;
+using Store.BLL.DTO.ItemsProperties;
 using Store.BLL.DTO.OrdersDTO;
 using Store.ViewModels;
+using Store.ViewModels.ItemsProperties;
+using Store.ViewModels.Phone;
 
 namespace Store.ViewMappers
 {
@@ -10,10 +13,28 @@ namespace Store.ViewMappers
     {
         private readonly IMapper _mapper = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<ItemBaseDTO, ItemBaseViewModel>();
+            cfg.CreateMap<ItemBaseDTO, ItemBaseViewModel>()
+            .ForMember(dest => dest.Brand,
+                opt => opt.MapFrom(src => src.Brand.Name))
+            .ForMember(dest => dest.Model,
+                opt => opt.MapFrom(src => src.Model.Name))
+            .ForMember(dest => dest.Color,
+                opt => opt.MapFrom(src => src.Color.Name))
+            .ForMember(dest => dest.ColorHex,
+                opt => opt.MapFrom(src => src.Color.Hex));
+
             cfg.CreateMap<CartItemDTO, CartItemViewModel>();
 
-            cfg.CreateMap<PhoneDTO, PhoneViewModel>();
+            cfg.CreateMap<PhoneDTO, PhoneViewModel>()
+            .ForMember(dest => dest.Brand,
+                opt => opt.MapFrom(src => src.Brand.Name))
+            .ForMember(dest => dest.Model,
+                opt => opt.MapFrom(src => src.Model.Name))
+            .ForMember(dest => dest.Color,
+                opt => opt.MapFrom(src => src.Color.Name))
+            .ForMember(dest => dest.ColorHex,
+                opt => opt.MapFrom(src => src.Color.Hex));
+
             cfg.CreateMap<PhoneSpecificationsDTO, PhoneViewModel>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
 
@@ -23,6 +44,23 @@ namespace Store.ViewMappers
             cfg.CreateMap<OrderViewModel, OrderDTO>();
 
             cfg.CreateMap<UserDTO, UserViewModel>();
+
+            cfg.CreateMap<BrandDTO, BrandViewModel>();
+            cfg.CreateMap<ModelDTO, ModelViewModel>();
+            cfg.CreateMap<ColorDTO, ColorViewModel>();
+            cfg.CreateMap<ImageDTO, ImageViewModel>();
+
+            cfg.CreateMap<PhoneDTO, PhoneEditViewModel>()
+            .ForMember(dest => dest.SpecsId,
+                opt => opt.MapFrom(src => src.Specifications.Id))
+            .ForMember(dest => dest.Brand,
+                opt => opt.MapFrom(src => src.Brand.Name))
+            .ForMember(dest => dest.Model,
+                opt => opt.MapFrom(src => src.Model.Name))
+            .ForMember(dest => dest.Color,
+                opt => opt.MapFrom(src => src.Color.Name))
+            .ForMember(dest => dest.ColorHex,
+                opt => opt.MapFrom(src => src.Color.Hex));
 
         }).CreateMapper();
 
@@ -62,6 +100,26 @@ namespace Store.ViewMappers
         public IEnumerable<OrderViewModel> Map(IEnumerable<OrderDTO> source)
         {
             return _mapper.Map<IEnumerable<OrderViewModel>>(source);
+        }
+
+        public IEnumerable<BrandViewModel> Map(IEnumerable<BrandDTO> source)
+        {
+            return _mapper.Map<IEnumerable<BrandViewModel>>(source);
+        }
+
+        public IEnumerable<ModelViewModel> Map(IEnumerable<ModelDTO> source)
+        {
+            return _mapper.Map<IEnumerable<ModelViewModel>>(source);
+        }
+
+        public IEnumerable<ColorViewModel> Map(IEnumerable<ColorDTO> source)
+        {
+            return _mapper.Map<IEnumerable<ColorViewModel>>(source);
+        }
+
+        public PhoneEditViewModel MapForEdit(PhoneDTO source)
+        {
+            return _mapper.Map<PhoneEditViewModel>(source);
         }
     }
 }

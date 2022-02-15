@@ -32,6 +32,9 @@ public class StoreContext : IdentityDbContext
             .HasOne<Model>(i => i.Model);
         modelBuilder.Entity<ItemBase>()
             .HasOne<Color>(i => i.Color);
+        modelBuilder.Entity<ItemBase>()
+            .HasMany<Image>(i => i.Images)
+            .WithMany(i => i.Item);
 
         modelBuilder.Entity<CartItem>()
             .HasOne(c => c.User)
@@ -70,6 +73,8 @@ public class StoreContext : IdentityDbContext
     public DbSet<DeliveryOption> DeliveryOptions { get; set; }
 
     public DbSet<PaymentOption> PaymentOptions { get; set; }
+
+    public DbSet<OrderStatus> OrderStatuses { get; set; }
 
     public DbSet<Order> Orders { get; set; }
 

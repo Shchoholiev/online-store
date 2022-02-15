@@ -5,5 +5,7 @@ namespace Store.DAL.Entities.ItemProperties
     public class Image : EntityBase
     {
         public string Link { get; set; }
+
+        public List<ItemBase> Item { get; set; }
     }
 }

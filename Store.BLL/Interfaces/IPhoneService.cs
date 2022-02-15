@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Store.BLL.DTO;
+using Store.BLL.DTO.ItemsProperties;
 using Store.DAL.Entities.Phone;
 
 namespace Store.BLL.Interfaces;
@@ -23,7 +24,16 @@ public interface IPhoneService
 
     int GetCount();
 
+    void Edit(int id, int amount, int price);
+
     void Edit(PhoneDTO phoneDTO);
 
     void Delete(int id);
+
+    IEnumerable<BrandDTO> GetBrands();
+
+    IEnumerable<ModelDTO> GetModels();
+
+    IEnumerable<ColorDTO> GetColors();
+
 }

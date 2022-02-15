@@ -57,7 +57,7 @@ namespace Store.BLL.Services
                 _orderRepository.Attach(cart, item);
             }
 
-            _orderRepository.Attach(order.Delivery, order.Payment, order.User);
+            _orderRepository.Attach(order.Delivery, order.Payment, order.Status, order.User);
             _orderRepository.Add(order);
 
             operationDetails.Succeeded = true;
@@ -73,7 +73,7 @@ namespace Store.BLL.Services
             foreach (var cartItem in order.Items)
             {
                 var cartItemDb = this._cartItemRepository.GetItem(cartItem.Id, c => c.Item, 
-                    c => c.Item.Image, c => c.Item.Brand, c => c.Item.Model, c => c.Item.Color );
+                    c => c.Item.Images, c => c.Item.Brand, c => c.Item.Model, c => c.Item.Color );
                 var cartItemDTO = _mapper.Map(cartItemDb);
                 cartItemDTOs.Add(cartItemDTO);
             }
@@ -88,6 +88,19 @@ namespace Store.BLL.Services
             var orderDtos = _mapper.Map(orders);
 
             return orderDtos;
+        }
+
+        public IEnumerable<OrderDTO> GetOrders()
+        {
+            var orders = _orderRepository.GetAll();
+            var orderDtos = _mapper.Map(orders);
+
+            return orderDtos;
+        }
+
+        public int GetCount()
+        {
+            return this._orderRepository.GetCount();
         }
 
         private bool CheckAmount(int itemId, int amount)

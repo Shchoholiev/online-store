@@ -1,8 +1,10 @@
 ﻿using System.Linq.Expressions;
 using LinqKit;
 using Store.BLL.DTO;
+using Store.BLL.DTO.ItemsProperties;
 using Store.BLL.Interfaces;
 using Store.BLL.Mappers;
+using Store.DAL.Entities.ItemProperties;
 using Store.DAL.Entities.Phone;
 using Store.DAL.Repository;
 
@@ -12,11 +14,21 @@ public class PhoneService : IPhoneService
 {
     private readonly IGenericRepository<Phone> _repository;
 
+    private readonly IGenericRepository<Brand> _brandsRepository;
+
+    private readonly IGenericRepository<Model> _modelsRepository;
+
+    private readonly IGenericRepository<Color> _colorsRepository;
+
     private readonly Mapper _mapper = new();
 
-    public PhoneService(IGenericRepository<Phone> repository)
+    public PhoneService(IGenericRepository<Phone> repository, IGenericRepository<Brand> brandsRepository,
+                        IGenericRepository<Model> modelsRepository, IGenericRepository<Color> colorsRepositor)
     {
         this._repository = repository;
+        this._brandsRepository = brandsRepository;
+        this._modelsRepository = modelsRepository;
+        this._colorsRepository = colorsRepositor;
     }
 
     public PhoneDTO GetItem(int? id)
@@ -82,18 +94,39 @@ public class PhoneService : IPhoneService
         return this._repository.GetCount();
     }
 
+    public void Edit(int id, int amount, int price)
+    {
+        var phone = this._repository.GetItem(id);
+        phone.Amount = amount;
+        phone.Price = price;
+
+        this._repository.Update(phone);
+    }
+
     public void Edit(PhoneDTO phoneDTO)
     {
-        var phone = this._repository.GetItem(phoneDTO.Id);
-
-        phone.Amount = phoneDTO.Amount;
-        phone.Price = phoneDTO.Price;
-
+        var phone = this._mapper.Map(phoneDTO);
+        this._repository.Attach(phone.Brand, phone.Model, phone.Color, phone.Images, phone.Specifications);
         this._repository.Update(phone);
     }
 
     public void Delete(int id)
     {
         this._repository.Delete(id);
+    }
+
+    public IEnumerable<BrandDTO> GetBrands()
+    {
+        return this._mapper.Map(this._brandsRepository.GetAll());
+    }
+
+    public IEnumerable<ModelDTO> GetModels()
+    {
+        return this._mapper.Map(this._modelsRepository.GetAll());
+    }
+
+    public IEnumerable<ColorDTO> GetColors()
+    {
+        return this._mapper.Map(this._colorsRepository.GetAll());
     }
 }

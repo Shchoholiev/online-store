@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Store.Areas.Identity.ViewModels;
 using Store.BLL.DTO;
 using Store.BLL.Interfaces;
+using Store.Infrastructure;
 using Store.ViewMappers;
 using Store.ViewModels;
 
@@ -82,6 +84,16 @@ namespace Store.Controllers
             order.Items = cartItemViewModels;
 
             return View(order);
+        }
+
+        [Authorize(Roles = "admin")]
+        public IActionResult ManageOrders(PageParameters pageParameters)
+        {
+            var orders = this._mapper.Map(this._orderService.GetOrders());
+            var count = this._orderService.GetCount();
+            var pagedOrders = new PagedList<OrderViewModel>(orders, pageParameters, count);
+
+            return View(pagedOrders);
         }
     }
 }

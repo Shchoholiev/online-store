@@ -9,6 +9,10 @@ namespace Store.BLL.Interfaces
 
         OrderDTO GetOrder(int id);
 
+        IEnumerable<OrderDTO> GetOrders();
+
         IEnumerable<OrderDTO> GetOrders(string userId);
+
+        int GetCount();
     }
 }

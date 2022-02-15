@@ -1,4 +1,6 @@
-﻿namespace Store.ViewModels;
+﻿using Store.ViewModels.ItemsProperties;
+
+namespace Store.ViewModels;
 
 public class ItemBaseViewModel : EntityBaseViewModel
 {
@@ -10,7 +12,7 @@ public class ItemBaseViewModel : EntityBaseViewModel
 
     public int Amount { get; set; }
 
-    public string Image { get; set; }
+    public List<ImageViewModel> Images { get; set; }
 
     public string Color { get; set; }
 

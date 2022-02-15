@@ -81,7 +81,7 @@ namespace Store.BLL.Services
         public IEnumerable<CartItemDTO> GetItems(string userId)
         {
             var cartItems = _repository.GetAll(c => c.User.Id == userId && c.Order == null,
-                c => c.Item, c => c.Item.Brand, c => c.Item.Model, c => c.Item.Image);
+                c => c.Item, c => c.Item.Brand, c => c.Item.Model, c => c.Item.Images);
 
             var cartItemsDTO = _mapper.Map(cartItems);
 

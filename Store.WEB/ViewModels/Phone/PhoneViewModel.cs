@@ -1,4 +1,4 @@
-﻿namespace Store.ViewModels
+﻿namespace Store.ViewModels.Phone
 {
     public partial class PhoneViewModel : ItemBaseViewModel
     {    

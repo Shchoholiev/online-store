@@ -8,7 +8,7 @@ public class ItemBase : EntityBase
 
     public int Amount { get; set; }
 
-    public Image? Image { get; set; }
+    public List<Image>? Images { get; set; }
 
     public Brand? Brand { get; set; }
 
