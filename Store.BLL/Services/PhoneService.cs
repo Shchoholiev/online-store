@@ -4,6 +4,7 @@ using Store.BLL.DTO;
 using Store.BLL.DTO.ItemsProperties;
 using Store.BLL.Interfaces;
 using Store.BLL.Mappers;
+using Store.DAL.Entities.Base;
 using Store.DAL.Entities.ItemProperties;
 using Store.DAL.Entities.Phone;
 using Store.DAL.Repository;
@@ -106,7 +107,19 @@ public class PhoneService : IPhoneService
     public void Edit(PhoneDTO phoneDTO)
     {
         var phone = this._mapper.Map(phoneDTO);
-        this._repository.Attach(phone.Brand, phone.Model, phone.Color, phone.Images, phone.Specifications);
+        this._repository.Attach(phone.Brand, phone.Model, phone.Color, phone.Specifications);
+        foreach (var image in phone.Images)
+        {
+            //if (image.Id == 0)
+            //{
+            //    var newImage = new Image { Link = image.Link, Items = new List<ItemBase> { phone } };
+            //}
+            //else
+            //{
+                image.Items = new List<ItemBase> { phone };
+                this._repository.Attach(image);
+            //}
+        }
         this._repository.Update(phone);
     }
 

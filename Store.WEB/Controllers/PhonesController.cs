@@ -93,7 +93,7 @@ namespace Store.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult Edit([Bind("Id,Brand,Model,Image,Color,Memory,Specifications,Amount,Price")] PhoneDTO phone)
+        public ActionResult Edit([Bind("Id,Brand,Model,Images,Color,Memory,Specifications,Amount,Price")] PhoneDTO phone)
         {
             this._phoneService.Edit(phone);
             return RedirectToAction("Details", new { id = phone.Id });

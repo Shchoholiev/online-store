@@ -34,7 +34,7 @@ public class StoreContext : IdentityDbContext
             .HasOne<Color>(i => i.Color);
         modelBuilder.Entity<ItemBase>()
             .HasMany<Image>(i => i.Images)
-            .WithMany(i => i.Item);
+            .WithMany(i => i.Items);
 
         modelBuilder.Entity<CartItem>()
             .HasOne(c => c.User)

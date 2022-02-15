@@ -29,6 +29,7 @@ namespace Store.BLL.DI
             services.AddScoped<IGenericRepository<Order>, GenericRepository<Order>>();
             services.AddScoped<IGenericRepository<DeliveryOption>, GenericRepository<DeliveryOption>>();
             services.AddScoped<IGenericRepository<PaymentOption>, GenericRepository<PaymentOption>>();
+
             services.AddScoped<IGenericRepository<Brand>, GenericRepository<Brand>>();
             services.AddScoped<IGenericRepository<Model>, GenericRepository<Model>>();
             services.AddScoped<IGenericRepository<Color>, GenericRepository<Color>>();

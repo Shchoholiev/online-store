@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Edit";
+    var index = 0; 
 }
 
 <h4>Phone Editing</h4>
@@ -46,18 +47,30 @@
                             else
                             {
                                 <option value="@m.Id">@m.Name</option>
-                            }  
+                            }                            
                         }
                     </select>
                     <input name="Model.Name" class="form-control" placeholder="Custom Value"/>
                 </div>                
             </section>
 
-            <div class="form-group">
-                <label asp-for="Images" class="control-label"></label>
-                <input asp-for="Images" class="form-control"/>
-                <span asp-validation-for="Images" class="text-danger"></span>
-            </div>
+            <section class="row" id="images">
+                <label class="control-label">Images</label>
+                @foreach (var image in Model.Images)
+                {
+                    <div class="d-flex flex-column col">
+                        <img style="width: 70px;" src="@image.Link"/>
+                        <input hidden asp-for="@image.Id" name="Images[@index].Id" class="form-control"/>
+                        <input asp-for="@image.Link" name="Images[@index].Link" class="form-control"/>
+                    </div>
+                    index++;
+                }
+                @*<div class="d-flex flex-column col">
+                        <img class="img-thumbnail" style="width: 100px; height: 100px;" src=""/>
+                        <input name="Images[@index].Link" class="form-control" placeholder="New link"/>
+                </div>*@
+            </section>
+            <input type="button" class="btn btn-secondary" value="Add Image" onclick="addImage(@index)"/>
 
             <section>
                 <label asp-for="Color" class="control-label"></label>
@@ -109,8 +122,17 @@
     </div>
 </div>
 
-
-
+<script type="text/javascript">
+    var imagesSection = document.getElementById("images");
+    function addImage(index){
+        imagesSection.insertAdjacentHTML("beforeend",
+        `<div class="d-flex flex-column col">
+             <img class="img-thumbnail" style="width: 100px; height: 100px;" src=""/>
+             <input name="Images[${index}].Link" class="form-control" placeholder="New link"/>
+        </div>`);
+     index++;
+    }                
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

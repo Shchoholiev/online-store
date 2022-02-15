@@ -6,6 +6,6 @@ namespace Store.DAL.Entities.ItemProperties
     {
         public string Link { get; set; }
 
-        public List<ItemBase> Item { get; set; }
+        public List<ItemBase> Items { get; set; }
     }
 }
