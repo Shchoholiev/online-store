@@ -22,7 +22,6 @@ namespace Store.BLL.DI
 
             services.AddDbContext<StoreContext>(options =>
                 options.UseSqlServer(connectionString)
-                //ServiceLifetime.Singleton
             );
 
             services.AddScoped<IGenericRepository<CartItem>, GenericRepository<CartItem>>();
@@ -33,6 +32,7 @@ namespace Store.BLL.DI
             services.AddScoped<IGenericRepository<Brand>, GenericRepository<Brand>>();
             services.AddScoped<IGenericRepository<Model>, GenericRepository<Model>>();
             services.AddScoped<IGenericRepository<Color>, GenericRepository<Color>>();
+            services.AddScoped<IGenericRepository<Image>, GenericRepository<Image>>();
 
             services.AddScoped<IGenericRepository<Phone>, ItemsRepository<Phone>>();
             services.AddScoped<IGenericRepository<ItemBase>, ItemsRepository<ItemBase>>();

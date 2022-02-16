@@ -21,15 +21,19 @@ public class PhoneService : IPhoneService
 
     private readonly IGenericRepository<Color> _colorsRepository;
 
+    private readonly IGenericRepository<Image> _imagesRepository;
+
     private readonly Mapper _mapper = new();
 
     public PhoneService(IGenericRepository<Phone> repository, IGenericRepository<Brand> brandsRepository,
-                        IGenericRepository<Model> modelsRepository, IGenericRepository<Color> colorsRepositor)
+                        IGenericRepository<Model> modelsRepository, IGenericRepository<Color> colorsRepositor,
+                        IGenericRepository<Image> imagesRepository)
     {
         this._repository = repository;
         this._brandsRepository = brandsRepository;
         this._modelsRepository = modelsRepository;
         this._colorsRepository = colorsRepositor;
+        this._imagesRepository = imagesRepository;
     }
 
     public PhoneDTO GetItem(int? id)
@@ -107,19 +111,7 @@ public class PhoneService : IPhoneService
     public void Edit(PhoneDTO phoneDTO)
     {
         var phone = this._mapper.Map(phoneDTO);
-        this._repository.Attach(phone.Brand, phone.Model, phone.Color, phone.Specifications);
-        foreach (var image in phone.Images)
-        {
-            //if (image.Id == 0)
-            //{
-            //    var newImage = new Image { Link = image.Link, Items = new List<ItemBase> { phone } };
-            //}
-            //else
-            //{
-                image.Items = new List<ItemBase> { phone };
-                this._repository.Attach(image);
-            //}
-        }
+        this._repository.Attach(phone);
         this._repository.Update(phone);
     }
 

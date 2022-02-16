@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Store.BLL.DTO;
 using Store.BLL.DTO.ItemsProperties;
+using Store.DAL.Entities.ItemProperties;
 using Store.DAL.Entities.Phone;
 
 namespace Store.BLL.Interfaces;
@@ -35,5 +36,4 @@ public interface IPhoneService
     IEnumerable<ModelDTO> GetModels();
 
     IEnumerable<ColorDTO> GetColors();
-
 }
