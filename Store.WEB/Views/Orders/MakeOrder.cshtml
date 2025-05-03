@@ -1,0 +1,42 @@
+﻿@using Store.BLL.Services
+@model Store.ViewModels.OrderViewModel
+
+@{
+    ViewData["Title"] = "Make Order";  
+}
+
+<h3>Your Order</h3>
+<hr />
+@{
+    await Html.RenderPartialAsync("~/Views/ShoppingCart/ShoppingCartPartial.cshtml", Model?.Items);
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="MakeOrder">            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <select asp-for="Delivery" class="form-select">
+                <option value="1">In Store</option>
+                <option value="2">NovaPoshta</option>
+                <option value="3">UkrPoshta</option>
+                <option value="4">Justin</option>
+            </select>
+            <div class="form-group">
+                <label asp-for="DeliveryAddress" class="control-label"></label>
+                <input asp-for="DeliveryAddress" class="form-control" />
+                <span asp-validation-for="DeliveryAddress" class="text-danger"></span>
+            </div>
+            <select asp-for="Payment" class="form-select">
+                <option value="1">Cash</option>
+                <option value="2">Card</option>
+            </select>
+            <div class="form-group">
+                <label asp-for="Details" class="control-label"></label>
+                <input asp-for="Details" class="form-control" />
+                <span asp-validation-for="Details" class="text-danger"></span>
+            </div>
+            <input hidden asp-for="TotalPrice" class="form-control" value="@Model.TotalPrice"/>
+            <div class="text-primary my-2 fs-3 fw-bold">$@Model.TotalPrice</div>
+            <input type="submit" value="Order" class="btn btn-primary"/>
+        </form>
+    </div>
+</div>

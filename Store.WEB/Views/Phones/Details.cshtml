@@ -1,0 +1,279 @@
+﻿@using Store.ViewModels
+@model List<Store.ViewModels.PhoneViewModel>
+
+@{
+    PhoneViewModel phone = @Model.FirstOrDefault();
+    ViewData["Title"] = phone?.GetFullName();
+}
+
+@{
+    var memories = Model.OrderBy(p => p.Memory)
+                   .Where(p => p.Color == phone.Color)
+                   .Select(p => p);
+
+    var colors = Model.OrderBy(p => p.Color)
+                 .Where(p => p.Memory == phone.Memory)
+                 .Select(p => p)
+                 .DistinctBy(p => p.Color);
+}
+
+<style>
+    .min-w50{
+        min-width: 50%;
+    }
+    .min-w35{
+        min-width: 35%;
+    }
+    .mr-2{
+        margin-right: 15px;
+    }
+    h6{
+        margin: 8px 0;
+    }
+
+    .color-circle{
+        width: 35px; 
+        height: 35px;
+        border-radius: 50%;
+        border-width: 0.5px;
+        border-style: solid;
+        border-color: #a6a6a6;
+    }
+
+    .color{
+        border-radius: 5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #6C757D;
+        margin-right: 10px;
+        padding: 10px;
+    }
+    .color:hover{
+        border-color: #007BFF;
+    }
+
+    a{
+        color: #6C757D;
+        text-decoration: none;
+    }
+    a:hover{
+        color: #007BFF;
+    }
+ 
+</style>
+
+<div>
+    <h6 class="mb-4 fw-normal">
+         <a asp-action="Index">Phones</a> 
+         >
+         <a>@phone.GetFullName()</a>
+    </h6>
+
+    <h5>@phone.GetFullName()</h5>
+
+    <div class="container bg-white d-flex flex-column mt-3 p-4">
+        <div class="d-flex flex-row">
+        
+            <div class="container min-w50 w-50 d-flex justify-content-center">
+                 <img src="@phone.Image" style="max-height: 380px;" class="float-left"/>
+            </div>
+
+            <div class="container d-flex flex-column">
+                <h6 class="text-secondary text-uppercase fw-light mb-0">@phone.Brand</h6>
+                <h5 class="fw-bold">@phone.Model</h5>
+
+                <hr/>
+
+                <h5 class="fw-bold mb-3">Memory</h5>
+
+                <div class="d-flex flex-row">
+                    <div class="d-flex flex-row">
+                    @foreach (var m in memories)
+                    {
+                        if (m.Id == phone.Id)
+                        {
+                            <input type="button" value="@m.Memory GB" class="btn btn-outline-primary mr-2 bg-primary text-white"/>
+                        } 
+                        else
+                        {
+                            <input type="button" value="@m.Memory GB" class="btn btn-outline-primary mr-2"
+                            onclick="location.href='@Url.Action("Details", "Phones", new {id = m.Id})'"/>
+                        }
+                    }
+                    </div>
+                </div>
+            
+                <hr/>
+
+                <h5 class="fw-bold mb-3">Color</h5>
+                <div class="d-flex flex-row">
+                    <div class="d-flex flex-wrap">
+                    @foreach (var c in colors)
+                    {
+                        if (c.Id == phone.Id)
+                        {
+                            <div class="d-flex flex-column color align-items-center" style="border-color: #007BFF;">
+                                    <div class="color-circle" style="background:#@c.ColorHex;"></div>
+                                    <h6 class="mb-0 text-primary">@c.Color</h6>
+                            </div>
+                        } 
+                        else
+                        {
+                            <a asp-action="Details" asp-route-id="@c.Id">
+                                <div class="d-flex flex-column color align-items-center" style="">
+                                    <div class="color-circle" style="background:#@c.ColorHex;"></div>
+                                    <h6 class="mb-0">@c.Color</h6>
+                                </div>
+                            </a>
+                        }
+                    }
+                    </div>
+                </div>
+
+                <hr/>
+
+                <h5 class="fw-bold mb-3">Price: $@phone.Price</h5>
+
+                <dl class="row">
+                    <dt class = "col-sm-2">
+                        /Amount:
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @phone.Amount
+                    </dd>
+                </dl>
+                
+                @if (phone.Amount > 0)
+                {
+                    <form asp-controller="ShoppingCart" asp-action="buy" asp-route-itemId="@phone.Id">
+                        <button type="submit" name="btn-buy" class="btn btn-primary">BUY</button>
+                    </form>
+                }
+                else
+                {
+                    <button disabled type="button" name="btn-buy" class="btn btn-primary">BUY</button>
+                }
+
+           </div>
+        </div>
+
+            <div class="p-3 mt-3">
+                
+                <div class="w-100 d-flex flex-row">
+                    <div class="w-50 text-center">
+                        <h5 class="fw-bold text-primary">Specifications</h5>
+                    </div>
+                    <div class="w-50 text-center">
+                        <h5 class="fw-bold text-secondary">Reviews</h5>
+                    </div>
+                </div>
+                <hr class="mt-0"/>
+
+                
+
+                <h5 class="fw-bold mb-3">Display</h5>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Diagonal</h6></div>
+                    <h6 class="fw-light">@phone?.Diagonal"</h6>
+                </div>
+                <hr />   
+
+                <h5 class="fw-bold mb-3">Processor</h5>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Processor</h6></div>
+                    <h6 class="fw-light">@phone?.Processor</h6>
+                </div>
+                <hr />   
+
+                <h5 class="fw-bold mb-3">Camera</h5>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Camera</h6></div>
+                    <h6 class="fw-light">@phone?.Camera</h6>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Diaphragm</h6></div>
+                    <h6 class="fw-light">@phone?.Diaphragm</h6>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Front Camera</h6></div>
+                    <h6 class="fw-light">@phone?.FrontCamera</h6>
+                </div>
+                
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Video Record</h6></div>
+                    <h6 class="fw-light">@phone?.VideoRecord</h6>
+                </div>
+                
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Additional info</h6></div>
+                    <h6 class="fw-light">@phone?.AboutCamera</h6>
+                </div>
+                <hr />   
+
+                <h5 class="fw-bold mb-3">Operating system</h5>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Operating system</h6></div>
+                    <h6 class="fw-light">@phone?.OS</h6>
+                </div>
+                <hr />   
+
+                <h5 class="fw-bold mb-3">Wireless technologies</h5>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Wifi</h6></div>
+                    <h6 class="fw-light">@phone?.Wifi</h6>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>GPS</h6></div>
+                    <h6 class="fw-light">@phone?.GPS</h6>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Bluetooth</h6></div>
+                    <h6 class="fw-light">@phone?.Bluetooth</h6>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>NFC</h6></div>
+                    <h6 class="fw-light">@phone?.NFC</h6>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Wireless Charging</h6></div>
+                    <h6 class="fw-light">@phone?.WirelessCharging</h6>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>WaterProtection</h6></div>
+                    <h6 class="fw-light">@phone?.WaterProtection</h6>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="min-w35" ><h6>Technologies</h6></div>
+                    <h6 class="fw-light">@phone?.Technologies</h6>
+                </div>
+                <hr />
+
+                <h5 class="fw-bold mb-3">Overall dimensions</h5>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Dimensions</h6></div>
+                    <h6 class="fw-light">@phone?.Sizes</h6>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Weight</h6></div>
+                    <h6 class="fw-light">@phone?.Weight</h6>
+                </div>
+                <hr /> 
+
+                <h5 class="fw-bold mb-3">What’s in the box</h5>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>In the box</h6></div>
+                    <h6 class="fw-light">@phone?.InBox</h6>
+                </div>
+                <hr />  
+
+                <h5 class="fw-bold mb-3">Warranty</h5>
+                <div class="d-flex flex-row">
+                    <div class="min-w35"><h6>Guarantee period</h6></div>
+                    <h6 class="fw-light">@phone?.Warranty Month</h6>
+                </div>
+                <hr />
+
+            </div>
+
+       </div>
+</div>

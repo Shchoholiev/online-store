@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Store.ViewModels.OrderViewModel>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h3>Orders</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Order Number</th>
+      <th>Date</th>
+      <th>Total Price</th>
+      <th>Paid Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach (var order in Model)
+      {
+          <tr>
+              <td>@order.Id</td>
+              <td>@order.CreationTime</td>
+              <td>$@order.TotalPrice</td>
+              <td>@order.IsPaid</td>
+              <td>
+                  <form method="get" asp-action="Details" asp-route-id="@order.Id">
+                      <input type="submit" class="btn btn-primary" value="Details"/>
+                  </form>
+              </td>
+          </tr>
+      }
+  </tbody>
+</table>
